@@ -217,9 +217,11 @@ export default function SafeMap({
         .bindPopup(`
           <div class="spot-popup">
             <strong>${emoji} ${spot.name}</strong><br/>
-            <span style="color: #8B949E;">${spot.type.replace('_', ' ')}</span><br/>
-            🕐 ${spot.hours}<br/>
-            📍 ${spot.city}
+            <span style="color: #8B949E;">${String(spot.type || '').replace(/_/g, ' ')}</span><br/>
+            ${spot.address ? `📌 ${spot.address}<br/>` : ''}
+            🕐 ${spot.hours || '—'}<br/>
+            📍 ${spot.city || ''}
+            ${spot.distance_km != null ? `<br/><strong>${spot.distance_km} km away</strong>` : ''}
           </div>
         `)
       spotsLayer.current.push(marker)

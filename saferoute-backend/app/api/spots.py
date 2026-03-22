@@ -6,6 +6,7 @@ from app.services.sms import send_buddy_alert
 from pydantic import BaseModel
 from typing import List, Optional
 from geopy.distance import geodesic
+import uuid
 
 router = APIRouter()
 
@@ -83,27 +84,45 @@ def get_nearest_safe_spot(
     return nearby[0]
 
 
+def _buddy_alert_handler(request: BuddyAlertRequest):
+    tracking_id = str(uuid.uuid4())[:8]
+    tracking_url = f"https://saferoute-asean.vercel.app/track/{tracking_id}"
+
+    sid = send_buddy_alert(
+        user_name=request.user_name,
+        current_location={
+            'lat': request.current_lat,
+            'lng': request.current_lng,
+            'address': request.current_address
+        },
+        destination=request.destination,
+        buddy_phone=request.buddy_phone,
+        tracking_url=tracking_url
+    )
+
+    return {
+        "success": True,
+        "message_sid": sid,
+        "tracking_url": tracking_url,
+        "message": "Buddy alert sent!",
+    }
+
+
 @router.post("/buddy-alert")
 def trigger_buddy_alert(request: BuddyAlertRequest):
     """
     Send an emergency SMS to a designated buddy with current location.
     """
     try:
-        tracking_url = f"https://saferoute-asean.vercel.app/track/{request.current_lat:.4f},{request.current_lng:.4f}"
-        
-        sid = send_buddy_alert(
-            user_name=request.user_name,
-            current_location={
-                'lat': request.current_lat,
-                'lng': request.current_lng,
-                'address': request.current_address
-            },
-            destination=request.destination,
-            buddy_phone=request.buddy_phone,
-            tracking_url=tracking_url
-        )
+        return _buddy_alert_handler(request)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to send buddy alert: {str(e)}")
 
-        return {"success": True, "message_sid": sid, "message": "Buddy alert sent!"}
 
+@router.post("/send-alert")
+def send_alert(request: BuddyAlertRequest):
+    """Alias for Phase 3 spec — same payload as /buddy-alert."""
+    try:
+        return _buddy_alert_handler(request)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to send buddy alert: {str(e)}")

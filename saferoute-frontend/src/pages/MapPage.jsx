@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import SafeMap from '../components/SafeMap'
 import RoutePlanner from '../components/RoutePlanner'
-import { getHeatmapBbox } from '../services/api'
+import { getDangerHeatmap } from '../services/api'
 import './MapPage.css'
 
 export default function MapPage() {
@@ -13,17 +13,14 @@ export default function MapPage() {
   const [startMarker, setStartMarker] = useState(null)
   const [endMarker, setEndMarker] = useState(null)
   const [selectedRouteIndex, setSelectedRouteIndex] = useState(0)
+  const [routeSearchLoading, setRouteSearchLoading] = useState(false)
+  const [travelHour, setTravelHour] = useState(() => new Date().getHours())
 
   useEffect(() => {
-    getHeatmapBbox({
-      lat_min: 14.4,
-      lat_max: 14.8,
-      lng_min: 120.9,
-      lng_max: 121.2,
-    })
+    getDangerHeatmap(travelHour)
       .then(setHeatmapData)
       .catch(() => {})
-  }, [])
+  }, [travelHour])
 
   const handleRoutesFound = useCallback((foundRoutes, markers) => {
     setRoutes(foundRoutes)
@@ -45,12 +42,38 @@ export default function MapPage() {
   return (
     <div className="map-page">
       <RoutePlanner
+        travelHour={travelHour}
+        onTravelHourChange={setTravelHour}
         onRoutesFound={handleRoutesFound}
         onSafeSpotsFound={handleSafeSpotsFound}
         onSelectedRouteChange={setSelectedRouteIndex}
+        onLoadingChange={setRouteSearchLoading}
       />
 
       <div className="map-area">
+        {routeSearchLoading && (
+          <div
+            className="map-loading-overlay"
+            role="status"
+            aria-live="polite"
+            aria-label="Calculating routes"
+          >
+            <div className="map-loading-card">
+              <div className="map-loading-spinner" aria-hidden />
+              <p>Calculating safest routes…</p>
+            </div>
+          </div>
+        )}
+
+        {!routes?.length && !routeSearchLoading && (
+          <div className="map-empty-hint" role="region" aria-label="Getting started">
+            <h2 className="map-empty-title">Find your safe route</h2>
+            <p className="map-empty-text">
+              Enter start and destination in the panel, then choose the safest path on the map.
+            </p>
+          </div>
+        )}
+
         <div className="map-controls">
           <button
             type="button"

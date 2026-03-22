@@ -4,6 +4,7 @@ from geopy.distance import geodesic
 from sqlalchemy.orm import Session
 from sklearn.neighbors import BallTree
 from app.models import CrimeIncident, SafeSpot
+from app.osm.geojson_osm import get_osm_geo_data
 
 # Severity weights (higher = more impact on perceived risk)
 CRIME_WEIGHTS = {
@@ -16,13 +17,14 @@ CRIME_WEIGHTS = {
 
 class SafetyScorer:
     """
-    Route safety model: combines weighted crime proximity (spatial), time-of-day risk,
-    lighting context, and proximity to safe spots. Uses BallTree (sklearn) for fast
-    spatial queries over hundreds of incidents.
+    Route safety model: weighted crime proximity, time-of-day risk, lighting,
+    foot-traffic proxy, DB safe spots, and OSM GeoJSON context (street lamps,
+    surveillance/CCTV, police station polygons) when data/export.geojson is present.
     """
 
     def __init__(self, db: Session):
         self.db = db
+        self._osm = get_osm_geo_data()
         self._build_indices()
 
     def _build_indices(self):
@@ -130,6 +132,48 @@ class SafetyScorer:
         n = len(self._spot_tree.query_radius(q, r=r_rad)[0])
         return min(18.0, n * 5.5)
 
+    def _osm_lamp_lighting_factor(self, lat, lng, radius_meters=90):
+        """
+        Scale lighting penalty down when many street lamps are nearby (OSM).
+        Returns 1.0 = no relief, down to ~0.28 when lamps are dense.
+        """
+        if not self._osm.lamp_tree or not self._osm.lamp_coords:
+            return 1.0
+        r_rad = radius_meters / 6371000.0
+        q = np.radians([[lat, lng]])
+        idx = self._osm.lamp_tree.query_radius(q, r=r_rad)[0]
+        if len(idx) == 0:
+            return 1.0
+        density = min(1.0, len(idx) / 8.0)
+        return max(0.28, 1.0 - 0.72 * density)
+
+    def _osm_surveillance_bonus(self, lat, lng, radius_meters=100):
+        """
+        Distance-weighted bonus near mapped surveillance (CCTV, guards, etc.).
+        Uses surveillance:type from OSM when present (camera vs guard).
+        """
+        if not self._osm.surveillance_tree or not self._osm.surveillance_rows:
+            return 0.0
+        r_rad = radius_meters / 6371000.0
+        q = np.radians([[lat, lng]])
+        idx = self._osm.surveillance_tree.query_radius(q, r=r_rad)[0]
+        total = 0.0
+        for j in idx:
+            row = self._osm.surveillance_rows[j]
+            dist_m = geodesic((lat, lng), (row["lat"], row["lng"])).meters
+            decay = 1.0 / (1.0 + (dist_m / 45.0) ** 2)
+            total += row["weight"] * decay
+        return min(14.0, total * 4.2)
+
+    def _osm_police_bonus(self, lat, lng, radius_meters=200):
+        """Extra boost near police polygons from OSM (centroids), capped to limit overlap with DB spots."""
+        if not self._osm.police_tree or not self._osm.police_centroids:
+            return 0.0
+        r_rad = radius_meters / 6371000.0
+        q = np.radians([[lat, lng]])
+        n = len(self._osm.police_tree.query_radius(q, r=r_rad)[0])
+        return min(8.0, n * 4.0)
+
     def _lighting_penalty(self, hour):
         """Night = poorer lighting / visibility context."""
         if 22 <= hour or hour <= 5:
@@ -161,10 +205,15 @@ class SafetyScorer:
             time_penalty = 6.0
 
         lighting_penalty = self._lighting_penalty(hour)
+        lighting_penalty *= self._osm_lamp_lighting_factor(lat, lng)
         traffic_penalty = self._foot_traffic_proxy(hour)
 
         total_penalty = crime_penalty + time_penalty + lighting_penalty + traffic_penalty
-        bonus = self._safe_spot_bonus(lat, lng)
+        bonus = (
+            self._safe_spot_bonus(lat, lng)
+            + self._osm_surveillance_bonus(lat, lng)
+            + self._osm_police_bonus(lat, lng)
+        )
 
         score = 100.0 - total_penalty + bonus
         return float(max(5.0, min(99.0, score)))
