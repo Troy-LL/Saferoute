@@ -1,0 +1,15 @@
+fastapi==0.115.12
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.40
+psycopg2-binary==2.9.10
+alembic==1.15.1
+python-dotenv==1.1.0
+requests==2.32.3
+twilio==9.5.2
+scikit-learn==1.6.1
+pandas==2.2.3
+numpy==2.2.4
+joblib==1.4.2
+geopy==2.4.1
+polyline==2.0.2
+pydantic==2.11.1
