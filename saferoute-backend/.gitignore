@@ -6,7 +6,7 @@ __pycache__/
 .env
 *.db
 *.sqlite3
-data/*.csv
+# Synthetic seed CSVs in data/ are committed for reproducible deploys
 dist/
 build/
 .DS_Store

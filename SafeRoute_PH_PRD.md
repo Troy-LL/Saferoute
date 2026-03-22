@@ -179,7 +179,7 @@ Women in the Philippines, especially in Metro Manila, face constant safety conce
 SafeRoute Alert: [Name] is walking from [Start Address] to [End Address]. 
 Current location: [Address] (14.6507, 121.1029)
 ETA: 25 minutes
-Track: https://saferoute.vercel.app/track/abc123
+Track: https://saferoute-asean.vercel.app/track/abc123
 ```
 
 **Technical Implementation:**
@@ -403,7 +403,7 @@ Current location: Corner Katipunan & Aurora
 ETA: 15 minutes
 
 Track her route: 
-https://saferoute.vercel.app/track/abc123
+https://saferoute-asean.vercel.app/track/abc123
 
 - SafeRoute
 ```
@@ -945,7 +945,7 @@ Sends SMS alert to emergency contacts.
     "+639171234567",
     "+639189876543"
   ],
-  "tracking_link": "https://saferoute.vercel.app/track/abc123",
+  "tracking_link": "https://saferoute-asean.vercel.app/track/abc123",
   "timestamp": "2026-03-21T14:30:00Z"
 }
 ```
@@ -2002,7 +2002,7 @@ And with one tap, you can alert your trusted contacts. They get your location, y
   - [ ] File size <500MB
 
 - [ ] Live demo link
-  - [ ] Working URL (https://saferoute.vercel.app)
+  - [ ] Working URL (https://saferoute-asean.vercel.app)
   - [ ] Tested in incognito mode
   - [ ] Mobile responsive
   - [ ] No authentication required
@@ -2038,7 +2038,7 @@ And with one tap, you can alert your trusted contacts. They get your location, y
 - [Name 3] - Content & Research
 
 **Project Links:**
-- Live Demo: https://saferoute.vercel.app
+- Live Demo: https://saferoute-asean.vercel.app
 - GitHub: https://github.com/[username]/saferoute
 - Video: [YouTube/Google Drive link]
 

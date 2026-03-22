@@ -112,7 +112,7 @@ app = FastAPI(title="SafeRoute API", version="1.0.0")
 # CORS for React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://saferoute.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://saferoute-asean.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -654,7 +654,7 @@ if __name__ == "__main__":
         },
         destination="Quezon Memorial Circle",
         buddy_phone="+639XXXXXXXXX",  # Test phone number
-        tracking_url="https://saferoute.vercel.app/track/test123"
+        tracking_url="https://saferoute-asean.vercel.app/track/test123"
     )
 ```
 
@@ -1859,7 +1859,7 @@ def send_alert(request: AlertRequest):
     try:
         # Generate tracking URL
         tracking_id = str(uuid.uuid4())[:8]
-        tracking_url = f"https://saferoute.vercel.app/track/{tracking_id}"
+        tracking_url = f"https://saferoute-asean.vercel.app/track/{tracking_id}"
         
         # Send SMS
         message_sid = send_buddy_alert(
@@ -2485,7 +2485,7 @@ MIT License - See LICENSE file
 
 ## 🔗 Links
 
-- Live Demo: https://saferoute.vercel.app
+- Live Demo: https://saferoute-asean.vercel.app
 - Video: [YouTube link]
 - Slides: [Google Drive link]
 ```
@@ -2592,7 +2592,7 @@ Send emergency SMS to buddy.
 {
   "success": true,
   "message_sid": "SM...",
-  "tracking_url": "https://saferoute.vercel.app/track/abc123"
+  "tracking_url": "https://saferoute-asean.vercel.app/track/abc123"
 }
 ```
 ```
@@ -2760,7 +2760,7 @@ vercel --prod
 **4.5.2 End-to-End Production Test**
 
 Test on **actual mobile device**:
-1. Open https://saferoute.vercel.app
+1. Open https://saferoute-asean.vercel.app
 2. Complete onboarding
 3. Search for route (use real Manila addresses)
 4. Select route, verify map display
@@ -2774,7 +2774,7 @@ Test on **actual mobile device**:
 ```bash
 # Lighthouse audit (aim for 70+ on all metrics)
 npm install -g lighthouse
-lighthouse https://saferoute.vercel.app --view
+lighthouse https://saferoute-asean.vercel.app --view
 ```
 
 **Metrics to check:**
@@ -2796,7 +2796,7 @@ lighthouse https://saferoute.vercel.app --view
 Checklist:
 - [ ] 5-page PDF proposal (<10MB)
 - [ ] 3-minute video MP4 (<500MB)
-- [ ] Live demo URL (https://saferoute.vercel.app)
+- [ ] Live demo URL (https://saferoute-asean.vercel.app)
 - [ ] GitHub repo URL (public, with README)
 - [ ] Team information form filled
 
@@ -3044,7 +3044,7 @@ console.log('First coordinate:', routes[0].geometry[0]);
 console.log(import.meta.env.VITE_API_URL);
 
 // Verify CORS headers in backend
-// Should include: https://saferoute.vercel.app
+// Should include: https://saferoute-asean.vercel.app
 ```
 
 ---

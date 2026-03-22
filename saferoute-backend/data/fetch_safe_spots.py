@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+from pathlib import Path
 
 def generate_synthetic_safe_spots(n=60):
     """Generate synthetic safe spots for Metro Manila demo."""
@@ -61,11 +62,11 @@ def generate_synthetic_safe_spots(n=60):
         })
     
     df = pd.DataFrame(data)
-    df.to_csv('data/safe_spots.csv', index=False)
-    print(f"✅ Generated {len(df)} safe spots (incl. {len(real_spots)} real locations) → data/safe_spots.csv")
+    out = Path(__file__).resolve().parent / "safe_spots.csv"
+    df.to_csv(out, index=False)
+    print(f"[OK] Generated {len(df)} safe spots (incl. {len(real_spots)} anchor locations) -> {out}")
     return df
 
 if __name__ == "__main__":
-    import os
-    os.makedirs('data', exist_ok=True)
-    generate_synthetic_safe_spots(60)
+    Path(__file__).resolve().parent.mkdir(parents=True, exist_ok=True)
+    generate_synthetic_safe_spots(55)

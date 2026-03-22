@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+from pathlib import Path
 from datetime import datetime, timedelta
 
 def generate_synthetic_crime_data(n=500):
@@ -57,11 +58,11 @@ def generate_synthetic_crime_data(n=500):
         })
     
     df = pd.DataFrame(data)
-    df.to_csv('data/crime_incidents.csv', index=False)
-    print(f"✅ Generated {n} synthetic crime incidents → data/crime_incidents.csv")
+    out = Path(__file__).resolve().parent / "crime_incidents.csv"
+    df.to_csv(out, index=False)
+    print(f"[OK] Generated {n} synthetic crime incidents -> {out}")
     return df
 
 if __name__ == "__main__":
-    import os
-    os.makedirs('data', exist_ok=True)
-    generate_synthetic_crime_data(500)
+    Path(__file__).resolve().parent.mkdir(parents=True, exist_ok=True)
+    generate_synthetic_crime_data(520)

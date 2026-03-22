@@ -1,0 +1,56 @@
+spot_id,name,type,latitude,longitude,hours,address,city
+1,Manila Police District HQ,police_station,14.5995,120.9842,24/7,"Manila, Metro Manila",Manila
+2,QCPD Station 9 - Diliman,police_station,14.6512,121.0681,24/7,"Quezon City, Metro Manila",Quezon City
+3,Makati Police Station,police_station,14.5547,121.0244,24/7,"Makati, Metro Manila",Makati
+4,Pasig City Police Station,police_station,14.5764,121.0854,24/7,"Pasig, Metro Manila",Pasig
+5,7-Eleven Katipunan,convenience_store,14.6402,121.072,24/7,"Quezon City, Metro Manila",Quezon City
+6,7-Eleven Makati Ave,convenience_store,14.5578,121.0176,24/7,"Makati, Metro Manila",Makati
+7,Ministop UN Ave,convenience_store,14.5832,120.9837,24/7,"Manila, Metro Manila",Manila
+8,Family Mart Ortigas,convenience_store,14.5866,121.062,24/7,"Pasig, Metro Manila",Pasig
+9,UP Diliman Gate 1 Security,security_post,14.654,121.068,24/7,"Quezon City, Metro Manila",Quezon City
+10,Ateneo Security Gate,security_post,14.6402,121.0781,24/7,"Quezon City, Metro Manila",Quezon City
+11,SM Manila Security Post,security_post,14.5982,120.9867,24/7,"Manila, Metro Manila",Manila
+12,Philippine General Hospital,hospital,14.5784,120.9822,24/7,"Manila, Metro Manila",Manila
+13,Makati Medical Center,hospital,14.5596,121.016,24/7,"Makati, Metro Manila",Makati
+14,The Medical City Ortigas,hospital,14.5842,121.0686,24/7,"Pasig, Metro Manila",Pasig
+15,Manila Fire Station Central,fire_station,14.601,120.9836,24/7,"Manila, Metro Manila",Manila
+16,Quezon City Fire Station,fire_station,14.6508,121.0355,24/7,"Quezon City, Metro Manila",Quezon City
+17,Safe Spot 1,security_post,14.559793,121.019147,24/7,"Makati, Metro Manila",Makati
+18,Safe Spot 2,security_post,14.612226,121.165244,24/7,"Quezon City, Metro Manila",Quezon City
+19,Safe Spot 3,security_post,14.78348,121.189074,24/7,"Pasig, Metro Manila",Pasig
+20,Safe Spot 4,hospital,14.615668,121.163494,24/7,"Makati, Metro Manila",Makati
+21,Safe Spot 5,security_post,14.663498,121.179341,24/7,"Pasig, Metro Manila",Pasig
+22,Safe Spot 6,security_post,14.441436,121.065106,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+23,Safe Spot 7,convenience_store,14.756263,120.933604,24/7,"Quezon City, Metro Manila",Quezon City
+24,Safe Spot 8,security_post,14.639657,120.918686,24/7,"Quezon City, Metro Manila",Quezon City
+25,Safe Spot 9,police_station,14.724396,121.191426,24/7,"Quezon City, Metro Manila",Quezon City
+26,Safe Spot 10,hospital,14.607082,121.078437,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+27,Safe Spot 11,security_post,14.552902,120.968307,24/7,"Makati, Metro Manila",Makati
+28,Safe Spot 12,convenience_store,14.569106,121.096711,24/7,"Quezon City, Metro Manila",Quezon City
+29,Safe Spot 13,convenience_store,14.684396,121.0304,24/7,"Quezon City, Metro Manila",Quezon City
+30,Safe Spot 14,hospital,14.661918,120.919307,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+31,Safe Spot 15,police_station,14.400485,121.13485,24/7,"Quezon City, Metro Manila",Quezon City
+32,Safe Spot 16,security_post,14.587579,121.156632,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+33,Safe Spot 17,security_post,14.478047,121.166017,24/7,"Pasig, Metro Manila",Pasig
+34,Safe Spot 18,police_station,14.473581,120.967053,24/7,"Quezon City, Metro Manila",Quezon City
+35,Safe Spot 19,convenience_store,14.658327,121.07163,24/7,"Pasig, Metro Manila",Pasig
+36,Safe Spot 20,police_station,14.694045,121.178664,24/7,"Makati, Metro Manila",Makati
+37,Safe Spot 21,hospital,14.457748,121.1053,24/7,"Makati, Metro Manila",Makati
+38,Safe Spot 22,police_station,14.560663,121.034668,24/7,"Manila, Metro Manila",Manila
+39,Safe Spot 23,police_station,14.566297,120.911345,24/7,"Quezon City, Metro Manila",Quezon City
+40,Safe Spot 24,police_station,14.662935,121.187376,24/7,"Quezon City, Metro Manila",Quezon City
+41,Safe Spot 25,hospital,14.732022,121.158158,24/7,"Quezon City, Metro Manila",Quezon City
+42,Safe Spot 26,convenience_store,14.781413,120.994825,24/7,"Pasig, Metro Manila",Pasig
+43,Safe Spot 27,security_post,14.475778,121.15846,24/7,"Manila, Metro Manila",Manila
+44,Safe Spot 28,convenience_store,14.763673,120.931218,24/7,"Quezon City, Metro Manila",Quezon City
+45,Safe Spot 29,police_station,14.550107,121.146187,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+46,Safe Spot 30,hospital,14.693877,121.063274,24/7,"Pasig, Metro Manila",Pasig
+47,Safe Spot 31,hospital,14.620655,121.050235,24/7,"Pasig, Metro Manila",Pasig
+48,Safe Spot 32,hospital,14.638293,120.93966,24/7,"Manila, Metro Manila",Manila
+49,Safe Spot 33,security_post,14.693608,121.020686,24/7,"Quezon City, Metro Manila",Quezon City
+50,Safe Spot 34,hospital,14.736244,121.194713,24/7,"Manila, Metro Manila",Manila
+51,Safe Spot 35,convenience_store,14.549715,121.08194,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+52,Safe Spot 36,hospital,14.597431,121.129951,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+53,Safe Spot 37,hospital,14.418678,120.994093,24/7,"Mandaluyong, Metro Manila",Mandaluyong
+54,Safe Spot 38,police_station,14.484703,120.931088,24/7,"Pasig, Metro Manila",Pasig
+55,Safe Spot 39,security_post,14.410443,121.084795,24/7,"Quezon City, Metro Manila",Quezon City
