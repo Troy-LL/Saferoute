@@ -16,7 +16,9 @@ export default function MapPage() {
 
   // Load heatmap on mount
   useState(() => {
-    axios.get(`${API_BASE}/api/routes/heatmap?lat=14.5995&lng=121.0175&radius_km=5`)
+    axios.get(`${API_BASE}/api/heatmap`, {
+      params: { lat_min: 14.4, lat_max: 14.8, lng_min: 120.9, lng_max: 121.2 }
+    })
       .then(r => setHeatmapData(r.data))
       .catch(() => {})
   })

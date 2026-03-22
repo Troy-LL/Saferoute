@@ -18,7 +18,7 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
   const [alertSent, setAlertSent] = useState(false)
 
   async function geocode(query) {
-    const res = await axios.get(`${API_BASE}/api/routes/geocode`, {
+    const res = await axios.get(`${API_BASE}/api/geocode`, {
       params: { address: query }
     })
     const results = res.data.results
@@ -46,7 +46,7 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
       ])
 
       // Calculate routes
-      const res = await axios.post(`${API_BASE}/api/routes/calculate-route`, {
+      const res = await axios.post(`${API_BASE}/api/calculate-route`, {
         start_lat: start.lat,
         start_lng: start.lng,
         end_lat: end.lat,
@@ -58,7 +58,7 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
       onRoutesFound(res.data, { start, end })
 
       // Also load safe spots
-      const spotsRes = await axios.get(`${API_BASE}/api/spots/safe-spots`, {
+      const spotsRes = await axios.get(`${API_BASE}/api/safe-spots`, {
         params: {
           lat: (start.lat + end.lat) / 2,
           lng: (start.lng + end.lng) / 2,
@@ -80,7 +80,7 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
       return
     }
     try {
-      await axios.post(`${API_BASE}/api/spots/buddy-alert`, {
+      await axios.post(`${API_BASE}/api/buddy-alert`, {
         user_name: buddyName || 'A SafeRoute user',
         current_lat: 14.5995,
         current_lng: 121.0175,
