@@ -31,9 +31,8 @@
 .brand-shield {
   font-size: 22px;
 }
-.brand-ph {
+.brand-accent {
   color: var(--primary);
-  margin-left: 1px;
 }
 
 .navbar-links {

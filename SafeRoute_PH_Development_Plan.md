@@ -1,4 +1,4 @@
-# SafeRoute PH - Phase-by-Phase Development Plan
+# SafeRoute - Phase-by-Phase Development Plan
 
 **Project Type:** MVP (Competition Submission)  
 **Timeline:** 4 Days (March 21-24, 2026)  
@@ -107,12 +107,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api import routes, safety, spots
 from app.database import engine, Base
 
-app = FastAPI(title="SafeRoute PH API", version="1.0.0")
+app = FastAPI(title="SafeRoute API", version="1.0.0")
 
 # CORS for React frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://saferoute-ph.vercel.app"],
+    allow_origins=["http://localhost:5173", "https://saferoute.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -633,7 +633,7 @@ def send_buddy_alert(user_name, current_location, destination, buddy_phone, trac
 Current location: ({current_location['lat']}, {current_location['lng']})
 Track: {tracking_url}
 
-This is an automated message from SafeRoute PH."""
+This is an automated message from SafeRoute."""
     
     message = client.messages.create(
         body=message_body,
@@ -654,7 +654,7 @@ if __name__ == "__main__":
         },
         destination="Quezon Memorial Circle",
         buddy_phone="+639XXXXXXXXX",  # Test phone number
-        tracking_url="https://saferoute-ph.vercel.app/track/test123"
+        tracking_url="https://saferoute.vercel.app/track/test123"
     )
 ```
 
@@ -888,7 +888,7 @@ vercel env add VITE_API_URL production
 # Add both frontend and backend
 
 git init
-git remote add origin https://github.com/[username]/saferoute-ph.git
+git remote add origin https://github.com/[username]/saferoute.git
 
 # Create .gitignore
 cat > .gitignore << EOF
@@ -904,7 +904,7 @@ EOF
 
 # Initial commit
 git add .
-git commit -m "Initial commit: SafeRoute PH MVP"
+git commit -m "Initial commit: SafeRoute MVP"
 git push -u origin main
 ```
 
@@ -1859,7 +1859,7 @@ def send_alert(request: AlertRequest):
     try:
         # Generate tracking URL
         tracking_id = str(uuid.uuid4())[:8]
-        tracking_url = f"https://saferoute-ph.vercel.app/track/{tracking_id}"
+        tracking_url = f"https://saferoute.vercel.app/track/{tracking_id}"
         
         # Send SMS
         message_sid = send_buddy_alert(
@@ -2392,7 +2392,7 @@ return (
 **4.2.1 README.md**
 
 ```markdown
-# SafeRoute PH
+# SafeRoute
 
 AI-powered walking navigation that routes women through safer streets in Metro Manila.
 
@@ -2485,7 +2485,7 @@ MIT License - See LICENSE file
 
 ## 🔗 Links
 
-- Live Demo: https://saferoute-ph.vercel.app
+- Live Demo: https://saferoute.vercel.app
 - Video: [YouTube link]
 - Slides: [Google Drive link]
 ```
@@ -2493,7 +2493,7 @@ MIT License - See LICENSE file
 **4.2.2 API Documentation (docs/API.md)**
 
 ```markdown
-# SafeRoute PH API Documentation
+# SafeRoute API Documentation
 
 Base URL: `https://saferoute-backend.railway.app`
 
@@ -2592,7 +2592,7 @@ Send emergency SMS to buddy.
 {
   "success": true,
   "message_sid": "SM...",
-  "tracking_url": "https://saferoute-ph.vercel.app/track/abc123"
+  "tracking_url": "https://saferoute.vercel.app/track/abc123"
 }
 ```
 ```
@@ -2602,7 +2602,7 @@ Send emergency SMS to buddy.
 ```markdown
 MIT License
 
-Copyright (c) 2026 SafeRoute PH Team
+Copyright (c) 2026 SafeRoute Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -2676,7 +2676,7 @@ SOFTWARE.
 **4.4.1 PDF Structure**
 
 **Page 1: Cover + Problem**
-- Title: SafeRoute PH
+- Title: SafeRoute
 - Tagline: "AI-Powered Safety Navigation for Women in Metro Manila"
 - Team logo
 - Problem statement with statistics
@@ -2760,7 +2760,7 @@ vercel --prod
 **4.5.2 End-to-End Production Test**
 
 Test on **actual mobile device**:
-1. Open https://saferoute-ph.vercel.app
+1. Open https://saferoute.vercel.app
 2. Complete onboarding
 3. Search for route (use real Manila addresses)
 4. Select route, verify map display
@@ -2774,7 +2774,7 @@ Test on **actual mobile device**:
 ```bash
 # Lighthouse audit (aim for 70+ on all metrics)
 npm install -g lighthouse
-lighthouse https://saferoute-ph.vercel.app --view
+lighthouse https://saferoute.vercel.app --view
 ```
 
 **Metrics to check:**
@@ -2796,7 +2796,7 @@ lighthouse https://saferoute-ph.vercel.app --view
 Checklist:
 - [ ] 5-page PDF proposal (<10MB)
 - [ ] 3-minute video MP4 (<500MB)
-- [ ] Live demo URL (https://saferoute-ph.vercel.app)
+- [ ] Live demo URL (https://saferoute.vercel.app)
 - [ ] GitHub repo URL (public, with README)
 - [ ] Team information form filled
 
@@ -2805,7 +2805,7 @@ Checklist:
 1. Go to AIRA Youth Challenge submission portal
 2. Create account / login
 3. Fill team information:
-   - Team name: SafeRoute PH Team
+   - Team name: SafeRoute Team
    - University: Polytechnic University of the Philippines
    - Country: Philippines
    - Team members: (all from same country, at least 1 citizen)
@@ -3044,7 +3044,7 @@ console.log('First coordinate:', routes[0].geometry[0]);
 console.log(import.meta.env.VITE_API_URL);
 
 // Verify CORS headers in backend
-// Should include: https://saferoute-ph.vercel.app
+// Should include: https://saferoute.vercel.app
 ```
 
 ---
@@ -3103,7 +3103,7 @@ A functional MVP demonstrating:
 
 ---
 
-**Good luck, Team SafeRoute PH! 🚀**
+**Good luck, Team SafeRoute! 🚀**
 
 **Remember:** The goal is not perfection, it's demonstrating feasibility and impact. Ship it! 
 

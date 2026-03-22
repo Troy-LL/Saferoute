@@ -17,7 +17,9 @@ export default function Navbar() {
       <div className="navbar-inner">
         <Link to="/" className="navbar-brand">
           <span className="brand-shield">🛡️</span>
-          <span className="brand-text">SafeRoute<span className="brand-ph">PH</span></span>
+          <span className="brand-text">
+            Safe<span className="brand-accent">Route</span>
+          </span>
         </Link>
 
         {/* Desktop Nav */}

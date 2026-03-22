@@ -14,4 +14,4 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./saferoute.db")
 
 # App Settings
 APP_ENV = os.getenv("APP_ENV", "development")
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173,https://saferoute-ph.vercel.app").split(",")
+CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173,https://saferoute.vercel.app").split(",")

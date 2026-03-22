@@ -59,7 +59,7 @@ export default function HomePage() {
             <span className="hero-accent">Without Fear</span>
           </h1>
           <p className="hero-desc animate-in">
-            SafeRoute PH uses crime pattern data and AI-powered routing to help you walk<br/>
+            SafeRoute uses crime pattern data and AI-powered routing to help you walk<br/>
             safely in Metro Manila — especially at night.
           </p>
           <div className="hero-actions animate-in">
@@ -139,7 +139,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>🛡️ SafeRoute PH · Built for ASEAN Challenge 2025 · Open Source</p>
+        <p>🛡️ SafeRoute · Built for ASEAN Challenge 2025 · Open Source</p>
         <p style={{ marginTop: '4px', fontSize: '12px', color: 'var(--text-muted)' }}>
           Data is synthetic demo data. Not a substitute for personal safety judgment.
         </p>

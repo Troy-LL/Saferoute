@@ -10,7 +10,7 @@ export default function AboutPage() {
       <div className="about-container">
 
         <header className="about-header">
-          <h1>About SafeRoute PH</h1>
+          <h1>About SafeRoute</h1>
           <p className="header-sub">A pedestrian safety platform built for Metro Manila</p>
         </header>
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
         <section className="about-section glass-card">
           <h2>💡 Our Solution</h2>
           <p>
-            SafeRoute PH is an AI-powered pedestrian safety navigator that ranks walking routes
+            SafeRoute is an AI-powered pedestrian safety navigator that ranks walking routes
             by a composite <strong>Safety Score</strong> combining:
           </p>
           <ul className="about-list">
@@ -86,13 +86,13 @@ export default function AboutPage() {
           <p>
             This prototype uses <strong>synthetic demo data</strong> for demonstration purposes.
             In production, it would integrate with official PNP crime blotter APIs, MMDA data,
-            and crowdsourced incident reports. SafeRoute PH is not a substitute for personal
+            and crowdsourced incident reports. SafeRoute is not a substitute for personal
             safety judgment. Always stay alert and trust your instincts.
           </p>
         </section>
 
         <footer className="about-footer">
-          <p>🛡️ SafeRoute PH · Built for ASEAN Innovation Challenge 2025 · Open Source</p>
+          <p>🛡️ SafeRoute · Built for ASEAN Innovation Challenge 2025 · Open Source</p>
         </footer>
 
       </div>

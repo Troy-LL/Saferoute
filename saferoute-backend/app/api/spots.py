@@ -75,7 +75,7 @@ def trigger_buddy_alert(request: BuddyAlertRequest):
     Send an emergency SMS to a designated buddy with current location.
     """
     try:
-        tracking_url = f"https://saferoute-ph.vercel.app/track/{request.current_lat:.4f},{request.current_lng:.4f}"
+        tracking_url = f"https://saferoute.vercel.app/track/{request.current_lat:.4f},{request.current_lng:.4f}"
         
         sid = send_buddy_alert(
             user_name=request.user_name,

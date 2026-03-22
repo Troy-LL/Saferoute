@@ -33,7 +33,7 @@ def send_buddy_alert(user_name, current_location, destination, buddy_phone, trac
 Current location: ({current_location['lat']:.6f}, {current_location['lng']:.6f})
 Track: {tracking_url}
 
-This is an automated message from SafeRoute PH."""
+This is an automated message from SafeRoute."""
 
     message = client.messages.create(
         body=message_body,
@@ -56,7 +56,7 @@ if __name__ == "__main__":
             },
             destination="Quezon Memorial Circle",
             buddy_phone="+639XXXXXXXXX",  # Replace with real test number
-            tracking_url="https://saferoute-ph.vercel.app/track/test123"
+            tracking_url="https://saferoute.vercel.app/track/test123"
         )
         print(f"SMS sent! SID: {sid}")
     except Exception as e:

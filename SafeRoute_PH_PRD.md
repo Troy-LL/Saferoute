@@ -1,4 +1,4 @@
-# SafeRoute PH - Product Requirements Document (MVP)
+# SafeRoute - Product Requirements Document (MVP)
 
 **Document Version:** 1.0  
 **Last Updated:** March 21, 2026  
@@ -11,7 +11,7 @@
 ## 1. EXECUTIVE SUMMARY
 
 ### Product Overview
-**Product Name:** SafeRoute PH  
+**Product Name:** SafeRoute  
 **Version:** MVP v1.0 (Competition Demo)  
 **Budget:** ₱0 (100% free/open-source)  
 **Target:** AIRA Youth Challenge submission + functional demo
@@ -179,7 +179,7 @@ Women in the Philippines, especially in Metro Manila, face constant safety conce
 SafeRoute Alert: [Name] is walking from [Start Address] to [End Address]. 
 Current location: [Address] (14.6507, 121.1029)
 ETA: 25 minutes
-Track: https://saferoute-ph.vercel.app/track/abc123
+Track: https://saferoute.vercel.app/track/abc123
 ```
 
 **Technical Implementation:**
@@ -403,9 +403,9 @@ Current location: Corner Katipunan & Aurora
 ETA: 15 minutes
 
 Track her route: 
-https://saferoute-ph.vercel.app/track/abc123
+https://saferoute.vercel.app/track/abc123
 
-- SafeRoute PH
+- SafeRoute
 ```
 
 ---
@@ -945,7 +945,7 @@ Sends SMS alert to emergency contacts.
     "+639171234567",
     "+639189876543"
   ],
-  "tracking_link": "https://saferoute-ph.vercel.app/track/abc123",
+  "tracking_link": "https://saferoute.vercel.app/track/abc123",
   "timestamp": "2026-03-21T14:30:00Z"
 }
 ```
@@ -969,7 +969,7 @@ ETA: {eta_minutes} minutes
 
 Track route: {tracking_link}
 
-- SafeRoute PH
+- SafeRoute
 ```
 
 **Implementation Notes:**
@@ -1956,7 +1956,7 @@ uvicorn main:app --reload --port 8000
 **0:30-1:00 - Solution Introduction**
 [Screen recording: Opening SafeRoute app]
 
-"Meet SafeRoute PH. The first AI-powered navigation app that routes you through safer streets. Using crime data, street lighting analysis, and real-time danger prediction, SafeRoute calculates safety scores for every route. So you can walk with confidence, not fear."
+"Meet SafeRoute. The first AI-powered navigation app that routes you through safer streets. Using crime data, street lighting analysis, and real-time danger prediction, SafeRoute calculates safety scores for every route. So you can walk with confidence, not fear."
 
 **1:00-2:00 - Feature Demo**
 [Screen recording: Live demo]
@@ -1977,9 +1977,9 @@ And with one tap, you can alert your trusted contacts. They get your location, y
 **2:30-3:00 - Call to Action**
 [Talking head: Team member]
 
-"SafeRoute PH is 100% free and open-source. Built by students, for the community. If we can prevent even one assault, this was worth building. Join us in making our streets safer—one route at a time."
+"SafeRoute is 100% free and open-source. Built by students, for the community. If we can prevent even one assault, this was worth building. Join us in making our streets safer—one route at a time."
 
-[End screen: SafeRoute PH logo, QR code to demo, website URL]
+[End screen: SafeRoute logo, QR code to demo, website URL]
 
 ---
 
@@ -2002,7 +2002,7 @@ And with one tap, you can alert your trusted contacts. They get your location, y
   - [ ] File size <500MB
 
 - [ ] Live demo link
-  - [ ] Working URL (https://saferoute-ph.vercel.app)
+  - [ ] Working URL (https://saferoute.vercel.app)
   - [ ] Tested in incognito mode
   - [ ] Mobile responsive
   - [ ] No authentication required
@@ -2038,8 +2038,8 @@ And with one tap, you can alert your trusted contacts. They get your location, y
 - [Name 3] - Content & Research
 
 **Project Links:**
-- Live Demo: https://saferoute-ph.vercel.app
-- GitHub: https://github.com/[username]/saferoute-ph
+- Live Demo: https://saferoute.vercel.app
+- GitHub: https://github.com/[username]/saferoute
 - Video: [YouTube/Google Drive link]
 
 **Support:**
