@@ -1,10 +1,8 @@
-import { useState, useCallback } from 'react'
-import axios from 'axios'
+import { useState, useCallback, useEffect } from 'react'
 import SafeMap from '../components/SafeMap'
 import RoutePlanner from '../components/RoutePlanner'
+import { getHeatmapBbox } from '../services/api'
 import './MapPage.css'
-
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
 
 export default function MapPage() {
   const [routes, setRoutes] = useState(null)
@@ -12,27 +10,36 @@ export default function MapPage() {
   const [safeSpots, setSafeSpots] = useState([])
   const [showHeatmap, setShowHeatmap] = useState(true)
   const [showSpots, setShowSpots] = useState(true)
-  const [clickMode, setClickMode] = useState(null) // 'start' | 'end' | null
+  const [startMarker, setStartMarker] = useState(null)
+  const [endMarker, setEndMarker] = useState(null)
+  const [selectedRouteIndex, setSelectedRouteIndex] = useState(0)
 
-  // Load heatmap on mount
-  useState(() => {
-    axios.get(`${API_BASE}/api/heatmap`, {
-      params: { lat_min: 14.4, lat_max: 14.8, lng_min: 120.9, lng_max: 121.2 }
+  useEffect(() => {
+    getHeatmapBbox({
+      lat_min: 14.4,
+      lat_max: 14.8,
+      lng_min: 120.9,
+      lng_max: 121.2,
     })
-      .then(r => setHeatmapData(r.data))
+      .then(setHeatmapData)
       .catch(() => {})
-  })
+  }, [])
 
-  const handleRoutesFound = useCallback((foundRoutes) => {
+  const handleRoutesFound = useCallback((foundRoutes, markers) => {
     setRoutes(foundRoutes)
+    setSelectedRouteIndex(0)
+    if (markers?.start && markers?.end) {
+      setStartMarker({ lat: markers.start.lat, lng: markers.start.lng })
+      setEndMarker({ lat: markers.end.lat, lng: markers.end.lng })
+    }
   }, [])
 
   const handleSafeSpotsFound = useCallback((spots) => {
     if (showSpots) setSafeSpots(spots)
   }, [showSpots])
 
-  const handleMapClick = useCallback((latlng) => {
-    // Future: allow clicking to set start/end
+  const handleMapClick = useCallback(() => {
+    // Future: tap-to-set start/end
   }, [])
 
   return (
@@ -40,12 +47,13 @@ export default function MapPage() {
       <RoutePlanner
         onRoutesFound={handleRoutesFound}
         onSafeSpotsFound={handleSafeSpotsFound}
+        onSelectedRouteChange={setSelectedRouteIndex}
       />
 
       <div className="map-area">
-        {/* Map Controls */}
         <div className="map-controls">
           <button
+            type="button"
             className={`btn btn-sm ${showHeatmap ? 'btn-primary' : 'btn-glass'}`}
             onClick={() => setShowHeatmap(v => !v)}
             title="Toggle crime heatmap"
@@ -53,6 +61,7 @@ export default function MapPage() {
             🔥 Crime Heatmap
           </button>
           <button
+            type="button"
             className={`btn btn-sm ${showSpots ? 'btn-primary' : 'btn-glass'}`}
             onClick={() => setShowSpots(v => !v)}
             title="Toggle safe spots"
@@ -63,9 +72,12 @@ export default function MapPage() {
 
         <SafeMap
           routes={routes}
+          highlightedRouteIndex={selectedRouteIndex}
           heatmapData={showHeatmap ? heatmapData : null}
           safeSpots={showSpots ? safeSpots : []}
           onMapClick={handleMapClick}
+          startMarker={startMarker}
+          endMarker={endMarker}
         />
       </div>
     </div>

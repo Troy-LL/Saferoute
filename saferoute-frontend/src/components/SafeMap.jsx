@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet.heat'
 import './SafeMap.css'
 
 // Fix Leaflet default icon
@@ -18,22 +19,21 @@ L.Icon.Default.mergeOptions({
 // Metro Manila center
 const METRO_MANILA = [14.5995, 121.0175]
 
-function SafetyBadge({ score }) {
-  const color = score >= 70 ? 'green' : score >= 40 ? 'yellow' : 'red'
-  const label = score >= 70 ? '✅ Safe' : score >= 40 ? '⚠️ Moderate' : '🚨 Risky'
-  return (
-    <span className={`badge badge-${color}`}>
-      {label} {score}/100
-    </span>
-  )
-}
-
-export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, startMarker, endMarker }) {
+export default function SafeMap({
+  routes,
+  heatmapData,
+  safeSpots,
+  onMapClick,
+  startMarker,
+  endMarker,
+  highlightedRouteIndex = 0,
+}) {
   const mapRef = useRef(null)
   const mapInstance = useRef(null)
   const routeLayers = useRef([])
   const heatLayer = useRef(null)
   const spotsLayer = useRef([])
+  const endpointMarkers = useRef([])
 
   // Initialize map
   useEffect(() => {
@@ -100,6 +100,7 @@ export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, st
       const latlngs = route.geometry.map(([lng, lat]) => [lat, lng])
       const color = COLORS[route.color] || '#fff'
       const weight = WIDTHS[idx] || 3
+      const isHighlighted = idx === highlightedRouteIndex
 
       // Glow effect: draw thick transparent line behind
       const glowLine = L.polyline(latlngs, {
@@ -113,10 +114,10 @@ export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, st
       const line = L.polyline(latlngs, {
         color,
         weight,
-        opacity: idx === 0 ? 0.95 : 0.65,
+        opacity: isHighlighted ? 0.95 : 0.55,
         lineCap: 'round',
         lineJoin: 'round',
-        dashArray: idx === 0 ? null : '8 6'
+        dashArray: isHighlighted ? null : '8 6'
       }).addTo(map)
 
       line.bindTooltip(`
@@ -135,7 +136,7 @@ export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, st
       const allCoords = routes.flatMap(r => r.geometry).map(([lng, lat]) => [lat, lng])
       map.fitBounds(L.latLngBounds(allCoords), { padding: [60, 60] })
     }
-  }, [routes])
+  }, [routes, highlightedRouteIndex])
 
   // Draw heatmap
   useEffect(() => {
@@ -152,7 +153,11 @@ export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, st
 
     // Use leaflet.heat if available
     if (typeof L.heatLayer === 'function') {
-      const points = heatmapData.map(d => [d.lat, d.lng, d.intensity])
+      const points = heatmapData.map(d => [
+        d.lat,
+        d.lng,
+        typeof d.intensity === 'number' ? d.intensity : 0.6,
+      ])
       const layer = L.heatLayer(points, {
         radius: 20,
         blur: 15,
@@ -221,12 +226,39 @@ export default function SafeMap({ routes, heatmapData, safeSpots, onMapClick, st
     })
   }, [safeSpots])
 
-  // Start/End markers
+  // Start / end markers (geocoded search points)
   useEffect(() => {
     const map = mapInstance.current
     if (!map) return
 
-    // We'll just pan the map if both are set; actual pin icons shown via route
+    endpointMarkers.current.forEach(m => map.removeLayer(m))
+    endpointMarkers.current = []
+
+    const startIcon = L.divIcon({
+      className: 'endpoint-marker endpoint-start',
+      html: '<div class="endpoint-pin">A</div>',
+      iconSize: [28, 36],
+      iconAnchor: [14, 36],
+    })
+    const endIcon = L.divIcon({
+      className: 'endpoint-marker endpoint-end',
+      html: '<div class="endpoint-pin">B</div>',
+      iconSize: [28, 36],
+      iconAnchor: [14, 36],
+    })
+
+    if (startMarker) {
+      const m = L.marker([startMarker.lat, startMarker.lng], { icon: startIcon })
+        .addTo(map)
+        .bindPopup('Start')
+      endpointMarkers.current.push(m)
+    }
+    if (endMarker) {
+      const m = L.marker([endMarker.lat, endMarker.lng], { icon: endIcon })
+        .addTo(map)
+        .bindPopup('Destination')
+      endpointMarkers.current.push(m)
+    }
   }, [startMarker, endMarker])
 
   return (

@@ -69,6 +69,20 @@ def get_safe_spots(
     return nearby
 
 
+@router.get("/safe-spots/nearest", response_model=Optional[SafeSpotResponse])
+def get_nearest_safe_spot(
+    lat: float = Query(...),
+    lng: float = Query(...),
+    radius_km: float = Query(10.0, description="Search radius to find nearest"),
+    db: Session = Depends(get_db),
+):
+    """Nearest safe spot within radius (Phase 2)."""
+    nearby = get_safe_spots(lat=lat, lng=lng, radius_km=radius_km, db=db)
+    if not nearby:
+        return None
+    return nearby[0]
+
+
 @router.post("/buddy-alert")
 def trigger_buddy_alert(request: BuddyAlertRequest):
     """

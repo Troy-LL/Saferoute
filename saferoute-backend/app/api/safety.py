@@ -17,6 +17,54 @@ class HeatmapPoint(BaseModel):
     incident_count: int
 
 
+class DangerHeatmapPoint(BaseModel):
+    """Phase 2: time-weighted crime points for overlay (no bbox filter — use sparingly)."""
+    lat: float
+    lng: float
+    intensity: float  # 0.0–1.0
+
+
+INTENSITY_BY_TYPE = {
+    "robbery": 1.0,
+    "assault": 0.9,
+    "harassment": 0.6,
+    "theft": 0.5,
+}
+
+
+@router.get("/danger-heatmap", response_model=List[DangerHeatmapPoint])
+def get_danger_heatmap(
+    time_of_day: Optional[int] = Query(None, description="Hour 0–23; only incidents within ±3h"),
+    db: Session = Depends(get_db),
+):
+    """
+    Crime points with intensity by type; optional time-of-day filter (Phase 2).
+    """
+    incidents = db.query(CrimeIncident).all()
+    out: List[DangerHeatmapPoint] = []
+    for inc in incidents:
+        if time_of_day is not None and inc.time_of_day:
+            try:
+                incident_hour = int(str(inc.time_of_day).split(":")[0])
+            except (ValueError, IndexError):
+                incident_hour = 12
+            # ±3 hours window (wrap midnight handled loosely)
+            diff = abs(incident_hour - time_of_day)
+            diff = min(diff, 24 - diff)
+            if diff > 3:
+                continue
+        t = (inc.incident_type or "theft").lower()
+        intensity = INTENSITY_BY_TYPE.get(t, 0.5)
+        out.append(
+            DangerHeatmapPoint(
+                lat=inc.latitude,
+                lng=inc.longitude,
+                intensity=intensity,
+            )
+        )
+    return out
+
+
 @router.get("/heatmap", response_model=List[HeatmapPoint])
 def get_heatmap_data(
     lat_min: float = Query(14.4, description="Min latitude"),

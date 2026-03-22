@@ -1,10 +1,17 @@
-import { useState } from 'react'
-import axios from 'axios'
+import { useState, useEffect } from 'react'
+import {
+  calculateRoute,
+  geocodeAddress,
+  getSafeSpots,
+  sendBuddyAlert,
+} from '../services/api'
 import './RoutePlanner.css'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000'
-
-export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
+export default function RoutePlanner({
+  onRoutesFound,
+  onSafeSpotsFound,
+  onSelectedRouteChange,
+}) {
   const [startInput, setStartInput] = useState('')
   const [endInput, setEndInput] = useState('')
   const [hour, setHour] = useState(new Date().getHours())
@@ -16,15 +23,19 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
   const [buddyPhone, setBuddyPhone] = useState('')
   const [buddyName, setBuddyName] = useState('')
   const [alertSent, setAlertSent] = useState(false)
+  const [routeContext, setRouteContext] = useState(null)
 
   async function geocode(query) {
-    const res = await axios.get(`${API_BASE}/api/geocode`, {
-      params: { address: query }
-    })
-    const results = res.data.results
+    const results = await geocodeAddress(query)
     if (!results || results.length === 0) throw new Error(`No results for "${query}"`)
     return results[0]
   }
+
+  useEffect(() => {
+    if (!routes?.length) return
+    setSelectedRoute(0)
+    onSelectedRouteChange?.(0)
+  }, [routes, onSelectedRouteChange])
 
   async function handleSearch(e) {
     e.preventDefault()
@@ -45,30 +56,35 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
         geocode(endInput + ' Metro Manila Philippines')
       ])
 
-      // Calculate routes
-      const res = await axios.post(`${API_BASE}/api/calculate-route`, {
-        start_lat: start.lat,
-        start_lng: start.lng,
-        end_lat: end.lat,
-        end_lng: end.lng,
-        time_of_day: hour
-      })
+      setRouteContext({ start, end, startLabel: startInput, endLabel: endInput })
 
-      setRoutes(res.data)
-      onRoutesFound(res.data, { start, end })
+      const routeData = await calculateRoute(
+        start.lat,
+        start.lng,
+        end.lat,
+        end.lng,
+        hour
+      )
 
-      // Also load safe spots
-      const spotsRes = await axios.get(`${API_BASE}/api/safe-spots`, {
-        params: {
-          lat: (start.lat + end.lat) / 2,
-          lng: (start.lng + end.lng) / 2,
-          radius_km: 1.5
-        }
-      })
-      if (onSafeSpotsFound) onSafeSpotsFound(spotsRes.data)
+      setRoutes(routeData)
+      onRoutesFound(routeData, { start, end })
+
+      const spotsData = await getSafeSpots(
+        (start.lat + end.lat) / 2,
+        (start.lng + end.lng) / 2,
+        1.5
+      )
+      if (onSafeSpotsFound) onSafeSpotsFound(spotsData)
 
     } catch (err) {
-      setError(err.response?.data?.detail || err.message || 'Failed to calculate route')
+      const detail = err.response?.data?.detail
+      setError(
+        typeof detail === 'string'
+          ? detail
+          : detail
+            ? JSON.stringify(detail)
+            : err.message || 'Failed to calculate route'
+      )
     } finally {
       setLoading(false)
     }
@@ -80,13 +96,13 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
       return
     }
     try {
-      await axios.post(`${API_BASE}/api/buddy-alert`, {
+      await sendBuddyAlert({
         user_name: buddyName || 'A SafeRoute user',
-        current_lat: 14.5995,
-        current_lng: 121.0175,
-        current_address: startInput || 'Metro Manila',
-        destination: endInput || 'Destination',
-        buddy_phone: buddyPhone
+        current_lat: routeContext?.start?.lat ?? 14.5995,
+        current_lng: routeContext?.start?.lng ?? 121.0175,
+        current_address: routeContext?.startLabel || startInput || 'Metro Manila',
+        destination: routeContext?.endLabel || endInput || 'Destination',
+        buddy_phone: buddyPhone,
       })
       setAlertSent(true)
       setTimeout(() => {
@@ -95,7 +111,8 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
         setBuddyPhone('')
       }, 3000)
     } catch (err) {
-      alert('Could not send alert: ' + (err.response?.data?.detail || err.message))
+      const d = err.response?.data?.detail
+      alert('Could not send alert: ' + (typeof d === 'string' ? d : err.message))
     }
   }
 
@@ -166,7 +183,10 @@ export default function RoutePlanner({ onRoutesFound, onSafeSpotsFound }) {
             <div
               key={route.route_id}
               className={`route-card ${selectedRoute === idx ? 'route-card-selected' : ''}`}
-              onClick={() => setSelectedRoute(idx)}
+              onClick={() => {
+                setSelectedRoute(idx)
+                onSelectedRouteChange?.(idx)
+              }}
             >
               <div className="route-card-header">
                 <div className="route-rank">

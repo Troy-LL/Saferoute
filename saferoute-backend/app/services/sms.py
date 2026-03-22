@@ -55,7 +55,7 @@ if __name__ == "__main__":
                 'address': "UP Diliman, Quezon City"
             },
             destination="Quezon Memorial Circle",
-            buddy_phone=os.getenv("TWILIO_TEST_TO", "+639000000000"),
+            buddy_phone=os.getenv("TWILIO_TEST_TO", "+63756446519"),
             tracking_url="https://saferoute-asean.vercel.app/track/test123"
         )
         print(f"SMS sent! SID: {sid}")
