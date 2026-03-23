@@ -1,0 +1,501 @@
+ID,Date,City,Neighborhood_Street,Latitude,Longitude,Crime_Type,Severity,Source
+1,2026-03-25,Manila,Tondo (Zaragoza St),14.61953,120.96624,Physical Injury / Brawl,High,Statistical Hotspot
+2,2026-03-25,Manila,NAIA Terminal 1 (Border),14.50678,120.99179,Smuggling (P102M Shabu),High,Real News (Simulated)
+3,2026-03-25,Manila,NAIA Terminal 1 (Border),14.50691,120.99385,Smuggling (P102M Shabu),High,Real News (Simulated)
+4,2026-03-24,Quezon City,Sto. Domingo,14.62724,121.00787,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+5,2026-03-24,Quezon City,Pasong Putik,14.72896,121.05754,Robbery (Jewelry Store),High,Real News (Simulated)
+6,2026-03-22,Quezon City,Holy Spirit,14.67522,121.08013,Animal Cruelty,Low,Real News (Simulated)
+7,2026-03-22,Manila,Tondo (Zaragoza St),14.61803,120.96541,Physical Injury / Brawl,High,Statistical Hotspot
+8,2026-03-22,Quezon City,Commonwealth Ave,14.66792,121.05096,Vehicular Crash,High,Statistical Hotspot
+9,2026-03-22,Quezon City,Kaligayahan (Zabarte Rd),14.7348,121.04274,House Robbery,Medium,Real News (Simulated)
+10,2026-03-21,Quezon City,Kaligayahan (Zabarte Rd),14.7341,121.04,House Robbery,Medium,Real News (Simulated)
+11,2026-03-21,Quezon City,Vibal Publishing Compound,14.62048,121.01575,Armed Siege / Trespassing,High,Real News (Scraped)
+12,2026-03-21,Manila,Quiapo Market,14.5968,120.98523,Theft,Medium,Statistical Hotspot
+13,2026-03-20,Quezon City,Commonwealth Ave,14.67003,121.04968,Vehicular Crash,High,Statistical Hotspot
+14,2026-03-20,Quezon City,Pasong Putik,14.7316,121.05682,Robbery (Jewelry Store),High,Real News (Simulated)
+15,2026-03-20,Quezon City,Sto. Domingo,14.62583,121.00816,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+16,2026-03-19,Quezon City,Commonwealth Ave,14.6698,121.04958,Vehicular Crash,High,Statistical Hotspot
+17,2026-03-18,Manila,Quiapo Market,14.5991,120.98456,Theft,Medium,Statistical Hotspot
+18,2026-03-17,Quezon City,Holy Spirit,14.67598,121.078,Animal Cruelty,Low,Real News (Simulated)
+19,2026-03-17,Manila,Tondo (Zaragoza St),14.61781,120.96579,Physical Injury / Brawl,High,Statistical Hotspot
+20,2026-03-17,Quezon City,Pasong Putik,14.72881,121.05538,Robbery (Jewelry Store),High,Real News (Simulated)
+21,2026-03-17,Manila,University Belt,14.60508,120.99294,Snatching,Medium,Statistical Hotspot
+22,2026-03-16,Quezon City,Pasong Putik,14.72917,121.0572,Robbery (Jewelry Store),High,Real News (Simulated)
+23,2026-03-16,Quezon City,Pasong Putik,14.73091,121.05646,Robbery (Jewelry Store),High,Real News (Simulated)
+24,2026-03-15,Manila,Tondo (Zaragoza St),14.6215,120.96804,Physical Injury / Brawl,High,Statistical Hotspot
+25,2026-03-15,Quezon City,Kaligayahan (Zabarte Rd),14.73521,121.04052,House Robbery,Medium,Real News (Simulated)
+26,2026-03-15,Quezon City,Pasong Putik,14.73279,121.05837,Robbery (Jewelry Store),High,Real News (Simulated)
+27,2026-03-15,Manila,Tondo (Zaragoza St),14.62109,120.9683,Physical Injury / Brawl,High,Statistical Hotspot
+28,2026-03-15,Manila,Quiapo Market,14.59956,120.98328,Theft,Medium,Statistical Hotspot
+29,2026-03-14,Quezon City,Kaligayahan (Zabarte Rd),14.73694,121.04393,House Robbery,Medium,Real News (Scraped)
+30,2026-03-14,Manila,Tondo (Zaragoza St),14.61961,120.96512,Physical Injury / Brawl,High,Statistical Hotspot
+31,2026-03-14,Manila,University Belt,14.60651,120.99345,Snatching,Medium,Statistical Hotspot
+32,2026-03-13,Quezon City,Sto. Domingo,14.62667,121.00464,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+33,2026-03-11,Quezon City,Holy Spirit,14.67686,121.0805,Animal Cruelty,Low,Real News (Simulated)
+34,2026-03-10,Manila,University Belt,14.60637,120.99197,Snatching,Medium,Statistical Hotspot
+35,2026-03-10,Manila,NAIA Terminal 1 (Border),14.5074,120.99155,Smuggling (P102M Shabu),High,Real News (Scraped)
+36,2026-03-09,Quezon City,Holy Spirit,14.6746,121.08127,Animal Cruelty,Low,Real News (Simulated)
+37,2026-03-09,Manila,Quiapo Market,14.59741,120.98512,Theft,Medium,Statistical Hotspot
+38,2026-03-08,Manila,Ermita,14.57987,120.98344,Robbery / Extortion,High,Real News (Simulated)
+39,2026-03-08,Quezon City,Pasong Putik,14.73144,121.0572,Robbery (Jewelry Store),High,Real News (Simulated)
+40,2026-03-07,Quezon City,Sto. Domingo,14.62806,121.00831,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+41,2026-03-06,Manila,Quiapo Market,14.59854,120.98344,Theft,Medium,Statistical Hotspot
+42,2026-03-06,Manila,University Belt,14.60429,120.99401,Snatching,Medium,Statistical Hotspot
+43,2026-03-06,Manila,University Belt,14.60338,120.99178,Snatching,Medium,Statistical Hotspot
+44,2026-03-05,Quezon City,Vibal Publishing Compound,14.62127,121.01499,Armed Siege / Trespassing,High,Real News (Scraped)
+45,2026-03-05,Quezon City,Cubao (Aurora Blvd),14.61902,121.05335,Theft (Pickpocketing),Medium,Statistical Hotspot
+46,2026-03-05,Quezon City,Pasong Putik,14.72896,121.05646,Robbery (Jewelry Store),High,Real News (Simulated)
+47,2026-03-05,Quezon City,Cubao (Aurora Blvd),14.61898,121.05168,Theft (Pickpocketing),Medium,Statistical Hotspot
+48,2026-03-05,Quezon City,Kaligayahan (Zabarte Rd),14.73367,121.04122,House Robbery,Medium,Real News (Simulated)
+49,2026-03-04,Quezon City,Cubao (Aurora Blvd),14.62003,121.0534,Theft (Pickpocketing),Medium,Statistical Hotspot
+50,2026-03-04,Quezon City,Cubao (Aurora Blvd),14.61766,121.05141,Theft (Pickpocketing),Medium,Statistical Hotspot
+51,2026-03-04,Quezon City,Kaligayahan (Zabarte Rd),14.73473,121.04243,House Robbery,Medium,Real News (Simulated)
+52,2026-03-04,Manila,Quiapo Market,14.60038,120.98574,Theft,Medium,Statistical Hotspot
+53,2026-03-03,Quezon City,Vibal Publishing Compound,14.6204,121.01496,Armed Siege / Trespassing,High,Real News (Simulated)
+54,2026-03-03,Quezon City,Kaligayahan (Zabarte Rd),14.73393,121.04349,House Robbery,Medium,Real News (Simulated)
+55,2026-03-03,Manila,University Belt,14.60404,120.99217,Snatching,Medium,Statistical Hotspot
+56,2026-03-02,Manila,University Belt,14.60717,120.99027,Snatching,Medium,Statistical Hotspot
+57,2026-03-02,Manila,Tondo (Zaragoza St),14.61822,120.96526,Physical Injury / Brawl,High,Statistical Hotspot
+58,2026-03-02,Quezon City,Commonwealth Ave,14.66691,121.05076,Vehicular Crash,High,Statistical Hotspot
+59,2026-03-02,Quezon City,Pasong Putik,14.73199,121.05798,Robbery (Jewelry Store),High,Real News (Simulated)
+60,2026-02-28,Quezon City,Holy Spirit,14.67657,121.08041,Animal Cruelty,Low,Real News (Simulated)
+61,2026-02-28,Quezon City,Cubao (Aurora Blvd),14.61996,121.05359,Theft (Pickpocketing),Medium,Statistical Hotspot
+62,2026-02-27,Quezon City,Cubao (Aurora Blvd),14.61986,121.05143,Theft (Pickpocketing),Medium,Statistical Hotspot
+63,2026-02-27,Manila,Tondo (Zaragoza St),14.6215,120.96686,Physical Injury / Brawl,High,Statistical Hotspot
+64,2026-02-26,Manila,Ermita,14.57608,120.98056,Robbery / Extortion,High,Real News (Simulated)
+65,2026-02-26,Quezon City,Sto. Domingo,14.62808,121.00654,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+66,2026-02-25,Quezon City,Holy Spirit,14.67311,121.08103,Animal Cruelty,Low,Real News (Simulated)
+67,2026-02-25,Quezon City,Cubao (Aurora Blvd),14.61994,121.05188,Theft (Pickpocketing),Medium,Statistical Hotspot
+68,2026-02-25,Manila,Tondo (Zaragoza St),14.61971,120.96578,Physical Injury / Brawl,High,Statistical Hotspot
+69,2026-02-24,Quezon City,Vibal Publishing Compound,14.62099,121.01611,Armed Siege / Trespassing,High,Real News (Simulated)
+70,2026-02-24,Quezon City,Cubao (Aurora Blvd),14.61979,121.05143,Theft (Pickpocketing),Medium,Statistical Hotspot
+71,2026-02-24,Quezon City,Commonwealth Ave,14.66639,121.05074,Vehicular Crash,High,Statistical Hotspot
+72,2026-02-23,Quezon City,Commonwealth Ave,14.66679,121.05043,Vehicular Crash,High,Statistical Hotspot
+73,2026-02-22,Quezon City,Cubao (Aurora Blvd),14.61723,121.05143,Theft (Pickpocketing),Medium,Statistical Hotspot
+74,2026-02-22,Manila,NAIA Terminal 1 (Border),14.50839,120.99192,Smuggling (P102M Shabu),High,Real News (Scraped)
+75,2026-02-22,Manila,NAIA Terminal 1 (Border),14.50741,120.99265,Smuggling (P102M Shabu),High,Real News (Simulated)
+76,2026-02-22,Manila,NAIA Terminal 1 (Border),14.50979,120.9934,Smuggling (P102M Shabu),High,Real News (Simulated)
+77,2026-02-22,Manila,University Belt,14.60367,120.99062,Snatching,Medium,Statistical Hotspot
+78,2026-02-22,Quezon City,Vibal Publishing Compound,14.61834,121.015,Armed Siege / Trespassing,High,Real News (Simulated)
+79,2026-02-22,Manila,Tondo (Zaragoza St),14.62097,120.96736,Physical Injury / Brawl,High,Statistical Hotspot
+80,2026-02-21,Manila,Ermita,14.57909,120.98427,Robbery / Extortion,High,Real News (Simulated)
+81,2026-02-21,Manila,Ermita,14.57806,120.98286,Robbery / Extortion,High,Real News (Simulated)
+82,2026-02-20,Manila,Tondo (Zaragoza St),14.6185,120.96762,Physical Injury / Brawl,High,Statistical Hotspot
+83,2026-02-20,Manila,University Belt,14.60358,120.99401,Snatching,Medium,Statistical Hotspot
+84,2026-02-20,Quezon City,Vibal Publishing Compound,14.6196,121.01578,Armed Siege / Trespassing,High,Real News (Simulated)
+85,2026-02-20,Manila,University Belt,14.60356,120.9925,Snatching,Medium,Statistical Hotspot
+86,2026-02-19,Manila,University Belt,14.6064,120.99156,Snatching,Medium,Statistical Hotspot
+87,2026-02-19,Quezon City,Cubao (Aurora Blvd),14.61991,121.05111,Theft (Pickpocketing),Medium,Statistical Hotspot
+88,2026-02-19,Manila,Quiapo Market,14.59793,120.98487,Theft,Medium,Statistical Hotspot
+89,2026-02-19,Manila,NAIA Terminal 1 (Border),14.509,120.9915,Smuggling (P102M Shabu),High,Real News (Simulated)
+90,2026-02-19,Quezon City,Commonwealth Ave,14.66685,121.05234,Vehicular Crash,High,Statistical Hotspot
+91,2026-02-19,Manila,Tondo (Zaragoza St),14.62114,120.96677,Physical Injury / Brawl,High,Statistical Hotspot
+92,2026-02-19,Quezon City,Vibal Publishing Compound,14.62048,121.01591,Armed Siege / Trespassing,High,Real News (Simulated)
+93,2026-02-18,Manila,University Belt,14.60673,120.99028,Snatching,Medium,Statistical Hotspot
+94,2026-02-18,Quezon City,Holy Spirit,14.67689,121.07802,Animal Cruelty,Low,Real News (Simulated)
+95,2026-02-17,Quezon City,Holy Spirit,14.67375,121.08062,Animal Cruelty,Low,Real News (Simulated)
+96,2026-02-16,Manila,Ermita,14.57859,120.98178,Robbery / Extortion,High,Real News (Scraped)
+97,2026-02-16,Quezon City,Pasong Putik,14.73005,121.05769,Robbery (Jewelry Store),High,Real News (Simulated)
+98,2026-02-16,Manila,University Belt,14.60386,120.99309,Snatching,Medium,Statistical Hotspot
+99,2026-02-16,Quezon City,Sto. Domingo,14.62571,121.0046,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+100,2026-02-16,Manila,University Belt,14.60423,120.99146,Snatching,Medium,Statistical Hotspot
+101,2026-02-15,Quezon City,Commonwealth Ave,14.66878,121.04944,Vehicular Crash,High,Statistical Hotspot
+102,2026-02-15,Manila,NAIA Terminal 1 (Border),14.50684,120.99249,Smuggling (P102M Shabu),High,Real News (Simulated)
+103,2026-02-15,Quezon City,Holy Spirit,14.67574,121.07858,Animal Cruelty,Low,Real News (Simulated)
+104,2026-02-14,Manila,NAIA Terminal 1 (Border),14.50983,120.99104,Smuggling (P102M Shabu),High,Real News (Simulated)
+105,2026-02-14,Quezon City,Kaligayahan (Zabarte Rd),14.73419,121.04141,House Robbery,Medium,Real News (Scraped)
+106,2026-02-14,Quezon City,Commonwealth Ave,14.66626,121.05031,Vehicular Crash,High,Statistical Hotspot
+107,2026-02-13,Manila,University Belt,14.60508,120.9931,Snatching,Medium,Statistical Hotspot
+108,2026-02-13,Quezon City,Kaligayahan (Zabarte Rd),14.73462,121.04242,House Robbery,Medium,Real News (Scraped)
+109,2026-02-13,Quezon City,Sto. Domingo,14.6264,121.00576,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+110,2026-02-13,Quezon City,Holy Spirit,14.67587,121.08161,Animal Cruelty,Low,Real News (Simulated)
+111,2026-02-12,Manila,Ermita,14.57669,120.9807,Robbery / Extortion,High,Real News (Simulated)
+112,2026-02-12,Quezon City,Sto. Domingo,14.62776,121.00687,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+113,2026-02-12,Manila,Quiapo Market,14.59997,120.98426,Theft,Medium,Statistical Hotspot
+114,2026-02-11,Manila,Quiapo Market,14.59782,120.98418,Theft,Medium,Statistical Hotspot
+115,2026-02-11,Quezon City,Holy Spirit,14.67596,121.08072,Animal Cruelty,Low,Real News (Simulated)
+116,2026-02-11,Quezon City,Holy Spirit,14.67427,121.0813,Animal Cruelty,Low,Real News (Scraped)
+117,2026-02-10,Quezon City,Kaligayahan (Zabarte Rd),14.73585,121.04391,House Robbery,Medium,Real News (Simulated)
+118,2026-02-10,Manila,Tondo (Zaragoza St),14.62011,120.968,Physical Injury / Brawl,High,Statistical Hotspot
+119,2026-02-10,Quezon City,Cubao (Aurora Blvd),14.62047,121.0523,Theft (Pickpocketing),Medium,Statistical Hotspot
+120,2026-02-10,Quezon City,Holy Spirit,14.67462,121.08181,Animal Cruelty,Low,Real News (Simulated)
+121,2026-02-09,Manila,Quiapo Market,14.59799,120.9838,Theft,Medium,Statistical Hotspot
+122,2026-02-09,Quezon City,Commonwealth Ave,14.66865,121.04952,Vehicular Crash,High,Statistical Hotspot
+123,2026-02-09,Manila,Quiapo Market,14.59716,120.9856,Theft,Medium,Statistical Hotspot
+124,2026-02-09,Quezon City,Cubao (Aurora Blvd),14.61711,121.05456,Theft (Pickpocketing),Medium,Statistical Hotspot
+125,2026-02-09,Quezon City,Vibal Publishing Compound,14.62079,121.01546,Armed Siege / Trespassing,High,Real News (Simulated)
+126,2026-02-09,Quezon City,Holy Spirit,14.67603,121.07808,Animal Cruelty,Low,Real News (Simulated)
+127,2026-02-08,Manila,NAIA Terminal 1 (Border),14.5077,120.99054,Smuggling (P102M Shabu),High,Real News (Simulated)
+128,2026-02-08,Manila,University Belt,14.60635,120.99383,Snatching,Medium,Statistical Hotspot
+129,2026-02-08,Manila,Tondo (Zaragoza St),14.61931,120.96846,Physical Injury / Brawl,High,Statistical Hotspot
+130,2026-02-08,Manila,University Belt,14.60363,120.99311,Snatching,Medium,Statistical Hotspot
+131,2026-02-08,Manila,Quiapo Market,14.60022,120.9841,Theft,Medium,Statistical Hotspot
+132,2026-02-08,Quezon City,Cubao (Aurora Blvd),14.61938,121.05345,Theft (Pickpocketing),Medium,Statistical Hotspot
+133,2026-02-08,Quezon City,Cubao (Aurora Blvd),14.61869,121.05272,Theft (Pickpocketing),Medium,Statistical Hotspot
+134,2026-02-07,Manila,Ermita,14.57945,120.9817,Robbery / Extortion,High,Real News (Simulated)
+135,2026-02-06,Manila,Tondo (Zaragoza St),14.61822,120.9671,Physical Injury / Brawl,High,Statistical Hotspot
+136,2026-02-04,Quezon City,Commonwealth Ave,14.66925,121.05,Vehicular Crash,High,Statistical Hotspot
+137,2026-02-04,Manila,Quiapo Market,14.59831,120.9856,Theft,Medium,Statistical Hotspot
+138,2026-02-04,Quezon City,Vibal Publishing Compound,14.61859,121.0166,Armed Siege / Trespassing,High,Real News (Simulated)
+139,2026-02-04,Manila,NAIA Terminal 1 (Border),14.50782,120.99048,Smuggling (P102M Shabu),High,Real News (Scraped)
+140,2026-02-04,Manila,Tondo (Zaragoza St),14.61796,120.96593,Physical Injury / Brawl,High,Statistical Hotspot
+141,2026-02-04,Manila,Quiapo Market,14.60061,120.98293,Theft,Medium,Statistical Hotspot
+142,2026-02-03,Manila,NAIA Terminal 1 (Border),14.50872,120.9905,Smuggling (P102M Shabu),High,Real News (Simulated)
+143,2026-02-03,Manila,University Belt,14.60637,120.99114,Snatching,Medium,Statistical Hotspot
+144,2026-02-03,Quezon City,Vibal Publishing Compound,14.61971,121.01503,Armed Siege / Trespassing,High,Real News (Simulated)
+145,2026-02-03,Manila,Quiapo Market,14.59733,120.98273,Theft,Medium,Statistical Hotspot
+146,2026-02-02,Quezon City,Cubao (Aurora Blvd),14.62019,121.05188,Theft (Pickpocketing),Medium,Statistical Hotspot
+147,2026-02-01,Quezon City,Holy Spirit,14.67539,121.08075,Animal Cruelty,Low,Real News (Scraped)
+148,2026-01-31,Quezon City,Pasong Putik,14.73133,121.05694,Robbery (Jewelry Store),High,Real News (Simulated)
+149,2026-01-31,Quezon City,Holy Spirit,14.67635,121.08169,Animal Cruelty,Low,Real News (Simulated)
+150,2026-01-31,Quezon City,Sto. Domingo,14.62642,121.00761,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+151,2026-01-30,Manila,Quiapo Market,14.59945,120.98397,Theft,Medium,Statistical Hotspot
+152,2026-01-29,Quezon City,Cubao (Aurora Blvd),14.62071,121.05191,Theft (Pickpocketing),Medium,Statistical Hotspot
+153,2026-01-29,Manila,Quiapo Market,14.59998,120.98361,Theft,Medium,Statistical Hotspot
+154,2026-01-28,Manila,University Belt,14.60646,120.99253,Snatching,Medium,Statistical Hotspot
+155,2026-01-28,Manila,Tondo (Zaragoza St),14.61865,120.9659,Physical Injury / Brawl,High,Statistical Hotspot
+156,2026-01-28,Manila,NAIA Terminal 1 (Border),14.50772,120.99426,Smuggling (P102M Shabu),High,Real News (Simulated)
+157,2026-01-27,Quezon City,Cubao (Aurora Blvd),14.62065,121.05188,Theft (Pickpocketing),Medium,Statistical Hotspot
+158,2026-01-26,Manila,Ermita,14.57704,120.98248,Robbery / Extortion,High,Real News (Simulated)
+159,2026-01-26,Quezon City,Cubao (Aurora Blvd),14.61926,121.05471,Theft (Pickpocketing),Medium,Statistical Hotspot
+160,2026-01-25,Quezon City,Vibal Publishing Compound,14.62127,121.01389,Armed Siege / Trespassing,High,Real News (Simulated)
+161,2026-01-25,Manila,Quiapo Market,14.59999,120.98496,Theft,Medium,Statistical Hotspot
+162,2026-01-25,Manila,NAIA Terminal 1 (Border),14.50779,120.99414,Smuggling (P102M Shabu),High,Real News (Simulated)
+163,2026-01-24,Quezon City,Commonwealth Ave,14.66832,121.05028,Vehicular Crash,High,Statistical Hotspot
+164,2026-01-24,Quezon City,Holy Spirit,14.67562,121.07804,Animal Cruelty,Low,Real News (Simulated)
+165,2026-01-23,Quezon City,Vibal Publishing Compound,14.62168,121.01324,Armed Siege / Trespassing,High,Real News (Simulated)
+166,2026-01-23,Quezon City,Sto. Domingo,14.62608,121.00531,Drug Seizure (P142M Shabu),High,Real News (Scraped)
+167,2026-01-23,Manila,Tondo (Zaragoza St),14.62078,120.96879,Physical Injury / Brawl,High,Statistical Hotspot
+168,2026-01-22,Quezon City,Cubao (Aurora Blvd),14.62033,121.05435,Theft (Pickpocketing),Medium,Statistical Hotspot
+169,2026-01-21,Manila,Quiapo Market,14.59777,120.98193,Theft,Medium,Statistical Hotspot
+170,2026-01-21,Manila,Tondo (Zaragoza St),14.62057,120.96847,Physical Injury / Brawl,High,Statistical Hotspot
+171,2026-01-21,Quezon City,Holy Spirit,14.67555,121.07841,Animal Cruelty,Low,Real News (Simulated)
+172,2026-01-21,Manila,NAIA Terminal 1 (Border),14.51031,120.99089,Smuggling (P102M Shabu),High,Real News (Simulated)
+173,2026-01-21,Manila,NAIA Terminal 1 (Border),14.50699,120.9932,Smuggling (P102M Shabu),High,Real News (Simulated)
+174,2026-01-21,Quezon City,Kaligayahan (Zabarte Rd),14.73661,121.04381,House Robbery,Medium,Real News (Simulated)
+175,2026-01-20,Quezon City,Pasong Putik,14.73252,121.05643,Robbery (Jewelry Store),High,Real News (Scraped)
+176,2026-01-20,Manila,Ermita,14.57963,120.98156,Robbery / Extortion,High,Real News (Simulated)
+177,2026-01-20,Manila,NAIA Terminal 1 (Border),14.50899,120.99152,Smuggling (P102M Shabu),High,Real News (Scraped)
+178,2026-01-20,Manila,University Belt,14.60653,120.99039,Snatching,Medium,Statistical Hotspot
+179,2026-01-20,Manila,University Belt,14.60629,120.99167,Snatching,Medium,Statistical Hotspot
+180,2026-01-20,Manila,Tondo (Zaragoza St),14.61859,120.96584,Physical Injury / Brawl,High,Statistical Hotspot
+181,2026-01-19,Quezon City,Holy Spirit,14.67643,121.07874,Animal Cruelty,Low,Real News (Scraped)
+182,2026-01-19,Manila,NAIA Terminal 1 (Border),14.50701,120.99315,Smuggling (P102M Shabu),High,Real News (Simulated)
+183,2026-01-19,Manila,University Belt,14.60678,120.99398,Snatching,Medium,Statistical Hotspot
+184,2026-01-19,Quezon City,Kaligayahan (Zabarte Rd),14.73635,121.04236,House Robbery,Medium,Real News (Simulated)
+185,2026-01-19,Quezon City,Vibal Publishing Compound,14.61869,121.01531,Armed Siege / Trespassing,High,Real News (Simulated)
+186,2026-01-18,Quezon City,Commonwealth Ave,14.67006,121.05,Vehicular Crash,High,Statistical Hotspot
+187,2026-01-18,Manila,NAIA Terminal 1 (Border),14.50941,120.99044,Smuggling (P102M Shabu),High,Real News (Simulated)
+188,2026-01-18,Manila,University Belt,14.60483,120.99048,Snatching,Medium,Statistical Hotspot
+189,2026-01-18,Quezon City,Sto. Domingo,14.62486,121.00515,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+190,2026-01-18,Quezon City,Vibal Publishing Compound,14.62175,121.01523,Armed Siege / Trespassing,High,Real News (Simulated)
+191,2026-01-18,Quezon City,Sto. Domingo,14.62679,121.00538,Drug Seizure (P142M Shabu),High,Real News (Scraped)
+192,2026-01-17,Quezon City,Commonwealth Ave,14.66614,121.05201,Vehicular Crash,High,Statistical Hotspot
+193,2026-01-17,Manila,Quiapo Market,14.59983,120.98446,Theft,Medium,Statistical Hotspot
+194,2026-01-17,Quezon City,Cubao (Aurora Blvd),14.62049,121.05362,Theft (Pickpocketing),Medium,Statistical Hotspot
+195,2026-01-16,Manila,Tondo (Zaragoza St),14.61872,120.96849,Physical Injury / Brawl,High,Statistical Hotspot
+196,2026-01-16,Quezon City,Commonwealth Ave,14.66908,121.05114,Vehicular Crash,High,Statistical Hotspot
+197,2026-01-16,Quezon City,Vibal Publishing Compound,14.61952,121.01607,Armed Siege / Trespassing,High,Real News (Simulated)
+198,2026-01-16,Quezon City,Vibal Publishing Compound,14.6202,121.01376,Armed Siege / Trespassing,High,Real News (Scraped)
+199,2026-01-15,Quezon City,Holy Spirit,14.67688,121.07845,Animal Cruelty,Low,Real News (Scraped)
+200,2026-01-15,Quezon City,Sto. Domingo,14.62499,121.00476,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+201,2026-01-14,Manila,University Belt,14.6034,120.9905,Snatching,Medium,Statistical Hotspot
+202,2026-01-14,Manila,University Belt,14.60623,120.99113,Snatching,Medium,Statistical Hotspot
+203,2026-01-14,Manila,NAIA Terminal 1 (Border),14.5083,120.99301,Smuggling (P102M Shabu),High,Real News (Simulated)
+204,2026-01-14,Manila,NAIA Terminal 1 (Border),14.50701,120.99152,Smuggling (P102M Shabu),High,Real News (Scraped)
+205,2026-01-14,Quezon City,Kaligayahan (Zabarte Rd),14.7352,121.0407,House Robbery,Medium,Real News (Simulated)
+206,2026-01-14,Quezon City,Pasong Putik,14.72981,121.05737,Robbery (Jewelry Store),High,Real News (Scraped)
+207,2026-01-14,Quezon City,Cubao (Aurora Blvd),14.61716,121.05256,Theft (Pickpocketing),Medium,Statistical Hotspot
+208,2026-01-13,Manila,University Belt,14.60466,120.99295,Snatching,Medium,Statistical Hotspot
+209,2026-01-13,Quezon City,Holy Spirit,14.67661,121.07964,Animal Cruelty,Low,Real News (Scraped)
+210,2026-01-13,Manila,Ermita,14.57792,120.98354,Robbery / Extortion,High,Real News (Simulated)
+211,2026-01-13,Manila,University Belt,14.60393,120.9905,Snatching,Medium,Statistical Hotspot
+212,2026-01-13,Quezon City,Sto. Domingo,14.62805,121.00623,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+213,2026-01-12,Quezon City,Cubao (Aurora Blvd),14.61786,121.05464,Theft (Pickpocketing),Medium,Statistical Hotspot
+214,2026-01-12,Quezon City,Pasong Putik,14.72992,121.05847,Robbery (Jewelry Store),High,Real News (Simulated)
+215,2026-01-12,Quezon City,Commonwealth Ave,14.66943,121.05164,Vehicular Crash,High,Statistical Hotspot
+216,2026-01-11,Manila,Tondo (Zaragoza St),14.62131,120.96781,Physical Injury / Brawl,High,Statistical Hotspot
+217,2026-01-11,Quezon City,Cubao (Aurora Blvd),14.61998,121.05107,Theft (Pickpocketing),Medium,Statistical Hotspot
+218,2026-01-11,Quezon City,Cubao (Aurora Blvd),14.61823,121.05459,Theft (Pickpocketing),Medium,Statistical Hotspot
+219,2026-01-11,Manila,University Belt,14.60333,120.99409,Snatching,Medium,Statistical Hotspot
+220,2026-01-11,Manila,University Belt,14.60625,120.99258,Snatching,Medium,Statistical Hotspot
+221,2026-01-10,Quezon City,Commonwealth Ave,14.66998,121.04873,Vehicular Crash,High,Statistical Hotspot
+222,2026-01-10,Manila,Ermita,14.57642,120.98212,Robbery / Extortion,High,Real News (Simulated)
+223,2026-01-10,Quezon City,Holy Spirit,14.67675,121.08108,Animal Cruelty,Low,Real News (Simulated)
+224,2026-01-10,Quezon City,Holy Spirit,14.67618,121.0815,Animal Cruelty,Low,Real News (Simulated)
+225,2026-01-10,Manila,Tondo (Zaragoza St),14.62066,120.96507,Physical Injury / Brawl,High,Statistical Hotspot
+226,2026-01-10,Quezon City,Pasong Putik,14.73126,121.05697,Robbery (Jewelry Store),High,Real News (Scraped)
+227,2026-01-09,Quezon City,Cubao (Aurora Blvd),14.61738,121.05283,Theft (Pickpocketing),Medium,Statistical Hotspot
+228,2026-01-08,Quezon City,Vibal Publishing Compound,14.61854,121.01611,Armed Siege / Trespassing,High,Real News (Scraped)
+229,2026-01-08,Quezon City,Kaligayahan (Zabarte Rd),14.73398,121.0435,House Robbery,Medium,Real News (Scraped)
+230,2026-01-08,Quezon City,Holy Spirit,14.67441,121.07864,Animal Cruelty,Low,Real News (Scraped)
+231,2026-01-08,Manila,University Belt,14.60391,120.99341,Snatching,Medium,Statistical Hotspot
+232,2026-01-08,Quezon City,Commonwealth Ave,14.66699,121.05155,Vehicular Crash,High,Statistical Hotspot
+233,2026-01-06,Quezon City,Sto. Domingo,14.62604,121.00637,Drug Seizure (P142M Shabu),High,Real News (Scraped)
+234,2026-01-06,Quezon City,Holy Spirit,14.67445,121.08008,Animal Cruelty,Low,Real News (Simulated)
+235,2026-01-05,Manila,Ermita,14.57674,120.98427,Robbery / Extortion,High,Real News (Simulated)
+236,2026-01-05,Quezon City,Cubao (Aurora Blvd),14.61748,121.05446,Theft (Pickpocketing),Medium,Statistical Hotspot
+237,2026-01-05,Quezon City,Sto. Domingo,14.62568,121.00733,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+238,2026-01-05,Manila,NAIA Terminal 1 (Border),14.50893,120.99249,Smuggling (P102M Shabu),High,Real News (Simulated)
+239,2026-01-04,Quezon City,Holy Spirit,14.67675,121.08095,Animal Cruelty,Low,Real News (Simulated)
+240,2026-01-04,Quezon City,Commonwealth Ave,14.6689,121.04959,Vehicular Crash,High,Statistical Hotspot
+241,2026-01-04,Quezon City,Cubao (Aurora Blvd),14.62005,121.05302,Theft (Pickpocketing),Medium,Statistical Hotspot
+242,2026-01-04,Manila,University Belt,14.6043,120.99408,Snatching,Medium,Statistical Hotspot
+243,2026-01-03,Manila,Tondo (Zaragoza St),14.61804,120.96886,Physical Injury / Brawl,High,Statistical Hotspot
+244,2026-01-03,Manila,NAIA Terminal 1 (Border),14.51041,120.99188,Smuggling (P102M Shabu),High,Real News (Simulated)
+245,2026-01-02,Quezon City,Cubao (Aurora Blvd),14.61832,121.0544,Theft (Pickpocketing),Medium,Statistical Hotspot
+246,2026-01-02,Quezon City,Commonwealth Ave,14.66616,121.04978,Vehicular Crash,High,Statistical Hotspot
+247,2026-01-02,Manila,Quiapo Market,14.5996,120.98372,Theft,Medium,Statistical Hotspot
+248,2026-01-02,Quezon City,Sto. Domingo,14.62587,121.00512,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+249,2026-01-02,Quezon City,Cubao (Aurora Blvd),14.61812,121.05214,Theft (Pickpocketing),Medium,Statistical Hotspot
+250,2026-01-01,Quezon City,Cubao (Aurora Blvd),14.61796,121.0544,Theft (Pickpocketing),Medium,Statistical Hotspot
+251,2025-12-31,Quezon City,Kaligayahan (Zabarte Rd),14.73334,121.04235,House Robbery,Medium,Real News (Simulated)
+252,2025-12-31,Quezon City,Vibal Publishing Compound,14.62057,121.01643,Armed Siege / Trespassing,High,Real News (Simulated)
+253,2025-12-30,Manila,NAIA Terminal 1 (Border),14.5087,120.99158,Smuggling (P102M Shabu),High,Real News (Simulated)
+254,2025-12-29,Manila,Ermita,14.57959,120.98033,Robbery / Extortion,High,Real News (Simulated)
+255,2025-12-29,Quezon City,Commonwealth Ave,14.66689,121.05158,Vehicular Crash,High,Statistical Hotspot
+256,2025-12-28,Quezon City,Commonwealth Ave,14.66892,121.04978,Vehicular Crash,High,Statistical Hotspot
+257,2025-12-27,Quezon City,Holy Spirit,14.67513,121.07927,Animal Cruelty,Low,Real News (Simulated)
+258,2025-12-27,Manila,Tondo (Zaragoza St),14.6214,120.96497,Physical Injury / Brawl,High,Statistical Hotspot
+259,2025-12-27,Manila,Ermita,14.57963,120.98278,Robbery / Extortion,High,Real News (Simulated)
+260,2025-12-26,Manila,Tondo (Zaragoza St),14.61883,120.96824,Physical Injury / Brawl,High,Statistical Hotspot
+261,2025-12-26,Manila,Quiapo Market,14.59772,120.98212,Theft,Medium,Statistical Hotspot
+262,2025-12-26,Quezon City,Kaligayahan (Zabarte Rd),14.73374,121.04369,House Robbery,Medium,Real News (Simulated)
+263,2025-12-26,Manila,NAIA Terminal 1 (Border),14.51059,120.99097,Smuggling (P102M Shabu),High,Real News (Simulated)
+264,2025-12-26,Manila,Tondo (Zaragoza St),14.61961,120.96547,Physical Injury / Brawl,High,Statistical Hotspot
+265,2025-12-25,Manila,Tondo (Zaragoza St),14.61797,120.96505,Physical Injury / Brawl,High,Statistical Hotspot
+266,2025-12-25,Quezon City,Vibal Publishing Compound,14.61971,121.01597,Armed Siege / Trespassing,High,Real News (Simulated)
+267,2025-12-25,Quezon City,Sto. Domingo,14.62742,121.00726,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+268,2025-12-24,Quezon City,Holy Spirit,14.67407,121.08075,Animal Cruelty,Low,Real News (Simulated)
+269,2025-12-24,Manila,Ermita,14.57628,120.98049,Robbery / Extortion,High,Real News (Simulated)
+270,2025-12-24,Quezon City,Sto. Domingo,14.62834,121.0052,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+271,2025-12-23,Quezon City,Cubao (Aurora Blvd),14.61973,121.05272,Theft (Pickpocketing),Medium,Statistical Hotspot
+272,2025-12-22,Quezon City,Cubao (Aurora Blvd),14.62031,121.05263,Theft (Pickpocketing),Medium,Statistical Hotspot
+273,2025-12-22,Manila,Tondo (Zaragoza St),14.62089,120.96576,Physical Injury / Brawl,High,Statistical Hotspot
+274,2025-12-22,Quezon City,Holy Spirit,14.6762,121.07941,Animal Cruelty,Low,Real News (Simulated)
+275,2025-12-22,Quezon City,Sto. Domingo,14.62794,121.00607,Drug Seizure (P142M Shabu),High,Real News (Scraped)
+276,2025-12-20,Quezon City,Commonwealth Ave,14.67005,121.04855,Vehicular Crash,High,Statistical Hotspot
+277,2025-12-20,Quezon City,Commonwealth Ave,14.67004,121.04965,Vehicular Crash,High,Statistical Hotspot
+278,2025-12-20,Manila,NAIA Terminal 1 (Border),14.50964,120.99276,Smuggling (P102M Shabu),High,Real News (Simulated)
+279,2025-12-20,Manila,Tondo (Zaragoza St),14.62142,120.96755,Physical Injury / Brawl,High,Statistical Hotspot
+280,2025-12-20,Quezon City,Holy Spirit,14.67556,121.08088,Animal Cruelty,Low,Real News (Simulated)
+281,2025-12-20,Manila,University Belt,14.60684,120.99351,Snatching,Medium,Statistical Hotspot
+282,2025-12-19,Quezon City,Sto. Domingo,14.62535,121.00736,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+283,2025-12-19,Manila,University Belt,14.60506,120.99183,Snatching,Medium,Statistical Hotspot
+284,2025-12-19,Manila,NAIA Terminal 1 (Border),14.50704,120.99339,Smuggling (P102M Shabu),High,Real News (Simulated)
+285,2025-12-19,Manila,University Belt,14.6046,120.99173,Snatching,Medium,Statistical Hotspot
+286,2025-12-18,Manila,NAIA Terminal 1 (Border),14.50899,120.9933,Smuggling (P102M Shabu),High,Real News (Simulated)
+287,2025-12-18,Quezon City,Cubao (Aurora Blvd),14.61754,121.05263,Theft (Pickpocketing),Medium,Statistical Hotspot
+288,2025-12-18,Quezon City,Kaligayahan (Zabarte Rd),14.73395,121.0421,House Robbery,Medium,Real News (Simulated)
+289,2025-12-18,Quezon City,Commonwealth Ave,14.6678,121.05027,Vehicular Crash,High,Statistical Hotspot
+290,2025-12-18,Quezon City,Pasong Putik,14.73177,121.05611,Robbery (Jewelry Store),High,Real News (Simulated)
+291,2025-12-17,Quezon City,Holy Spirit,14.67579,121.07933,Animal Cruelty,Low,Real News (Simulated)
+292,2025-12-17,Quezon City,Commonwealth Ave,14.66613,121.05042,Vehicular Crash,High,Statistical Hotspot
+293,2025-12-17,Quezon City,Commonwealth Ave,14.66864,121.05219,Vehicular Crash,High,Statistical Hotspot
+294,2025-12-16,Manila,Tondo (Zaragoza St),14.61795,120.9665,Physical Injury / Brawl,High,Statistical Hotspot
+295,2025-12-15,Quezon City,Pasong Putik,14.73113,121.0559,Robbery (Jewelry Store),High,Real News (Scraped)
+296,2025-12-15,Quezon City,Holy Spirit,14.67533,121.07877,Animal Cruelty,Low,Real News (Simulated)
+297,2025-12-15,Quezon City,Sto. Domingo,14.62794,121.00512,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+298,2025-12-15,Quezon City,Commonwealth Ave,14.6691,121.04868,Vehicular Crash,High,Statistical Hotspot
+299,2025-12-14,Manila,University Belt,14.6058,120.99301,Snatching,Medium,Statistical Hotspot
+300,2025-12-14,Quezon City,Pasong Putik,14.72962,121.059,Robbery (Jewelry Store),High,Real News (Simulated)
+301,2025-12-14,Quezon City,Kaligayahan (Zabarte Rd),14.73635,121.04127,House Robbery,Medium,Real News (Simulated)
+302,2025-12-13,Manila,University Belt,14.60684,120.9903,Snatching,Medium,Statistical Hotspot
+303,2025-12-13,Quezon City,Kaligayahan (Zabarte Rd),14.73452,121.04269,House Robbery,Medium,Real News (Scraped)
+304,2025-12-13,Manila,Tondo (Zaragoza St),14.62146,120.96867,Physical Injury / Brawl,High,Statistical Hotspot
+305,2025-12-12,Quezon City,Vibal Publishing Compound,14.61953,121.01674,Armed Siege / Trespassing,High,Real News (Simulated)
+306,2025-12-11,Quezon City,Commonwealth Ave,14.66881,121.04897,Vehicular Crash,High,Statistical Hotspot
+307,2025-12-11,Manila,NAIA Terminal 1 (Border),14.50692,120.99108,Smuggling (P102M Shabu),High,Real News (Simulated)
+308,2025-12-10,Quezon City,Sto. Domingo,14.62693,121.00446,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+309,2025-12-09,Quezon City,Kaligayahan (Zabarte Rd),14.73694,121.04123,House Robbery,Medium,Real News (Simulated)
+310,2025-12-09,Manila,Tondo (Zaragoza St),14.6182,120.96716,Physical Injury / Brawl,High,Statistical Hotspot
+311,2025-12-09,Quezon City,Kaligayahan (Zabarte Rd),14.73333,121.04299,House Robbery,Medium,Real News (Simulated)
+312,2025-12-09,Quezon City,Commonwealth Ave,14.6663,121.04879,Vehicular Crash,High,Statistical Hotspot
+313,2025-12-08,Quezon City,Cubao (Aurora Blvd),14.61941,121.05498,Theft (Pickpocketing),Medium,Statistical Hotspot
+314,2025-12-08,Manila,Quiapo Market,14.59812,120.98355,Theft,Medium,Statistical Hotspot
+315,2025-12-08,Quezon City,Holy Spirit,14.67571,121.0807,Animal Cruelty,Low,Real News (Simulated)
+316,2025-12-08,Manila,University Belt,14.60562,120.99213,Snatching,Medium,Statistical Hotspot
+317,2025-12-08,Quezon City,Vibal Publishing Compound,14.62113,121.01664,Armed Siege / Trespassing,High,Real News (Simulated)
+318,2025-12-08,Manila,Tondo (Zaragoza St),14.61893,120.96667,Physical Injury / Brawl,High,Statistical Hotspot
+319,2025-12-07,Quezon City,Commonwealth Ave,14.66824,121.05008,Vehicular Crash,High,Statistical Hotspot
+320,2025-12-06,Quezon City,Vibal Publishing Compound,14.62013,121.01363,Armed Siege / Trespassing,High,Real News (Simulated)
+321,2025-12-06,Manila,Tondo (Zaragoza St),14.61814,120.9662,Physical Injury / Brawl,High,Statistical Hotspot
+322,2025-12-06,Quezon City,Commonwealth Ave,14.66792,121.05056,Vehicular Crash,High,Statistical Hotspot
+323,2025-12-06,Manila,Ermita,14.5764,120.98088,Robbery / Extortion,High,Real News (Simulated)
+324,2025-12-06,Quezon City,Pasong Putik,14.72954,121.05737,Robbery (Jewelry Store),High,Real News (Simulated)
+325,2025-12-05,Quezon City,Cubao (Aurora Blvd),14.61852,121.05406,Theft (Pickpocketing),Medium,Statistical Hotspot
+326,2025-12-05,Quezon City,Cubao (Aurora Blvd),14.61708,121.05419,Theft (Pickpocketing),Medium,Statistical Hotspot
+327,2025-12-05,Quezon City,Vibal Publishing Compound,14.62051,121.01436,Armed Siege / Trespassing,High,Real News (Scraped)
+328,2025-12-05,Quezon City,Cubao (Aurora Blvd),14.61953,121.05185,Theft (Pickpocketing),Medium,Statistical Hotspot
+329,2025-12-04,Manila,Tondo (Zaragoza St),14.62151,120.96558,Physical Injury / Brawl,High,Statistical Hotspot
+330,2025-12-04,Quezon City,Kaligayahan (Zabarte Rd),14.7338,121.04252,House Robbery,Medium,Real News (Simulated)
+331,2025-12-04,Manila,Ermita,14.57933,120.98338,Robbery / Extortion,High,Real News (Simulated)
+332,2025-12-03,Manila,University Belt,14.60709,120.9936,Snatching,Medium,Statistical Hotspot
+333,2025-12-02,Manila,Ermita,14.57807,120.98382,Robbery / Extortion,High,Real News (Simulated)
+334,2025-12-02,Quezon City,Vibal Publishing Compound,14.61844,121.01412,Armed Siege / Trespassing,High,Real News (Scraped)
+335,2025-12-01,Quezon City,Commonwealth Ave,14.66636,121.05014,Vehicular Crash,High,Statistical Hotspot
+336,2025-11-30,Quezon City,Holy Spirit,14.67519,121.0788,Animal Cruelty,Low,Real News (Simulated)
+337,2025-11-30,Manila,Ermita,14.57765,120.98088,Robbery / Extortion,High,Real News (Simulated)
+338,2025-11-29,Quezon City,Kaligayahan (Zabarte Rd),14.7361,121.04021,House Robbery,Medium,Real News (Simulated)
+339,2025-11-28,Manila,Tondo (Zaragoza St),14.61961,120.96767,Physical Injury / Brawl,High,Statistical Hotspot
+340,2025-11-28,Quezon City,Holy Spirit,14.67564,121.07946,Animal Cruelty,Low,Real News (Simulated)
+341,2025-11-27,Quezon City,Holy Spirit,14.67602,121.07922,Animal Cruelty,Low,Real News (Simulated)
+342,2025-11-26,Manila,Quiapo Market,14.59871,120.98418,Theft,Medium,Statistical Hotspot
+343,2025-11-26,Quezon City,Pasong Putik,14.73269,121.05526,Robbery (Jewelry Store),High,Real News (Simulated)
+344,2025-11-25,Quezon City,Kaligayahan (Zabarte Rd),14.7361,121.0411,House Robbery,Medium,Real News (Simulated)
+345,2025-11-22,Manila,Tondo (Zaragoza St),14.61944,120.96652,Physical Injury / Brawl,High,Statistical Hotspot
+346,2025-11-22,Manila,University Belt,14.60455,120.99329,Snatching,Medium,Statistical Hotspot
+347,2025-11-22,Quezon City,Holy Spirit,14.6738,121.07835,Animal Cruelty,Low,Real News (Simulated)
+348,2025-11-22,Quezon City,Commonwealth Ave,14.66791,121.04952,Vehicular Crash,High,Statistical Hotspot
+349,2025-11-21,Manila,University Belt,14.60621,120.99124,Snatching,Medium,Statistical Hotspot
+350,2025-11-21,Quezon City,Sto. Domingo,14.62715,121.00645,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+351,2025-11-21,Manila,Ermita,14.57703,120.98363,Robbery / Extortion,High,Real News (Simulated)
+352,2025-11-20,Quezon City,Cubao (Aurora Blvd),14.61757,121.05489,Theft (Pickpocketing),Medium,Statistical Hotspot
+353,2025-11-20,Quezon City,Kaligayahan (Zabarte Rd),14.73385,121.04202,House Robbery,Medium,Real News (Simulated)
+354,2025-11-20,Manila,University Belt,14.60721,120.99117,Snatching,Medium,Statistical Hotspot
+355,2025-11-19,Manila,University Belt,14.60595,120.99178,Snatching,Medium,Statistical Hotspot
+356,2025-11-18,Quezon City,Sto. Domingo,14.62475,121.00714,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+357,2025-11-18,Quezon City,Commonwealth Ave,14.66649,121.04994,Vehicular Crash,High,Statistical Hotspot
+358,2025-11-16,Quezon City,Holy Spirit,14.67564,121.07947,Animal Cruelty,Low,Real News (Scraped)
+359,2025-11-16,Quezon City,Cubao (Aurora Blvd),14.61776,121.053,Theft (Pickpocketing),Medium,Statistical Hotspot
+360,2025-11-16,Manila,NAIA Terminal 1 (Border),14.50854,120.99256,Smuggling (P102M Shabu),High,Real News (Simulated)
+361,2025-11-16,Manila,Tondo (Zaragoza St),14.61902,120.96875,Physical Injury / Brawl,High,Statistical Hotspot
+362,2025-11-15,Manila,University Belt,14.60593,120.99053,Snatching,Medium,Statistical Hotspot
+363,2025-11-15,Manila,Quiapo Market,14.59929,120.98303,Theft,Medium,Statistical Hotspot
+364,2025-11-15,Manila,Quiapo Market,14.60029,120.98312,Theft,Medium,Statistical Hotspot
+365,2025-11-15,Manila,NAIA Terminal 1 (Border),14.50883,120.99046,Smuggling (P102M Shabu),High,Real News (Simulated)
+366,2025-11-15,Quezon City,Kaligayahan (Zabarte Rd),14.73355,121.04337,House Robbery,Medium,Real News (Simulated)
+367,2025-11-14,Quezon City,Pasong Putik,14.7289,121.05574,Robbery (Jewelry Store),High,Real News (Simulated)
+368,2025-11-13,Quezon City,Commonwealth Ave,14.66678,121.05148,Vehicular Crash,High,Statistical Hotspot
+369,2025-11-13,Quezon City,Kaligayahan (Zabarte Rd),14.73311,121.04151,House Robbery,Medium,Real News (Simulated)
+370,2025-11-12,Manila,Ermita,14.57967,120.98395,Robbery / Extortion,High,Real News (Simulated)
+371,2025-11-11,Manila,Tondo (Zaragoza St),14.61967,120.96683,Physical Injury / Brawl,High,Statistical Hotspot
+372,2025-11-11,Quezon City,Vibal Publishing Compound,14.61915,121.01464,Armed Siege / Trespassing,High,Real News (Simulated)
+373,2025-11-11,Quezon City,Pasong Putik,14.73149,121.05597,Robbery (Jewelry Store),High,Real News (Simulated)
+374,2025-11-11,Manila,Quiapo Market,14.59897,120.98576,Theft,Medium,Statistical Hotspot
+375,2025-11-11,Manila,University Belt,14.60436,120.99357,Snatching,Medium,Statistical Hotspot
+376,2025-11-11,Quezon City,Sto. Domingo,14.62537,121.00511,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+377,2025-11-10,Manila,Tondo (Zaragoza St),14.61764,120.96885,Physical Injury / Brawl,High,Statistical Hotspot
+378,2025-11-10,Quezon City,Holy Spirit,14.67433,121.07946,Animal Cruelty,Low,Real News (Scraped)
+379,2025-11-10,Manila,Tondo (Zaragoza St),14.62082,120.96602,Physical Injury / Brawl,High,Statistical Hotspot
+380,2025-11-10,Quezon City,Cubao (Aurora Blvd),14.61923,121.05487,Theft (Pickpocketing),Medium,Statistical Hotspot
+381,2025-11-10,Quezon City,Holy Spirit,14.67305,121.0818,Animal Cruelty,Low,Real News (Simulated)
+382,2025-11-09,Manila,University Belt,14.60364,120.99053,Snatching,Medium,Statistical Hotspot
+383,2025-11-09,Quezon City,Cubao (Aurora Blvd),14.62018,121.05423,Theft (Pickpocketing),Medium,Statistical Hotspot
+384,2025-11-08,Quezon City,Commonwealth Ave,14.66751,121.04952,Vehicular Crash,High,Statistical Hotspot
+385,2025-11-08,Manila,University Belt,14.60413,120.99198,Snatching,Medium,Statistical Hotspot
+386,2025-11-08,Quezon City,Commonwealth Ave,14.66792,121.05178,Vehicular Crash,High,Statistical Hotspot
+387,2025-11-07,Quezon City,Pasong Putik,14.73109,121.05647,Robbery (Jewelry Store),High,Real News (Simulated)
+388,2025-11-07,Quezon City,Commonwealth Ave,14.66725,121.05065,Vehicular Crash,High,Statistical Hotspot
+389,2025-11-06,Manila,NAIA Terminal 1 (Border),14.50901,120.99207,Smuggling (P102M Shabu),High,Real News (Simulated)
+390,2025-11-06,Manila,Ermita,14.57949,120.98098,Robbery / Extortion,High,Real News (Scraped)
+391,2025-11-06,Manila,Tondo (Zaragoza St),14.61984,120.9667,Physical Injury / Brawl,High,Statistical Hotspot
+392,2025-11-06,Quezon City,Vibal Publishing Compound,14.62004,121.01525,Armed Siege / Trespassing,High,Real News (Scraped)
+393,2025-11-06,Quezon City,Cubao (Aurora Blvd),14.62093,121.05302,Theft (Pickpocketing),Medium,Statistical Hotspot
+394,2025-11-05,Manila,Ermita,14.57759,120.9822,Robbery / Extortion,High,Real News (Scraped)
+395,2025-11-05,Quezon City,Cubao (Aurora Blvd),14.62092,121.05161,Theft (Pickpocketing),Medium,Statistical Hotspot
+396,2025-11-05,Manila,Quiapo Market,14.59804,120.98532,Theft,Medium,Statistical Hotspot
+397,2025-11-04,Quezon City,Kaligayahan (Zabarte Rd),14.73581,121.04161,House Robbery,Medium,Real News (Simulated)
+398,2025-11-04,Quezon City,Sto. Domingo,14.62709,121.00492,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+399,2025-11-04,Quezon City,Cubao (Aurora Blvd),14.61826,121.05111,Theft (Pickpocketing),Medium,Statistical Hotspot
+400,2025-11-04,Quezon City,Sto. Domingo,14.62814,121.00551,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+401,2025-11-03,Quezon City,Commonwealth Ave,14.66915,121.04979,Vehicular Crash,High,Statistical Hotspot
+402,2025-11-03,Quezon City,Vibal Publishing Compound,14.62183,121.01595,Armed Siege / Trespassing,High,Real News (Simulated)
+403,2025-11-03,Quezon City,Commonwealth Ave,14.66682,121.04991,Vehicular Crash,High,Statistical Hotspot
+404,2025-11-01,Quezon City,Cubao (Aurora Blvd),14.61816,121.05212,Theft (Pickpocketing),Medium,Statistical Hotspot
+405,2025-11-01,Manila,Ermita,14.57849,120.98357,Robbery / Extortion,High,Real News (Simulated)
+406,2025-10-31,Manila,Quiapo Market,14.59777,120.9852,Theft,Medium,Statistical Hotspot
+407,2025-10-30,Manila,Tondo (Zaragoza St),14.61839,120.96602,Physical Injury / Brawl,High,Statistical Hotspot
+408,2025-10-30,Quezon City,Commonwealth Ave,14.66988,121.05101,Vehicular Crash,High,Statistical Hotspot
+409,2025-10-29,Quezon City,Cubao (Aurora Blvd),14.62011,121.05369,Theft (Pickpocketing),Medium,Statistical Hotspot
+410,2025-10-29,Manila,Tondo (Zaragoza St),14.61881,120.96852,Physical Injury / Brawl,High,Statistical Hotspot
+411,2025-10-29,Manila,NAIA Terminal 1 (Border),14.50811,120.99292,Smuggling (P102M Shabu),High,Real News (Scraped)
+412,2025-10-28,Manila,Quiapo Market,14.59917,120.98305,Theft,Medium,Statistical Hotspot
+413,2025-10-28,Manila,Quiapo Market,14.59777,120.98217,Theft,Medium,Statistical Hotspot
+414,2025-10-27,Manila,Tondo (Zaragoza St),14.61799,120.96519,Physical Injury / Brawl,High,Statistical Hotspot
+415,2025-10-27,Manila,Quiapo Market,14.6,120.98275,Theft,Medium,Statistical Hotspot
+416,2025-10-27,Manila,Quiapo Market,14.59971,120.98296,Theft,Medium,Statistical Hotspot
+417,2025-10-27,Quezon City,Kaligayahan (Zabarte Rd),14.73643,121.04014,House Robbery,Medium,Real News (Scraped)
+418,2025-10-26,Quezon City,Kaligayahan (Zabarte Rd),14.73511,121.04276,House Robbery,Medium,Real News (Simulated)
+419,2025-10-26,Quezon City,Sto. Domingo,14.62516,121.00726,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+420,2025-10-26,Manila,Quiapo Market,14.60043,120.98375,Theft,Medium,Statistical Hotspot
+421,2025-10-26,Quezon City,Kaligayahan (Zabarte Rd),14.73302,121.04294,House Robbery,Medium,Real News (Scraped)
+422,2025-10-24,Quezon City,Holy Spirit,14.67395,121.07873,Animal Cruelty,Low,Real News (Simulated)
+423,2025-10-24,Quezon City,Vibal Publishing Compound,14.61823,121.01351,Armed Siege / Trespassing,High,Real News (Simulated)
+424,2025-10-23,Quezon City,Kaligayahan (Zabarte Rd),14.73447,121.04068,House Robbery,Medium,Real News (Simulated)
+425,2025-10-23,Quezon City,Pasong Putik,14.72987,121.0565,Robbery (Jewelry Store),High,Real News (Simulated)
+426,2025-10-22,Manila,University Belt,14.60413,120.9936,Snatching,Medium,Statistical Hotspot
+427,2025-10-22,Quezon City,Cubao (Aurora Blvd),14.61742,121.05232,Theft (Pickpocketing),Medium,Statistical Hotspot
+428,2025-10-21,Manila,Quiapo Market,14.59863,120.98463,Theft,Medium,Statistical Hotspot
+429,2025-10-21,Quezon City,Sto. Domingo,14.62602,121.00746,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+430,2025-10-21,Quezon City,Commonwealth Ave,14.66801,121.05108,Vehicular Crash,High,Statistical Hotspot
+431,2025-10-21,Manila,Ermita,14.57797,120.98109,Robbery / Extortion,High,Real News (Simulated)
+432,2025-10-20,Quezon City,Cubao (Aurora Blvd),14.61937,121.05149,Theft (Pickpocketing),Medium,Statistical Hotspot
+433,2025-10-19,Manila,University Belt,14.60591,120.9936,Snatching,Medium,Statistical Hotspot
+434,2025-10-19,Manila,NAIA Terminal 1 (Border),14.5077,120.99049,Smuggling (P102M Shabu),High,Real News (Simulated)
+435,2025-10-19,Manila,University Belt,14.60676,120.99095,Snatching,Medium,Statistical Hotspot
+436,2025-10-19,Manila,University Belt,14.60714,120.99088,Snatching,Medium,Statistical Hotspot
+437,2025-10-18,Manila,Quiapo Market,14.59974,120.98534,Theft,Medium,Statistical Hotspot
+438,2025-10-18,Quezon City,Cubao (Aurora Blvd),14.61817,121.05126,Theft (Pickpocketing),Medium,Statistical Hotspot
+439,2025-10-18,Manila,University Belt,14.60485,120.9936,Snatching,Medium,Statistical Hotspot
+440,2025-10-18,Quezon City,Holy Spirit,14.67315,121.08109,Animal Cruelty,Low,Real News (Simulated)
+441,2025-10-18,Manila,NAIA Terminal 1 (Border),14.50732,120.99423,Smuggling (P102M Shabu),High,Real News (Simulated)
+442,2025-10-17,Manila,University Belt,14.60449,120.99203,Snatching,Medium,Statistical Hotspot
+443,2025-10-17,Quezon City,Cubao (Aurora Blvd),14.62039,121.05412,Theft (Pickpocketing),Medium,Statistical Hotspot
+444,2025-10-17,Quezon City,Sto. Domingo,14.62444,121.00707,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+445,2025-10-16,Manila,University Belt,14.60552,120.99094,Snatching,Medium,Statistical Hotspot
+446,2025-10-16,Quezon City,Pasong Putik,14.7292,121.05882,Robbery (Jewelry Store),High,Real News (Simulated)
+447,2025-10-16,Manila,Tondo (Zaragoza St),14.61763,120.96518,Physical Injury / Brawl,High,Statistical Hotspot
+448,2025-10-16,Quezon City,Holy Spirit,14.67614,121.08195,Animal Cruelty,Low,Real News (Simulated)
+449,2025-10-16,Quezon City,Pasong Putik,14.73063,121.05588,Robbery (Jewelry Store),High,Real News (Simulated)
+450,2025-10-16,Manila,Ermita,14.57783,120.98091,Robbery / Extortion,High,Real News (Simulated)
+451,2025-10-15,Quezon City,Vibal Publishing Compound,14.62067,121.0157,Armed Siege / Trespassing,High,Real News (Simulated)
+452,2025-10-15,Manila,Tondo (Zaragoza St),14.62002,120.96664,Physical Injury / Brawl,High,Statistical Hotspot
+453,2025-10-15,Manila,Ermita,14.57692,120.98226,Robbery / Extortion,High,Real News (Simulated)
+454,2025-10-14,Quezon City,Vibal Publishing Compound,14.62043,121.01563,Armed Siege / Trespassing,High,Real News (Simulated)
+455,2025-10-14,Manila,NAIA Terminal 1 (Border),14.50831,120.99395,Smuggling (P102M Shabu),High,Real News (Simulated)
+456,2025-10-14,Quezon City,Pasong Putik,14.7296,121.05838,Robbery (Jewelry Store),High,Real News (Simulated)
+457,2025-10-14,Manila,Quiapo Market,14.59995,120.98501,Theft,Medium,Statistical Hotspot
+458,2025-10-14,Quezon City,Kaligayahan (Zabarte Rd),14.73517,121.04304,House Robbery,Medium,Real News (Simulated)
+459,2025-10-13,Quezon City,Vibal Publishing Compound,14.62179,121.01661,Armed Siege / Trespassing,High,Real News (Simulated)
+460,2025-10-13,Quezon City,Kaligayahan (Zabarte Rd),14.73422,121.04044,House Robbery,Medium,Real News (Simulated)
+461,2025-10-13,Quezon City,Vibal Publishing Compound,14.61937,121.01312,Armed Siege / Trespassing,High,Real News (Simulated)
+462,2025-10-13,Quezon City,Commonwealth Ave,14.66975,121.04877,Vehicular Crash,High,Statistical Hotspot
+463,2025-10-12,Quezon City,Sto. Domingo,14.62692,121.00581,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+464,2025-10-11,Manila,Quiapo Market,14.597,120.98501,Theft,Medium,Statistical Hotspot
+465,2025-10-10,Manila,Quiapo Market,14.59768,120.98249,Theft,Medium,Statistical Hotspot
+466,2025-10-10,Manila,Quiapo Market,14.59874,120.98344,Theft,Medium,Statistical Hotspot
+467,2025-10-10,Quezon City,Pasong Putik,14.73179,121.0559,Robbery (Jewelry Store),High,Real News (Simulated)
+468,2025-10-10,Quezon City,Holy Spirit,14.67508,121.08197,Animal Cruelty,Low,Real News (Scraped)
+469,2025-10-10,Manila,NAIA Terminal 1 (Border),14.50867,120.99426,Smuggling (P102M Shabu),High,Real News (Simulated)
+470,2025-10-10,Quezon City,Commonwealth Ave,14.66943,121.05223,Vehicular Crash,High,Statistical Hotspot
+471,2025-10-10,Manila,University Belt,14.60494,120.99082,Snatching,Medium,Statistical Hotspot
+472,2025-10-10,Quezon City,Vibal Publishing Compound,14.61894,121.01663,Armed Siege / Trespassing,High,Real News (Simulated)
+473,2025-10-09,Quezon City,Sto. Domingo,14.62447,121.0076,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+474,2025-10-09,Manila,Tondo (Zaragoza St),14.62156,120.96623,Physical Injury / Brawl,High,Statistical Hotspot
+475,2025-10-09,Quezon City,Sto. Domingo,14.627,121.00724,Drug Seizure (P142M Shabu),High,Real News (Simulated)
+476,2025-10-07,Quezon City,Vibal Publishing Compound,14.61815,121.01493,Armed Siege / Trespassing,High,Real News (Simulated)
+477,2025-10-06,Quezon City,Holy Spirit,14.6732,121.07926,Animal Cruelty,Low,Real News (Simulated)
+478,2025-10-06,Manila,University Belt,14.60657,120.9923,Snatching,Medium,Statistical Hotspot
+479,2025-10-05,Quezon City,Vibal Publishing Compound,14.62048,121.01491,Armed Siege / Trespassing,High,Real News (Simulated)
+480,2025-10-05,Manila,Tondo (Zaragoza St),14.61797,120.96518,Physical Injury / Brawl,High,Statistical Hotspot
+481,2025-10-05,Quezon City,Vibal Publishing Compound,14.61808,121.01493,Armed Siege / Trespassing,High,Real News (Scraped)
+482,2025-10-05,Quezon City,Cubao (Aurora Blvd),14.61791,121.05481,Theft (Pickpocketing),Medium,Statistical Hotspot
+483,2025-10-04,Manila,Quiapo Market,14.59893,120.98385,Theft,Medium,Statistical Hotspot
+484,2025-10-04,Quezon City,Kaligayahan (Zabarte Rd),14.73497,121.04082,House Robbery,Medium,Real News (Simulated)
+485,2025-10-04,Manila,Tondo (Zaragoza St),14.62127,120.9667,Physical Injury / Brawl,High,Statistical Hotspot
+486,2025-10-04,Manila,University Belt,14.60479,120.99278,Snatching,Medium,Statistical Hotspot
+487,2025-10-04,Manila,NAIA Terminal 1 (Border),14.50695,120.99157,Smuggling (P102M Shabu),High,Real News (Simulated)
+488,2025-10-03,Quezon City,Vibal Publishing Compound,14.62114,121.01341,Armed Siege / Trespassing,High,Real News (Scraped)
+489,2025-10-03,Quezon City,Commonwealth Ave,14.66859,121.05028,Vehicular Crash,High,Statistical Hotspot
+490,2025-10-03,Quezon City,Holy Spirit,14.67676,121.08141,Animal Cruelty,Low,Real News (Scraped)
+491,2025-10-03,Manila,NAIA Terminal 1 (Border),14.50711,120.99201,Smuggling (P102M Shabu),High,Real News (Simulated)
+492,2025-10-02,Manila,University Belt,14.6048,120.99396,Snatching,Medium,Statistical Hotspot
+493,2025-10-02,Quezon City,Vibal Publishing Compound,14.6186,121.01641,Armed Siege / Trespassing,High,Real News (Simulated)
+494,2025-10-02,Quezon City,Vibal Publishing Compound,14.62196,121.01634,Armed Siege / Trespassing,High,Real News (Scraped)
+495,2025-10-02,Manila,Tondo (Zaragoza St),14.61986,120.9685,Physical Injury / Brawl,High,Statistical Hotspot
+496,2025-10-01,Quezon City,Vibal Publishing Compound,14.62158,121.01448,Armed Siege / Trespassing,High,Real News (Scraped)
+497,2025-10-01,Manila,Quiapo Market,14.59724,120.9838,Theft,Medium,Statistical Hotspot
+498,2025-10-01,Manila,University Belt,14.60498,120.99184,Snatching,Medium,Statistical Hotspot
+499,2025-10-01,Quezon City,Pasong Putik,14.73079,121.05861,Robbery (Jewelry Store),High,Real News (Simulated)
+500,2025-10-01,Quezon City,Commonwealth Ave,14.66765,121.05122,Vehicular Crash,High,Statistical Hotspot
