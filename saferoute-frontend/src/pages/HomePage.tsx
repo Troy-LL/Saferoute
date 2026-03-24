@@ -15,6 +15,9 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { BrandName } from '@/components/BrandName'
+import { AliIcon } from '@/components/mascot/Ali'
+import PhoneDemo from '@/components/PhoneDemo'
+import appLogoUrl from '../../images/App logo.png'
 
 const FEATURES = [
   {
@@ -50,9 +53,9 @@ const FEATURES = [
 ]
 
 const STATS = [
-  { value: '500+', label: 'Incidents Mapped' },
-  { value: '60+', label: 'Safe Spots Marked' },
-  { value: '3', label: 'Route Alternatives' },
+  { value: '2,000+', label: 'Incidents Mapped' },
+  { value: '150+', label: 'Safe Spots Marked' },
+  { value: '5+', label: 'Smart Route Options' },
   { value: '24/7', label: 'Real-Time Updates' },
 ]
 
@@ -67,7 +70,7 @@ const STEPS = [
     n: 2,
     icon: Route,
     title: 'Compare Routes',
-    desc: 'Get 3 route options scored by safety, distance, and travel time.',
+    desc: 'Compare five or more route options scored by safety, distance, and travel time.',
   },
   {
     n: 3,
@@ -91,39 +94,51 @@ export default function HomePage() {
           <div className="absolute left-1/2 top-1/3 h-[300px] w-[300px] -translate-x-1/2 rounded-full blur-[80px]" style={{ background: 'rgba(255, 145, 164, 0.15)' }} />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-4xl px-4 py-24 text-center">
-          <Badge
-            variant="outline"
-            className="mb-6 gap-1.5 border-primary/30 bg-primary/5 px-3 py-1 text-sm text-primary"
-          >
-            <MapPin className="size-3.5" />
-            Built for Metro Manila
-          </Badge>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-24 grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
+          {/* Left — text content */}
+          <div className="text-center lg:text-left">
+            <div className="mb-6 ali-onboarding-float inline-block">
+              <AliIcon size={80} />
+            </div>
 
-          <h1 className="font-display text-5xl font-bold tracking-tight md:text-7xl">
-            Navigate the City
-            <br />
-            <span className="text-primary">Without Fear</span>
-          </h1>
+            <Badge
+              variant="outline"
+              className="mb-6 gap-1.5 border-primary/30 bg-primary/5 px-3 py-1 text-sm text-primary"
+            >
+              <MapPin className="size-3.5" />
+              Built for Metro Manila
+            </Badge>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            ALAITAPTAP uses crime pattern data and AI-powered routing to help you
-            walk safely in Metro Manila — especially at night.
-          </p>
+            <h1 className="font-display text-5xl font-bold tracking-tight md:text-7xl">
+              Navigate the City
+              <br />
+              <span className="text-primary">Without Fear</span>
+            </h1>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button asChild size="lg" className="gap-2 text-base">
-              <Link to="/map">
-                <Map className="size-4" />
-                Start Safe Route
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg" className="gap-2 text-base">
-              <a href="#features">
-                Learn More
-                <ChevronRight className="size-4" />
-              </a>
-            </Button>
+            <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
+              ALAITAPTAP uses crime pattern data and AI-powered routing to help you
+              walk safely in Metro Manila — especially at night.
+            </p>
+
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+              <Button asChild size="lg" className="gap-2 text-base">
+                <Link to="/map">
+                  <Map className="size-4" />
+                  Start Safe Route
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="gap-2 text-base">
+                <a href="#features">
+                  Learn More
+                  <ChevronRight className="size-4" />
+                </a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right — interactive phone demo */}
+          <div className="hidden lg:flex justify-center">
+            <PhoneDemo />
           </div>
         </div>
       </section>
@@ -223,31 +238,51 @@ export default function HomePage() {
 
       {/* ── CTA ── */}
       <section className="px-4 py-24">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-card p-12 text-center border border-border">
-          <Shield className="mx-auto mb-6 size-10 text-primary" />
-          <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-            Ready to Walk Safer?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground">
-            Join thousands navigating Metro Manila with confidence
-          </p>
-          <Button asChild size="lg" className="mt-8 gap-2 text-base">
-            <Link to="/map">
-              Get My Safe Route Now
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
+        <div className="relative mx-auto max-w-4xl overflow-hidden rounded-3xl bg-card p-12 text-center border border-border">
+          {/* Subtle warm glow behind Ali */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 h-[200px] w-[200px] rounded-full blur-[60px]"
+            style={{ background: 'radial-gradient(circle, rgba(255,229,102,0.2) 0%, transparent 70%)' }}
+          />
+
+          <div className="relative">
+            <div className="mx-auto mb-4 ali-onboarding-float">
+              <AliIcon size={56} />
+            </div>
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
+              You Don't Have to Walk Alone
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-lg text-muted-foreground italic">
+              Whenever you're unsure... just follow the light.
+            </p>
+            <Button asChild size="lg" className="mt-8 gap-2 text-base">
+              <Link to="/map">
+                Walk With Ali
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* ── Footer ── */}
       <footer className="border-t border-border px-4 py-12">
         <div className="mx-auto max-w-7xl text-center">
-          <div className="flex items-center justify-center gap-2 text-sm font-medium text-foreground">
-            <Shield className="size-4 text-primary" />
+          <div className="flex flex-wrap items-center justify-center gap-2 text-sm font-medium text-foreground">
+            <img
+              src={appLogoUrl}
+              alt=""
+              width={20}
+              height={20}
+              decoding="async"
+              draggable={false}
+              className="size-5 shrink-0 object-contain"
+              aria-hidden
+            />
             <BrandName className="inline font-medium text-sm" />
             <span className="text-muted-foreground">
-              &middot; Built for ASEAN Challenge 2025 &middot; Open Source
+              &middot; 2026 ASEAN AI Youth Challenge &middot; Open Source
             </span>
           </div>
           <p className="mt-2 text-xs text-muted-foreground">

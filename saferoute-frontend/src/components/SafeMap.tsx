@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { useTheme } from 'next-themes'
+import { Plus, Minus, Locate } from 'lucide-react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.heat'
 import type { RouteResult, HeatmapPoint, SafeSpot } from '../services/api'
+import { renderAliPointerHTML } from './mascot/Ali'
 
 // Fix Leaflet default icon
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
@@ -50,6 +52,8 @@ interface SafeMapProps {
   startMarker: { lat: number; lng: number } | null
   endMarker: { lat: number; lng: number } | null
   highlightedRouteIndex?: number
+  userLocation?: { lat: number; lng: number; heading: number; speed: number } | null
+  onSpotClick?: (spot: SafeSpot) => void
 }
 
 export default function SafeMap({
@@ -61,6 +65,8 @@ export default function SafeMap({
   startMarker,
   endMarker,
   highlightedRouteIndex = 0,
+  userLocation,
+  onSpotClick,
 }: SafeMapProps) {
   const { resolvedTheme } = useTheme()
   const [mapZoom, setMapZoom] = useState(13)
@@ -71,6 +77,7 @@ export default function SafeMap({
   const spotsLayer = useRef<L.Layer[]>([])
   const endpointMarkers = useRef<L.Marker[]>([])
   const baseLayerRef = useRef<L.TileLayer | null>(null)
+  const userMarkerRef = useRef<L.Marker | null>(null)
 
   // Initialize map
   useEffect(() => {
@@ -79,7 +86,7 @@ export default function SafeMap({
     const map = L.map(mapRef.current!, {
       center: METRO_MANILA,
       zoom: 13,
-      zoomControl: true,
+      zoomControl: false,
     })
 
     const initialLayerConfig = TILE_LAYER_CONFIG.transit_dark
@@ -212,7 +219,9 @@ export default function SafeMap({
 
     if (!heatmapData || heatmapData.length === 0) return
 
-    // Use leaflet.heat if available
+    const isDark = resolvedTheme === 'dark'
+    const heatOpacity = isDark ? 0.7 : 0.6
+
     if (typeof (L as any).heatLayer === 'function') {
       const points = heatmapData.map(d => [
         d.lat,
@@ -220,34 +229,34 @@ export default function SafeMap({
         typeof d.intensity === 'number' ? d.intensity : 0.6,
       ])
       const layer = (L as any).heatLayer(points, {
-        radius: 20,
-        blur: 15,
-        minOpacity: 0.4,
+        radius: 22,
+        blur: 16,
+        minOpacity: heatOpacity * 0.6,
+        maxZoom: 17,
         gradient: {
-          0.0: '#10B981',
-          0.4: '#F59E0B',
-          0.7: '#EF4444',
-          1.0: '#B91C1C'
-        }
+          0.0: '#FFFACD',
+          0.35: '#FF8C42',
+          0.7: '#C0392B',
+          1.0: '#8B1A1A',
+        },
       }).addTo(map)
       heatLayer.current = layer
     } else {
-      // Fallback: circle markers
       heatmapData.slice(0, 200).forEach(d => {
-        const opacity = d.intensity * 0.6
+        const opacity = d.intensity * heatOpacity
         const radius = 10 + d.intensity * 15
         const layer = L.circleMarker([d.lat, d.lng], {
-          radius: radius,
-          fillColor: '#EF4444',
+          radius,
+          fillColor: '#C0392B',
           fillOpacity: opacity,
-          stroke: false
+          stroke: false,
         }).addTo(map)
         routeLayers.current.push(layer)
       })
     }
   }, [heatmapData])
 
-  // Draw safe spots
+  // Draw safe spots — two-layer pin design with lazy tooltips
   useEffect(() => {
     const map = mapInstance.current
     if (!map) return
@@ -258,40 +267,68 @@ export default function SafeMap({
     if (!safeSpots || safeSpots.length === 0) return
     if (mapZoom < SAFE_SPOT_MIN_ZOOM) return
 
-    const TYPE_ICONS: Record<string, { label: string; color: string }> = {
-      police_station: { label: 'Police Station', color: '#3b82f6' },
-      convenience_store: { label: 'Convenience Store', color: '#f59e0b' },
-      security_post: { label: 'Security Post', color: '#10b981' },
-      hospital: { label: 'Hospital', color: '#ef4444' },
-      fire_station: { label: 'Fire Station', color: '#f97316' },
-      street_lamp: { label: 'Street Lamp', color: '#eab308' },
-      surveillance: { label: 'Surveillance', color: '#8b5cf6' },
+    const SPOT_COLORS: Record<string, { label: string; color: string; category: string }> = {
+      police_station:    { label: 'Police Station',    color: '#3498DB', category: 'Emergency' },
+      convenience_store: { label: 'Convenience Store',  color: '#2ECC71', category: 'Safe Zone' },
+      security_post:     { label: 'Security Post',     color: '#2ECC71', category: 'Safe Zone' },
+      hospital:          { label: 'Hospital',           color: '#3498DB', category: 'Emergency' },
+      fire_station:      { label: 'Fire Station',      color: '#3498DB', category: 'Emergency' },
+      street_lamp:       { label: 'Street Lamp',       color: '#F39C12', category: 'Caution' },
+      surveillance:      { label: 'Surveillance',      color: '#9B59B6', category: 'Community' },
     }
-    const dotRadius = Math.min(6, Math.max(3, mapZoom - 10))
+
+    const OUTER_R = 20
+    const INNER_R = 7
 
     safeSpots.forEach(spot => {
-      const typeMeta = TYPE_ICONS[spot.type] || { label: 'Safe Spot', color: '#22c55e' }
-      const marker = L.circleMarker([spot.lat, spot.lng], {
-        radius: dotRadius,
-        color: 'rgba(12, 17, 24, 0.95)',
-        weight: 1.5,
-        fillColor: typeMeta.color,
-        fillOpacity: 0.95,
+      const meta = SPOT_COLORS[spot.type] || { label: 'Safe Spot', color: '#2ECC71', category: 'Safe Zone' }
+
+      const outerRing = L.circleMarker([spot.lat, spot.lng], {
+        radius: OUTER_R,
+        color: meta.color,
+        weight: 2,
+        fillColor: meta.color,
+        fillOpacity: 0.12,
+        className: 'spot-outer-ring',
+      }).addTo(map)
+
+      const innerDot = L.circleMarker([spot.lat, spot.lng], {
+        radius: INNER_R,
+        color: '#fff',
+        weight: 2,
+        fillColor: meta.color,
+        fillOpacity: 1,
+      }).addTo(map)
+
+      // Lazy tooltip on hover — created on mouseover, removed on mouseout
+      innerDot.on('mouseover', () => {
+        const tooltipContent = `
+          <div class="spot-tooltip">
+            <div class="spot-tooltip-name">${spot.name}</div>
+            ${spot.address ? `<div class="spot-tooltip-desc">${spot.address}</div>` : ''}
+            <span class="spot-tooltip-badge" style="background:${meta.color}">${meta.label}</span>
+          </div>`
+        innerDot.bindTooltip(tooltipContent, {
+          direction: 'top',
+          offset: [0, -12],
+          className: 'spot-tooltip-container',
+        }).openTooltip()
+
+        outerRing.setRadius(28)
       })
-        .addTo(map)
-        .bindPopup(`
-          <div style="font-family: 'DM Sans', sans-serif; font-size: 13px; line-height: 1.6;">
-            <strong>${spot.name}</strong><br/>
-            <span style="color: ${typeMeta.color};">${typeMeta.label}</span><br/>
-            ${spot.address ? `${spot.address}<br/>` : ''}
-            ${spot.hours || '—'}<br/>
-            ${spot.city || ''}
-            ${spot.distance_km != null ? `<br/><strong>${spot.distance_km} km away</strong>` : ''}
-          </div>
-        `)
-      spotsLayer.current.push(marker)
+
+      innerDot.on('mouseout', () => {
+        innerDot.unbindTooltip()
+        outerRing.setRadius(OUTER_R)
+      })
+
+      innerDot.on('click', () => {
+        onSpotClick?.(spot)
+      })
+
+      spotsLayer.current.push(outerRing, innerDot)
     })
-  }, [safeSpots, mapZoom])
+  }, [safeSpots, mapZoom, onSpotClick])
 
   // Start / end markers (geocoded search points)
   useEffect(() => {
@@ -328,25 +365,115 @@ export default function SafeMap({
     }
   }, [startMarker, endMarker])
 
+  // User location marker (Ali the firefly pointer)
+  useEffect(() => {
+    const map = mapInstance.current
+    if (!map) return
+
+    if (!userLocation) {
+      if (userMarkerRef.current) {
+        map.removeLayer(userMarkerRef.current)
+        userMarkerRef.current = null
+      }
+      return
+    }
+
+    const isDark = resolvedTheme === 'dark'
+    const isMoving = (userLocation.speed ?? 0) > 0.5
+    const heading = userLocation.heading ?? 0
+    const size = 48
+
+    const aliIcon = L.divIcon({
+      className: 'ali-pointer-marker',
+      html: renderAliPointerHTML(heading, isMoving, isDark, size),
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+    })
+
+    if (userMarkerRef.current) {
+      userMarkerRef.current.setLatLng([userLocation.lat, userLocation.lng])
+      userMarkerRef.current.setIcon(aliIcon)
+    } else {
+      userMarkerRef.current = L.marker([userLocation.lat, userLocation.lng], {
+        icon: aliIcon,
+        zIndexOffset: 1000,
+      }).addTo(map)
+    }
+  }, [userLocation, resolvedTheme])
+
+  const handleZoomIn = useCallback(() => mapInstance.current?.zoomIn(), [])
+  const handleZoomOut = useCallback(() => mapInstance.current?.zoomOut(), [])
+  const handleLocate = useCallback(() => {
+    if (!userLocation || !mapInstance.current) return
+    mapInstance.current.flyTo([userLocation.lat, userLocation.lng], 16, { duration: 0.8 })
+  }, [userLocation])
+
   return (
     <div className="relative w-full h-full">
       <div ref={mapRef} id="safemap" className="w-full h-full" />
 
-      {/* Legend */}
-      <div className="absolute bottom-4 left-4 z-[1000] rounded-2xl border border-border bg-card/90 backdrop-blur-sm p-3 shadow-lg">
-        <div className="mb-2 text-xs font-semibold text-foreground">Route Safety</div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: '#FF91A4', boxShadow: '0 0 6px rgba(255,145,164,0.6)' }} />
-          Safe
+      {/* Custom map controls — bottom-right pill stack */}
+      <div className="absolute bottom-4 right-4 z-[1000] flex flex-col gap-0.5 map-glass-card rounded-xl overflow-hidden">
+        <button
+          onClick={handleZoomIn}
+          className="flex items-center justify-center h-10 w-10 text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
+          aria-label="Zoom in"
+        >
+          <Plus className="h-4 w-4" />
+        </button>
+        <div className="mx-2 h-px bg-border" />
+        <button
+          onClick={handleZoomOut}
+          className="flex items-center justify-center h-10 w-10 text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
+          aria-label="Zoom out"
+        >
+          <Minus className="h-4 w-4" />
+        </button>
+        <div className="mx-2 h-px bg-border" />
+        <button
+          onClick={handleLocate}
+          className="flex items-center justify-center h-10 w-10 text-foreground hover:bg-muted/50 transition-colors cursor-pointer"
+          aria-label="Go to my location"
+        >
+          <Locate className="h-4 w-4" />
+        </button>
+      </div>
+
+      {/* Legends — bottom-left */}
+      <div className="absolute bottom-4 left-4 z-[1000] flex flex-col gap-2">
+        {/* Route safety legend */}
+        <div className="map-glass-card rounded-xl p-2.5">
+          <div className="mb-1.5 text-[10px] font-semibold text-foreground">Route Safety</div>
+          <div className="flex items-center gap-3 text-[10px] text-muted-foreground">
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full" style={{ background: '#FF91A4', boxShadow: '0 0 4px rgba(255,145,164,0.6)' }} />
+              Safe
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full" style={{ background: '#f59e0b' }} />
+              Moderate
+            </span>
+            <span className="flex items-center gap-1">
+              <span className="inline-block h-2 w-2 rounded-full" style={{ background: '#ef4444' }} />
+              Risk
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: '#f59e0b' }} />
-          Moderate
-        </div>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-          <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ background: '#ef4444' }} />
-          High Risk
-        </div>
+
+        {/* Heatmap gradient legend */}
+        {heatmapData && heatmapData.length > 0 && (
+          <div className="map-glass-card rounded-xl p-2.5">
+            <div className="mb-1.5 text-[10px] font-semibold text-foreground">Crime Density</div>
+            <div
+              className="h-2.5 w-[120px] rounded-full"
+              style={{ background: 'linear-gradient(to right, #FFFACD, #FF8C42, #C0392B)' }}
+            />
+            <div className="flex justify-between mt-1 text-[9px] text-muted-foreground">
+              <span>Low</span>
+              <span>High</span>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )

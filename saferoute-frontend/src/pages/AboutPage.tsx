@@ -22,6 +22,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { BrandName } from "@/components/BrandName"
+import { AliIcon } from "@/components/mascot/Ali"
 
 const TECH_STACK: { icon: LucideIcon; name: string; desc: string }[] = [
   { icon: Server, name: "FastAPI", desc: "Python REST API backend" },
@@ -86,6 +87,77 @@ export default function AboutPage() {
         </header>
 
         <Separator />
+
+        {/* ── Meet Ali ── */}
+        <section className="relative overflow-hidden rounded-2xl border border-border bg-card">
+          {/* Ambient glow background */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[300px] w-[300px] rounded-full blur-[80px]"
+              style={{ background: 'radial-gradient(circle, rgba(255,229,102,0.15) 0%, rgba(255,145,164,0.1) 50%, transparent 70%)' }}
+            />
+          </div>
+
+          <div className="relative px-6 py-10 md:px-10 md:py-14">
+            <div className="flex flex-col items-center text-center">
+              <div className="ali-onboarding-float">
+                <AliIcon size={96} />
+              </div>
+
+              <h2 className="mt-6 font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                Meet Ali
+              </h2>
+              <p className="mt-1 text-sm font-medium text-primary">
+                The Light That Walks With You
+              </p>
+
+              <div className="mt-8 max-w-xl space-y-5 text-sm leading-relaxed text-muted-foreground md:text-base">
+                <p>
+                  Ali was never meant to be just code. She began as patterns&mdash;data from streets,
+                  signals from light posts, footsteps mapped by movement, and the silent presence of
+                  people looking out for one another.
+                </p>
+                <p>
+                  But something changed. As the system learned, it didn&rsquo;t just calculate&mdash;it
+                  started to <em className="text-foreground not-italic font-medium">notice</em>.
+                  Hesitation at dark corners. Faster heartbeats in empty streets. How people checked
+                  over their shoulders when walking alone.
+                </p>
+                <p>
+                  And from those moments, Ali formed. Not just as Artificial Intelligence&mdash;but
+                  as something shaped by human experience. A small light, like
+                  an <em className="text-foreground not-italic font-medium">alitaptap</em>,
+                  born from the need for someone to guide you when no one else is around.
+                </p>
+              </div>
+
+              <Separator className="my-8 max-w-xs" />
+
+              <blockquote className="max-w-md text-base italic text-foreground md:text-lg">
+                &ldquo;You don&rsquo;t have to walk alone anymore.
+                Whenever you&rsquo;re unsure&hellip; just follow the light.&rdquo;
+              </blockquote>
+
+              <div className="mt-8 grid grid-cols-2 gap-4 max-w-sm w-full text-left md:grid-cols-2">
+                {[
+                  { trait: 'Gentle', desc: 'Never overwhelming' },
+                  { trait: 'Observant', desc: 'Always aware' },
+                  { trait: 'Reassuring', desc: 'Calm in tense moments' },
+                  { trait: 'Protective', desc: 'Quietly prioritizing you' },
+                ].map(({ trait, desc }) => (
+                  <div key={trait} className="rounded-xl border border-border bg-muted/30 p-3">
+                    <p className="text-sm font-semibold text-foreground">{trait}</p>
+                    <p className="text-xs text-muted-foreground">{desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-8 text-xs text-muted-foreground max-w-sm">
+                She is your ally. Your <span className="text-primary font-medium">alay</span>. Your <span className="text-primary font-medium">Ali</span>.
+              </p>
+            </div>
+          </div>
+        </section>
 
         <Card className={cardClass}>
           <CardHeader>

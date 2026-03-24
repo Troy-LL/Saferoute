@@ -1,12 +1,13 @@
-import { useState, useCallback, useEffect } from 'react'
-import { Layers, Map as MapIcon, Satellite, Loader2 } from 'lucide-react'
+import { useState, useCallback, useEffect, useRef } from 'react'
+import { Menu, X } from 'lucide-react'
 import SafeMap from '@/components/SafeMap'
 import RoutePlanner from '@/components/RoutePlanner'
+import MapOverlayPanel from '@/components/MapOverlayPanel'
+import SpotDetailPanel from '@/components/SpotDetailPanel'
+import AliPresence from '@/components/AliPresence'
+import { AliIcon } from '@/components/mascot/Ali'
 import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Separator } from '@/components/ui/separator'
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import type { RouteResult, HeatmapPoint, SafeSpot } from '@/services/api'
 
 function parseCsvLine(line: string): string[] {
@@ -63,6 +64,30 @@ export default function MapPage() {
   const [routeSearchLoading, setRouteSearchLoading] = useState(false)
   const [travelHour, setTravelHour] = useState(() => new Date().getHours())
   const [baseMapMode, setBaseMapMode] = useState('transit')
+  const [isDesktopPanelOpen, setIsDesktopPanelOpen] = useState(false)
+  const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false)
+  const [selectedSpot, setSelectedSpot] = useState<SafeSpot | null>(null)
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number; heading: number; speed: number } | null>(null)
+  const watchIdRef = useRef<number | null>(null)
+
+  useEffect(() => {
+    if (!navigator.geolocation) return
+    watchIdRef.current = navigator.geolocation.watchPosition(
+      (pos) => {
+        setUserLocation({
+          lat: pos.coords.latitude,
+          lng: pos.coords.longitude,
+          heading: pos.coords.heading ?? 0,
+          speed: pos.coords.speed ?? 0,
+        })
+      },
+      () => {},
+      { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 },
+    )
+    return () => {
+      if (watchIdRef.current != null) navigator.geolocation.clearWatch(watchIdRef.current)
+    }
+  }, [])
 
   useEffect(() => {
     Promise.all([
@@ -121,6 +146,8 @@ export default function MapPage() {
       setStartMarker({ lat: markers.start.lat, lng: markers.start.lng })
       setEndMarker({ lat: markers.end.lat, lng: markers.end.lng })
     }
+    // Auto-close mobile sheet after route is found
+    setIsMobileSheetOpen(false)
   }, [])
 
   const handleSafeSpotsFound = useCallback((spots: SafeSpot[]) => {
@@ -133,16 +160,40 @@ export default function MapPage() {
     // Future: tap-to-set start/end
   }, [])
 
+  const handleSpotClick = useCallback((spot: SafeSpot) => {
+    setSelectedSpot(spot)
+  }, [])
+
   return (
     <div className="flex h-[calc(100vh-5rem)]">
-      <RoutePlanner
-        travelHour={travelHour}
-        onTravelHourChange={setTravelHour}
-        onRoutesFound={handleRoutesFound}
-        onSafeSpotsFound={handleSafeSpotsFound}
-        onSelectedRouteChange={setSelectedRouteIndex}
-        onLoadingChange={setRouteSearchLoading}
-      />
+      {/* Desktop: side-by-side layout */}
+      <div className={`hidden md:block ${isDesktopPanelOpen ? 'md:w-96' : 'md:w-0'} transition-all duration-300 overflow-hidden`}>
+        <RoutePlanner
+          travelHour={travelHour}
+          onTravelHourChange={setTravelHour}
+          onRoutesFound={handleRoutesFound}
+          onSafeSpotsFound={handleSafeSpotsFound}
+          onSelectedRouteChange={setSelectedRouteIndex}
+          onLoadingChange={setRouteSearchLoading}
+        />
+      </div>
+
+      {/* Mobile: Sheet drawer */}
+      <Sheet open={isMobileSheetOpen} onOpenChange={setIsMobileSheetOpen}>
+        <SheetContent side="left" className="w-full sm:w-96 p-0 md:hidden">
+          <SheetHeader className="sr-only">
+            <SheetTitle>Route Planner</SheetTitle>
+          </SheetHeader>
+          <RoutePlanner
+            travelHour={travelHour}
+            onTravelHourChange={setTravelHour}
+            onRoutesFound={handleRoutesFound}
+            onSafeSpotsFound={handleSafeSpotsFound}
+            onSelectedRouteChange={setSelectedRouteIndex}
+            onLoadingChange={setRouteSearchLoading}
+          />
+        </SheetContent>
+      </Sheet>
 
       <div className="relative min-h-0 flex-1">
         <div className="absolute inset-0 z-0 min-h-0">
@@ -155,20 +206,24 @@ export default function MapPage() {
             onMapClick={handleMapClick}
             startMarker={startMarker}
             endMarker={endMarker}
+            userLocation={userLocation}
+            onSpotClick={handleSpotClick}
           />
         </div>
 
         {routeSearchLoading && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-background/60 backdrop-blur-sm">
-            <div className="flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-6 shadow-lg">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <p className="text-sm text-muted-foreground">Calculating safest routes...</p>
+            <div className="flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-8 shadow-lg">
+              <div className="ali-waiting">
+                <AliIcon size={64} />
+              </div>
+              <p className="text-sm text-muted-foreground">Finding you the safest path...</p>
             </div>
           </div>
         )}
 
         {!routes?.length && !routeSearchLoading && (
-          <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2 rounded-xl border border-border bg-card/90 p-4 shadow-md backdrop-blur-sm">
+          <div className="absolute top-4 left-1/2 z-10 -translate-x-1/2 rounded-xl border border-border bg-card/90 p-4 shadow-md backdrop-blur-sm md:left-1/2 md:-translate-x-1/2">
             <h2 className="text-sm font-semibold text-foreground">Map Preview Ready</h2>
             <p className="mt-1 text-xs text-muted-foreground">
               Use Layers to toggle features, or enter start/destination to route.
@@ -176,69 +231,50 @@ export default function MapPage() {
           </div>
         )}
 
-        <div className="absolute right-4 top-4 z-50">
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-10 w-10 rounded-xl bg-card/90 shadow-md backdrop-blur-sm"
-              >
-                <Layers className="h-5 w-5" />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent align="end" className="z-[60] w-64">
-              <div className="space-y-4">
-                <h3 className="text-sm font-semibold">Map Layers</h3>
-                <Separator />
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="safe-spots-switch" className="cursor-pointer text-sm">
-                      Safe Spots
-                    </Label>
-                    <Switch
-                      id="safe-spots-switch"
-                      checked={showSpots}
-                      onCheckedChange={setShowSpots}
-                    />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <Label htmlFor="heatmap-switch" className="cursor-pointer text-sm">
-                      Crime Heatmap
-                    </Label>
-                    <Switch
-                      id="heatmap-switch"
-                      checked={showHeatmap}
-                      onCheckedChange={setShowHeatmap}
-                    />
-                  </div>
-                </div>
-                <Separator />
-                <div className="space-y-3">
-                  <p className="text-xs font-medium text-muted-foreground">Base Map</p>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={baseMapMode === 'transit' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setBaseMapMode('transit')}
-                      className="flex-1 gap-1.5"
-                    >
-                      <MapIcon className="h-3.5 w-3.5" /> Transit
-                    </Button>
-                    <Button
-                      variant={baseMapMode === 'satellite' ? 'default' : 'outline'}
-                      size="sm"
-                      onClick={() => setBaseMapMode('satellite')}
-                      className="flex-1 gap-1.5"
-                    >
-                      <Satellite className="h-3.5 w-3.5" /> Satellite
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </PopoverContent>
-          </Popover>
+        {/* Toggle button for route planner */}
+        <div className="absolute left-4 top-4 z-50">
+          {/* Desktop button */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setIsDesktopPanelOpen(!isDesktopPanelOpen)}
+            className="hidden md:flex h-10 w-10 rounded-xl bg-card/90 shadow-md backdrop-blur-sm"
+            aria-label={isDesktopPanelOpen ? "Close route planner" : "Open route planner"}
+          >
+            {isDesktopPanelOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+          {/* Mobile button */}
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={() => setIsMobileSheetOpen(!isMobileSheetOpen)}
+            className="flex md:hidden h-10 w-10 rounded-xl bg-card/90 shadow-md backdrop-blur-sm"
+            aria-label={isMobileSheetOpen ? "Close route planner" : "Open route planner"}
+          >
+            {isMobileSheetOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
+
+        {/* Layer overlay panel — top-right */}
+        <div className="absolute right-4 top-4 z-50">
+          <MapOverlayPanel
+            showHeatmap={showHeatmap}
+            onShowHeatmapChange={setShowHeatmap}
+            showSpots={showSpots}
+            onShowSpotsChange={setShowSpots}
+            baseMapMode={baseMapMode}
+            onBaseMapModeChange={setBaseMapMode}
+          />
+        </div>
+
+        {/* Spot detail panel */}
+        <SpotDetailPanel
+          spot={selectedSpot}
+          onClose={() => setSelectedSpot(null)}
+        />
+
+        {/* Ali ambient presence */}
+        <AliPresence isLoading={routeSearchLoading} />
       </div>
     </div>
   )

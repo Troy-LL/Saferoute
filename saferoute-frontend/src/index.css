@@ -129,6 +129,137 @@
   background: rgba(255, 145, 164, 0.6);
 }
 
+/* ── Ali mascot: firefly glow animation ── */
+@keyframes firefly-glow {
+  0%, 100% {
+    fill: #FFE566;
+    filter: drop-shadow(0 0 6px #FFE566);
+  }
+  50% {
+    fill: #C8FF00;
+    filter: drop-shadow(0 0 10px #C8FF00);
+  }
+}
+
+.ali-glow-pulse {
+  animation: firefly-glow 2s ease-in-out infinite;
+}
+.ali-glow-idle {
+  animation: firefly-glow 3s ease-in-out infinite;
+}
+.ali-glow-active {
+  animation: firefly-glow 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ali-glow-pulse,
+  .ali-glow-idle,
+  .ali-glow-active {
+    animation: none;
+    fill: #FFE566;
+    filter: drop-shadow(0 0 4px #FFE566);
+  }
+}
+
+.ali-mascot:hover {
+  transform: scale(1.1);
+  transition: transform 150ms ease;
+}
+
+/* ── Ali onboarding float ── */
+@keyframes ali-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.ali-onboarding-float {
+  animation: ali-float 3s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ali-onboarding-float { animation: none; }
+}
+
+/* ── Ali cursor blink ── */
+@keyframes ali-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.ali-cursor {
+  animation: ali-blink 0.8s ease-in-out infinite;
+  color: hsl(var(--primary));
+  font-weight: 300;
+  margin-left: 1px;
+}
+
+/* ── Ali map presence (corner peek) ── */
+.ali-presence-container {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .ali-presence-container {
+    left: auto;
+    right: 70px;
+    bottom: 20px;
+    transform: none;
+  }
+}
+.ali-peek {
+  pointer-events: auto;
+  cursor: default;
+  transition: transform 300ms ease;
+}
+.ali-peek:hover {
+  transform: scale(1.08);
+}
+
+/* Ali waiting bobble */
+@keyframes ali-wait {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  33% { transform: translateY(-4px) rotate(0deg); }
+  66% { transform: translateY(-2px) rotate(3deg); }
+}
+.ali-waiting {
+  animation: ali-wait 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ali-waiting { animation: none; }
+}
+
+/* ── Ali speech bubble ── */
+.ali-speech-bubble {
+  position: relative;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
+  padding: 6px 12px;
+  max-width: 160px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+}
+.dark .ali-speech-bubble {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+.ali-bubble-tail {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background: hsl(var(--card));
+  border-right: 1px solid hsl(var(--border));
+  border-bottom: 1px solid hsl(var(--border));
+}
+
 /* ── Pink gradient glow button ── */
 .btn-pink-glow {
   background: linear-gradient(135deg, #FF91A4 0%, #FFC1CC 100%);
@@ -188,6 +319,69 @@
   animation: pin-pulse 2s ease-in-out infinite 0.4s;
 }
 
+/* ── Map frosted glass panels ── */
+.map-glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+.dark .map-glass-card {
+  background: rgba(20, 20, 30, 0.85);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Leaflet ali pointer marker container reset */
+.ali-pointer-marker {
+  background: none !important;
+  border: none !important;
+}
+
+/* ── Safe spot marker transitions ── */
+.spot-outer-ring {
+  transition: r 200ms ease;
+}
+
+/* ── Safe spot tooltip ── */
+.spot-tooltip-container {
+  background: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.75rem !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+}
+.spot-tooltip-container .leaflet-tooltip-tip {
+  display: none;
+}
+.spot-tooltip {
+  padding: 8px 12px;
+  font-family: "Poppins", sans-serif;
+}
+.spot-tooltip-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  line-height: 1.3;
+}
+.spot-tooltip-desc {
+  font-size: 11px;
+  color: hsl(var(--muted-foreground));
+  margin-top: 2px;
+  line-height: 1.3;
+}
+.spot-tooltip-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 1px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  line-height: 1.6;
+}
+
 /* ── Leaflet overrides ── */
 .leaflet-container {
   background: hsl(var(--background)) !important;
@@ -209,13 +403,151 @@
   font-size: 10px !important;
   font-family: "Poppins", sans-serif !important;
 }
-.leaflet-control-zoom a {
-  background: hsl(var(--card)) !important;
-  color: hsl(var(--foreground)) !important;
-  border-color: hsl(var(--border)) !important;
-  border-radius: 0.5rem !important;
+/* Hide the default Leaflet zoom control — replaced by custom pill stack */
+.leaflet-control-zoom {
+  display: none !important;
 }
-.leaflet-control-zoom a:hover {
-  background: hsl(var(--secondary)) !important;
-  color: #FF91A4 !important;
+
+/* ═══════ Phone Demo — Ali firefly & scene animations ═══════ */
+
+.phone-demo-ali-core {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FF91A4;
+  position: relative;
+  box-shadow:
+    0 0 6px 2px #FF91A4,
+    0 0 20px 6px rgba(255,145,164,0.3),
+    0 0 40px 12px rgba(255,145,164,0.12);
+  animation: phone-ali-float 3s ease-in-out infinite, phone-ali-breath 2.2s ease-in-out infinite;
+}
+.phone-demo-ali-core::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,145,164,0.35) 0%, transparent 70%);
+  animation: phone-ali-pulse 2.2s ease-in-out infinite;
+}
+
+.phone-demo-ali-tail {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,145,164,0.2) 0%, transparent 70%);
+  animation: phone-ali-pulse 2.2s ease-in-out infinite 0.5s;
+}
+
+/* Risk state — warning amber */
+.phone-ali-risk .phone-demo-ali-core {
+  background: #f59e0b;
+  box-shadow:
+    0 0 6px 2px #f59e0b,
+    0 0 20px 6px rgba(245,158,11,0.3),
+    0 0 40px 12px rgba(245,158,11,0.15);
+  animation: phone-ali-float-fast 1.4s ease-in-out infinite, phone-ali-breath-fast 0.9s ease-in-out infinite;
+}
+.phone-ali-risk .phone-demo-ali-tail {
+  background: radial-gradient(circle, rgba(245,158,11,0.2) 0%, transparent 70%);
+}
+
+/* SOS state */
+.phone-ali-sos .phone-demo-ali-core {
+  background: #fff;
+  box-shadow:
+    0 0 8px 3px #fff,
+    0 0 24px 8px rgba(255,255,255,0.4),
+    0 0 50px 16px rgba(255,255,255,0.15);
+  animation: phone-ali-float 4s ease-in-out infinite;
+}
+.phone-ali-sos .phone-demo-ali-tail {
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+}
+
+/* Speech bubble */
+.phone-demo-bubble {
+  background: rgba(36,36,36,0.92);
+  border: 1px solid rgba(255,145,164,0.25);
+  border-radius: 12px 12px 12px 2px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  color: rgba(247,248,252,0.5);
+  max-width: 190px;
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  line-height: 1.45;
+  transform: translateY(6px);
+  animation: phone-fade-up 0.6s ease 1.4s forwards;
+}
+
+/* Path draw */
+.phone-demo-path-draw {
+  stroke-dasharray: 700;
+  stroke-dashoffset: 700;
+  animation: phone-walk-path 3s ease forwards;
+}
+
+/* SOS pulse */
+.phone-demo-sos-pulse {
+  animation: phone-sos-pulse 2s ease-in-out infinite;
+}
+
+/* Blink */
+.phone-demo-blink {
+  animation: phone-blink 1s ease-in-out infinite;
+}
+
+@keyframes phone-ali-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes phone-ali-float-fast {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes phone-ali-breath {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+@keyframes phone-ali-breath-fast {
+  0%, 100% { opacity: 0.7; transform: translateY(0) scale(0.95); }
+  50% { opacity: 1; transform: translateY(-3px) scale(1.1); }
+}
+@keyframes phone-ali-pulse {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; }
+  50% { transform: translate(-50%,-50%) scale(1.5); opacity: 0; }
+}
+@keyframes phone-sos-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+@keyframes phone-fade-up {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes phone-walk-path {
+  0% { stroke-dashoffset: 700; }
+  100% { stroke-dashoffset: 0; }
+}
+@keyframes phone-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-demo-ali-core,
+  .phone-demo-ali-core::before,
+  .phone-demo-ali-tail,
+  .phone-demo-sos-pulse,
+  .phone-demo-blink,
+  .phone-demo-path-draw,
+  .phone-demo-bubble {
+    animation: none !important;
+  }
+  .phone-demo-bubble { opacity: 1; transform: none; }
+  .phone-demo-path-draw { stroke-dashoffset: 0; }
 }

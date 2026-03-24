@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALAITAPTAP — Ali Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #0a0c14;
+    --deep: #0f1220;
+    --surface: #141828;
+    --card: #1a1f30;
+    --border: rgba(255,255,255,0.07);
+    --ali-core: #f5e642;
+    --ali-warm: #ffd166;
+    --ali-glow: rgba(245,230,66,0.25);
+    --ali-glow-soft: rgba(245,230,66,0.08);
+    --safe: #4dffb0;
+    --safe-glow: rgba(77,255,176,0.2);
+    --risk: #ff6b6b;
+    --risk-glow: rgba(255,107,107,0.2);
+    --sos: #ff3d71;
+    --text-primary: #f0eeea;
+    --text-secondary: rgba(240,238,234,0.5);
+    --text-muted: rgba(240,238,234,0.3);
+    --road: #1c2035;
+    --road-line: rgba(255,255,255,0.12);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: #07080f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    overflow: hidden;
+  }
+
+  .demo-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .brand-label {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--ali-warm);
+    opacity: 0.7;
+    text-transform: uppercase;
+  }
+
+  /* ─── PHONE SHELL ─── */
+  .phone {
+    width: 320px;
+    height: 640px;
+    background: #0d0f1a;
+    border-radius: 44px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.8),
+      0 40px 80px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .phone::before {
+    content:'';
+    position: absolute;
+    top: 10px; left: 50%; transform: translateX(-50%);
+    width: 90px; height: 26px;
+    background: #07080f;
+    border-radius: 20px;
+    z-index: 200;
+  }
+
+  .screen {
+    position: absolute;
+    inset: 0;
+    border-radius: 43px;
+    overflow: hidden;
+  }
+
+  /* ─── SCENES ─── */
+  .scene {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+  }
+  .scene.active { opacity: 1; pointer-events: auto; }
+
+  .status-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 48px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 24px 6px;
+    z-index: 100;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    background: linear-gradient(to bottom, rgba(10,12,20,0.9) 0%, transparent 100%);
+  }
+
+  /* ═══════════════ SCENE 1 — HOME ═══════════════ */
+  #scene-home { background: var(--night); }
+
+  .home-map-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 34px, var(--road-line) 34px, var(--road-line) 35px),
+      repeating-linear-gradient(90deg, transparent, transparent 34px, var(--road-line) 34px, var(--road-line) 35px),
+      var(--night);
+    opacity: 0.4;
+  }
+
+  .home-road { position: absolute; background: var(--road); }
+  .home-road.h { height: 36px; left:0; right:0; }
+  .home-road.v { width: 36px; top:0; bottom:0; }
+
+  .city-block {
+    position: absolute;
+    background: rgba(255,255,255,0.02);
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .city-light {
+    position: absolute;
+    width: 2px; height: 2px;
+    border-radius: 50%;
+    background: var(--ali-warm);
+  }
+
+  .home-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(10,12,20,0.5) 0%,
+      transparent 35%,
+      transparent 55%,
+      rgba(10,12,20,0.95) 100%
+    );
+  }
+
+  .home-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 24px 20px 36px;
+  }
+
+  .home-greeting {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .home-sub {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+
+  .home-search {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  .home-search-icon {
+    width: 16px; height: 16px;
+    border: 1.5px solid var(--text-muted);
+    border-radius: 50%;
+    position: relative; flex-shrink: 0;
+  }
+  .home-search-icon::after {
+    content:'';
+    position: absolute;
+    bottom: -4px; right: -4px;
+    width: 6px; height: 1.5px;
+    background: var(--text-muted);
+    transform: rotate(45deg);
+  }
+
+  .ali-prompt-bubble {
+    position: absolute;
+    bottom: 192px; left: 48px;
+    background: rgba(26,31,48,0.92);
+    border: 1px solid rgba(245,230,66,0.2);
+    border-radius: 12px 12px 12px 2px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    max-width: 190px;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    animation: fadeUp 0.6s ease 1.4s forwards;
+    line-height: 1.45;
+  }
+
+  /* ═══════════════ SCENE 2 — ROUTE ═══════════════ */
+  #scene-route { background: var(--night); }
+
+  .route-map {
+    position: absolute;
+    top: 48px; left: 0; right: 0;
+    height: 256px;
+    overflow: hidden;
+  }
+
+  .route-map-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 30px, var(--road-line) 30px, var(--road-line) 31px),
+      repeating-linear-gradient(90deg, transparent, transparent 30px, var(--road-line) 30px, var(--road-line) 31px),
+      var(--night);
+    opacity: 0.35;
+  }
+
+  .route-road { position: absolute; background: var(--road); }
+
+  .route-map-fade {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--night));
+  }
+
+  .route-sheet {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: var(--deep);
+    border-radius: 24px 24px 0 0;
+    padding: 18px 18px 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .route-sheet-handle {
+    width: 36px; height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin: 0 auto 16px;
+  }
+
+  .route-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .route-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 13px 13px;
+    margin-bottom: 9px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .route-card.recommended {
+    border-color: rgba(245,230,66,0.3);
+    background: linear-gradient(135deg, rgba(245,230,66,0.05), var(--card));
+  }
+
+  .route-card.recommended::after {
+    content: 'ALI RECOMMENDS';
+    position: absolute;
+    top: 8px; right: 10px;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    color: var(--ali-warm);
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .route-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .route-info { flex: 1; }
+  .route-name { font-size: 13px; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
+  .route-meta { font-size: 11px; color: var(--text-secondary); }
+
+  .route-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .badge-safe { background: rgba(77,255,176,0.1); color: var(--safe); border: 1px solid rgba(77,255,176,0.2); }
+  .badge-fast { background: rgba(255,255,255,0.06); color: var(--text-secondary); border: 1px solid var(--border); }
+
+  .route-ali-cue {
+    background: rgba(245,230,66,0.05);
+    border-left: 2px solid var(--ali-core);
+    border-radius: 0 10px 10px 0;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  /* ═══════════════ SCENE 3 — NAV ═══════════════ */
+  #scene-nav { background: var(--night); }
+
+  .nav-map { position: absolute; inset: 0; }
+  .nav-map-bg {
+    position: absolute; inset: 0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 32px, var(--road-line) 32px, var(--road-line) 33px),
+      repeating-linear-gradient(90deg, transparent, transparent 32px, var(--road-line) 32px, var(--road-line) 33px),
+      var(--night);
+    opacity: 0.3;
+  }
+
+  .nav-road-h { position: absolute; height: 40px; left: 0; right: 0; background: var(--road); }
+  .nav-road-v { position: absolute; width: 40px; top: 0; bottom: 0; background: var(--road); }
+  .nav-route-line { position: absolute; top:0; left:0; width: 100%; height: 100%; pointer-events: none; }
+
+  .nav-top-card {
+    position: absolute;
+    top: 56px; left: 16px; right: 16px;
+    background: rgba(20,24,40,0.93);
+    border-radius: 16px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-direction-icon {
+    width: 36px; height: 36px;
+    background: var(--ali-core);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .nav-arrow-r {
+    width: 0; height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 13px solid var(--night);
+  }
+
+  .nav-direction-text { font-size: 15px; font-weight: 500; color: var(--text-primary); }
+  .nav-street-name { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+  .nav-dist { margin-left: auto; font-size: 18px; font-weight: 300; color: var(--ali-core); }
+  .nav-dist span { font-size: 10px; color: var(--text-muted); display: block; text-align: right; }
+
+  .nav-bottom-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(14,16,26,0.96);
+    border-top: 1px solid var(--border);
+    padding: 15px 20px 34px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .nav-eta-time { font-size: 22px; font-weight: 300; color: var(--text-primary); line-height: 1; }
+  .nav-eta-label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+  .nav-safety-ring {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--safe);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500;
+    color: var(--safe);
+    box-shadow: 0 0 12px var(--safe-glow);
+  }
+  .nav-safety-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; text-align:center; }
+
+  .user-dot {
+    position: absolute;
+    width: 16px; height: 16px;
+    background: #fff;
+    border: 3px solid var(--ali-core);
+    border-radius: 50%;
+    box-shadow: 0 0 16px var(--ali-glow);
+    z-index: 10;
+  }
+
+  /* ═══════════════ SCENE 4 — RISK ═══════════════ */
+  #scene-risk { background: var(--night); }
+
+  .risk-zone {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,107,107,0.15) 0%, transparent 70%);
+  }
+
+  .risk-banner {
+    position: absolute;
+    top: 56px; left: 16px; right: 16px;
+    background: rgba(255,107,107,0.08);
+    border: 1px solid rgba(255,107,107,0.25);
+    border-radius: 14px;
+    padding: 12px 14px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .risk-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: rgba(255,107,107,0.15);
+    border: 1px solid rgba(255,107,107,0.3);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 13px;
+  }
+
+  .risk-title { font-size: 13px; font-weight: 500; color: var(--risk); }
+  .risk-subtitle { font-size: 11px; color: var(--text-secondary); margin-top: 1px; }
+
+  .risk-action-bar {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 15px 18px 34px;
+    background: rgba(14,16,26,0.97);
+    border-top: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+  }
+
+  .risk-alt-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+
+  .risk-alt-btn {
+    background: rgba(77,255,176,0.08);
+    border: 1px solid rgba(77,255,176,0.2);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .risk-alt-btn-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--safe);
+    box-shadow: 0 0 8px var(--safe-glow);
+    flex-shrink: 0;
+  }
+
+  .risk-alt-btn-text { font-size: 12.5px; color: var(--text-primary); }
+  .risk-alt-btn-meta { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+
+  .risk-continue {
+    padding: 11px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  /* ═══════════════ SCENE 5 — SOS ═══════════════ */
+  #scene-sos { background: #0d0814; }
+
+  .sos-bg-pulse {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 45%, rgba(255,61,113,0.12) 0%, transparent 65%);
+    animation: sosPulse 2s ease-in-out infinite;
+  }
+
+  .sos-top {
+    position: absolute;
+    top: 60px; left: 0; right: 0;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 20px; text-align: center;
+  }
+
+  .sos-status-ring {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,61,113,0.5);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+    position: relative;
+    animation: sosPulse 2s ease-in-out infinite;
+  }
+  .sos-status-ring::before {
+    content:''; position: absolute; inset: -8px;
+    border-radius: 50%; border: 1px solid rgba(255,61,113,0.2);
+    animation: sosPulse 2s ease-in-out infinite 0.3s;
+  }
+  .sos-status-ring::after {
+    content:''; position: absolute; inset: -16px;
+    border-radius: 50%; border: 1px solid rgba(255,61,113,0.1);
+    animation: sosPulse 2s ease-in-out infinite 0.6s;
+  }
+
+  .sos-icon-inner {
+    width: 44px; height: 44px;
+    background: rgba(255,61,113,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+
+  .sos-title { font-size: 17px; font-weight: 500; color: var(--text-primary); margin-bottom: 6px; }
+  .sos-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.5; max-width: 220px; }
+
+  .sos-contacts {
+    position: absolute;
+    top: 262px; left: 16px; right: 16px;
+  }
+
+  .sos-contact-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 10px; }
+
+  .sos-contact {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 11px 13px;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+  }
+
+  .sos-contact-avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3d4466, #252a40);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 500;
+    color: var(--text-secondary); flex-shrink: 0;
+  }
+
+  .sos-contact-name { font-size: 13px; color: var(--text-primary); }
+  .sos-contact-status { font-size: 10.5px; color: var(--text-muted); margin-top: 1px; }
+
+  .sos-contact-notified {
+    margin-left: auto;
+    font-size: 10px; color: var(--safe);
+    background: rgba(77,255,176,0.1);
+    padding: 3px 8px; border-radius: 20px;
+    border: 1px solid rgba(77,255,176,0.2);
+    white-space: nowrap;
+  }
+
+  .sos-cancel-btn {
+    position: absolute;
+    bottom: 34px; left: 20px; right: 20px;
+    padding: 14px; text-align: center;
+    font-size: 13px; color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--card);
+  }
+
+  /* ═══════════════ ALI FIREFLY ═══════════════ */
+  .ali {
+    position: absolute;
+    z-index: 50;
+    pointer-events: none;
+    transition: left 1.8s cubic-bezier(0.4,0,0.2,1), top 1.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .ali-tail {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,230,66,0.18) 0%, transparent 70%);
+    animation: aliPulse 2.2s ease-in-out infinite 0.5s;
+  }
+
+  .ali-core-dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ali-core);
+    position: relative;
+    box-shadow:
+      0 0 6px 2px var(--ali-core),
+      0 0 20px 6px var(--ali-glow),
+      0 0 40px 12px rgba(245,230,66,0.1);
+    animation: aliFloat 3s ease-in-out infinite, aliBreath 2.2s ease-in-out infinite;
+  }
+
+  .ali-core-dot::before {
+    content:'';
+    position: absolute; inset: -4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(245,230,66,0.3) 0%, transparent 70%);
+    animation: aliPulse 2.2s ease-in-out infinite;
+  }
+
+  .ali.risk-state .ali-core-dot {
+    background: #ff8c42;
+    box-shadow:
+      0 0 6px 2px #ff8c42,
+      0 0 20px 6px rgba(255,140,66,0.3),
+      0 0 40px 12px rgba(255,140,66,0.15);
+    animation: aliFloatFast 1.4s ease-in-out infinite, aliBreathFast 0.9s ease-in-out infinite;
+  }
+
+  .ali.risk-state .ali-tail {
+    background: radial-gradient(circle, rgba(255,140,66,0.2) 0%, transparent 70%);
+  }
+
+  .ali.sos-state .ali-core-dot {
+    background: #fff;
+    box-shadow:
+      0 0 8px 3px #fff,
+      0 0 24px 8px rgba(255,255,255,0.4),
+      0 0 50px 16px rgba(255,255,255,0.15);
+    animation: aliFloat 4s ease-in-out infinite;
+  }
+
+  .ali.sos-state .ali-tail {
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  }
+
+  @keyframes aliFloat {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes aliFloatFast {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  @keyframes aliBreath {
+    0%,100% { opacity: 0.9; }
+    50% { opacity: 1; }
+  }
+  @keyframes aliBreathFast {
+    0%,100% { opacity: 0.7; transform: translateY(0) scale(0.95); }
+    50% { opacity: 1; transform: translateY(-3px) scale(1.1); }
+  }
+  @keyframes aliPulse {
+    0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.6; }
+    50% { transform: translate(-50%,-50%) scale(1.5); opacity: 0; }
+  }
+  @keyframes sosPulse {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes walkPath {
+    0% { stroke-dashoffset: 700; }
+    100% { stroke-dashoffset: 0; }
+  }
+
+  .ali-prompt-bubble {
+    transform: translateY(6px);
+    animation: fadeUp 0.6s ease 1.4s forwards;
+  }
+
+  .nav-path-draw {
+    stroke-dasharray: 700;
+    stroke-dashoffset: 700;
+    animation: walkPath 3s ease forwards;
+  }
+
+  .blink { animation: blink 1s ease-in-out infinite; }
+  @keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── SCENE INDICATORS ─── */
+  .scene-dots { display: flex; gap: 6px; justify-content: center; }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.2);
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  .dot.active { width: 20px; background: var(--ali-core); }
+
+  .scene-label-wrap {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-wrap">
+  <div class="brand-label">ALAITAPTAP — Interactive Demo</div>
+
+  <div class="phone">
+    <div class="screen">
+
+      <!-- ── SCENE 1: HOME ── -->
+      <div class="scene active" id="scene-home">
+        <div class="home-map-bg"></div>
+        <div class="home-road h" style="top:195px;"></div>
+        <div class="home-road h" style="top:375px;"></div>
+        <div class="home-road v" style="left:115px;"></div>
+        <div class="home-road v" style="left:218px;"></div>
+
+        <div class="city-block" style="top:96px;left:18px;width:85px;height:85px;"></div>
+        <div class="city-block" style="top:96px;left:162px;width:134px;height:85px;"></div>
+        <div class="city-block" style="top:242px;left:18px;width:85px;height:118px;"></div>
+        <div class="city-block" style="top:242px;left:162px;width:134px;height:118px;"></div>
+        <div class="city-block" style="top:422px;left:18px;width:85px;height:80px;"></div>
+        <div class="city-block" style="top:422px;left:162px;width:134px;height:80px;"></div>
+
+        <div class="city-light" style="top:118px;left:38px;opacity:0.5;"></div>
+        <div class="city-light" style="top:132px;left:58px;opacity:0.3;"></div>
+        <div class="city-light" style="top:112px;left:198px;opacity:0.55;"></div>
+        <div class="city-light" style="top:138px;left:238px;opacity:0.4;"></div>
+        <div class="city-light" style="top:268px;left:48px;opacity:0.5;"></div>
+        <div class="city-light" style="top:288px;left:192px;opacity:0.6;"></div>
+        <div class="city-light" style="top:438px;left:28px;opacity:0.45;"></div>
+        <div class="city-light" style="top:448px;left:218px;opacity:0.5;"></div>
+
+        <div class="home-overlay"></div>
+
+        <div class="ali-prompt-bubble">
+          Where are you going?<br>I'll help you get there safely.
+        </div>
+
+        <div class="home-bottom">
+          <div class="home-greeting">Good evening.</div>
+          <div class="home-sub">Ali is ready to guide you.</div>
+          <div class="home-search">
+            <div class="home-search-icon"></div>
+            Where are you headed?
+          </div>
+        </div>
+
+        <div class="status-bar"><span>22:14</span><span>●●●</span></div>
+      </div>
+
+      <!-- ── SCENE 2: ROUTE SELECTION ── -->
+      <div class="scene" id="scene-route">
+        <div class="route-map">
+          <div class="route-map-bg"></div>
+          <div class="route-road" style="height:36px;top:88px;left:0;right:0;"></div>
+          <div class="route-road" style="height:36px;top:178px;left:0;right:0;"></div>
+          <div class="route-road" style="width:36px;top:0;bottom:0;left:98px;"></div>
+          <div class="route-road" style="width:36px;top:0;bottom:0;left:208px;"></div>
+
+          <svg style="position:absolute;inset:0;" viewBox="0 0 320 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- safe route glow -->
+            <path d="M 58 230 L 58 178 L 208 178 L 208 88 L 278 88" stroke="#4dffb0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
+            <!-- safe route -->
+            <path d="M 58 230 L 58 178 L 208 178 L 208 88 L 278 88" stroke="#4dffb0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+            <!-- fast route (dashed) -->
+            <path d="M 58 230 L 98 230 L 98 88 L 278 88" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" stroke-dasharray="6 5"/>
+            <!-- origin -->
+            <circle cx="58" cy="230" r="5" fill="white" stroke="#f5e642" stroke-width="2"/>
+            <!-- destination -->
+            <circle cx="278" cy="88" r="5" fill="#f5e642"/>
+            <circle cx="278" cy="88" r="11" fill="rgba(245,230,66,0.12)"/>
+          </svg>
+          <div class="route-map-fade"></div>
+        </div>
+
+        <div class="status-bar"><span>22:14</span><span>●●●</span></div>
+
+        <div class="route-sheet">
+          <div class="route-sheet-handle"></div>
+          <div class="route-label">Choose your route</div>
+
+          <div class="route-card recommended">
+            <div class="route-dot" style="background:var(--safe); box-shadow:0 0 8px var(--safe-glow);"></div>
+            <div class="route-info">
+              <div class="route-name">Via España Blvd.</div>
+              <div class="route-meta">18 min · 1.4 km · well-lit</div>
+            </div>
+            <span class="route-badge badge-safe">Safest</span>
+          </div>
+
+          <div class="route-card">
+            <div class="route-dot" style="background:rgba(255,255,255,0.25);"></div>
+            <div class="route-info">
+              <div class="route-name">Via Legarda St.</div>
+              <div class="route-meta">13 min · 1.1 km · less active</div>
+            </div>
+            <span class="route-badge badge-fast">Fastest</span>
+          </div>
+
+          <div class="route-ali-cue">
+            ✦ "This route passes by open establishments and has more people around."
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCENE 3: ACTIVE NAV ── -->
+      <div class="scene" id="scene-nav">
+        <div class="nav-map">
+          <div class="nav-map-bg"></div>
+          <div class="nav-road-h" style="top:185px;"></div>
+          <div class="nav-road-h" style="top:375px;"></div>
+          <div class="nav-road-v" style="left:138px;"></div>
+          <div class="nav-road-v" style="left:258px;"></div>
+
+          <svg class="nav-route-line" viewBox="0 0 320 640" fill="none">
+            <path d="M 158 580 L 158 375 L 258 375 L 258 185 L 198 185" stroke="#f5e642" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
+            <path d="M 158 580 L 158 375 L 258 375 L 258 185 L 198 185" stroke="#f5e642" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" class="nav-path-draw"/>
+            <path d="M 158 450 L 158 375 L 258 375 L 258 280" stroke="#f5e642" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+          </svg>
+
+          <div class="user-dot" style="left:150px; top:442px;"></div>
+
+          <div style="position:absolute;top:205px;left:18px;width:108px;height:158px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:3px;"></div>
+          <div style="position:absolute;top:40px;left:18px;width:108px;height:132px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:3px;"></div>
+          <div style="position:absolute;top:205px;left:280px;width:28px;height:158px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:3px;"></div>
+        </div>
+
+        <div class="nav-top-card">
+          <div class="nav-direction-icon">
+            <div class="nav-arrow-r"></div>
+          </div>
+          <div>
+            <div class="nav-direction-text">Turn right</div>
+            <div class="nav-street-name">onto España Blvd.</div>
+          </div>
+          <div class="nav-dist">80<span>meters</span></div>
+        </div>
+
+        <div class="nav-bottom-bar">
+          <div style="flex:1;">
+            <div class="nav-eta-time">12 min</div>
+            <div class="nav-eta-label">estimated arrival</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:3px;">Via España Blvd.</div>
+            <div style="font-size:11px;color:var(--text-secondary);">0.9 km remaining</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;">
+            <div class="nav-safety-ring">87</div>
+            <div class="nav-safety-label">Safety</div>
+          </div>
+        </div>
+
+        <div class="status-bar"><span>22:14</span><span>●●●</span></div>
+      </div>
+
+      <!-- ── SCENE 4: RISK ALERT ── -->
+      <div class="scene" id="scene-risk">
+        <div class="nav-map-bg" style="position:absolute;inset:0;opacity:0.2;
+          background:repeating-linear-gradient(0deg,transparent,transparent 32px,rgba(255,255,255,0.12) 32px,rgba(255,255,255,0.12) 33px),
+          repeating-linear-gradient(90deg,transparent,transparent 32px,rgba(255,255,255,0.12) 32px,rgba(255,255,255,0.12) 33px),
+          #0a0c14;"></div>
+        <div class="nav-road-h" style="top:195px;"></div>
+        <div class="nav-road-v" style="left:148px;"></div>
+
+        <div class="risk-zone" style="width:200px;height:200px;top:160px;left:48px;"></div>
+        <div class="risk-zone" style="width:140px;height:140px;top:195px;left:90px;opacity:0.7;"></div>
+
+        <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 320 640" fill="none">
+          <path d="M 148 580 L 148 195 L 278 195" stroke="rgba(255,107,107,0.4)" stroke-width="2.5" stroke-dasharray="7 5" stroke-linecap="round"/>
+        </svg>
+
+        <div class="user-dot" style="left:140px; top:378px; border-color:var(--risk); box-shadow:0 0 16px var(--risk-glow);"></div>
+
+        <div class="risk-banner">
+          <div class="risk-icon">⚠</div>
+          <div>
+            <div class="risk-title">Low activity area ahead</div>
+            <div class="risk-subtitle">Fewer people on this street right now</div>
+          </div>
+        </div>
+
+        <div class="risk-action-bar">
+          <div class="risk-alt-label">Ali suggests an alternative</div>
+          <div class="risk-alt-btn">
+            <div class="risk-alt-btn-dot"></div>
+            <div>
+              <div class="risk-alt-btn-text">Reroute via Lacson Ave.</div>
+              <div class="risk-alt-btn-meta">+3 min · more people · brighter</div>
+            </div>
+          </div>
+          <div class="risk-continue">Continue on current route</div>
+        </div>
+
+        <div class="status-bar"><span>22:14</span><span>●●●</span></div>
+      </div>
+
+      <!-- ── SCENE 5: SOS ── -->
+      <div class="scene" id="scene-sos">
+        <div class="sos-bg-pulse"></div>
+
+        <div class="sos-top">
+          <div class="sos-status-ring">
+            <div class="sos-icon-inner">🛡</div>
+          </div>
+          <div class="sos-title">Sending alert…</div>
+          <div class="sos-sub">Your location has been shared.<br>Stay calm. Help is coming.</div>
+        </div>
+
+        <div class="sos-contacts">
+          <div class="sos-contact-label">Emergency contacts notified</div>
+          <div class="sos-contact">
+            <div class="sos-contact-avatar">Ma</div>
+            <div>
+              <div class="sos-contact-name">Mama</div>
+              <div class="sos-contact-status">+63 917 *** ****</div>
+            </div>
+            <div class="sos-contact-notified">Notified ✓</div>
+          </div>
+          <div class="sos-contact">
+            <div class="sos-contact-avatar">JK</div>
+            <div>
+              <div class="sos-contact-name">Juan Kuya</div>
+              <div class="sos-contact-status">+63 998 *** ****</div>
+            </div>
+            <div class="sos-contact-notified blink">Calling…</div>
+          </div>
+        </div>
+
+        <div class="sos-cancel-btn">Cancel SOS</div>
+
+        <div class="status-bar" style="color:rgba(255,100,120,0.6);"><span>22:14</span><span>●●●</span></div>
+      </div>
+
+      <!-- ── ALI FIREFLY ── -->
+      <div class="ali" id="ali">
+        <div class="ali-tail"></div>
+        <div class="ali-core-dot"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="scene-dots" id="scene-dots">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+
+  <div class="scene-label-wrap" id="scene-label">Home / Idle</div>
+</div>
+
+<script>
+  const scenes = [
+    { id:'scene-home',  label:'Home / Idle',        ali:{left:46,top:152},  aliClass:'',          duration:4000 },
+    { id:'scene-route', label:'Route Selection',     ali:{left:42,top:218},  aliClass:'',          duration:4500 },
+    { id:'scene-nav',   label:'Active Navigation',   ali:{left:148,top:396}, aliClass:'',          duration:4500 },
+    { id:'scene-risk',  label:'Risk Alert',          ali:{left:136,top:342}, aliClass:'risk-state',duration:4000 },
+    { id:'scene-sos',   label:'SOS / Emergency',     ali:{left:142,top:236}, aliClass:'sos-state', duration:4200 }
+  ];
+
+  let current = 0;
+  let timer = null;
+  const ali = document.getElementById('ali');
+  const dots = document.querySelectorAll('.dot');
+  const labelEl = document.getElementById('scene-label');
+
+  function goTo(idx) {
+    document.getElementById(scenes[current].id).classList.remove('active');
+    dots[current].classList.remove('active');
+    current = idx;
+    const s = scenes[current];
+    document.getElementById(s.id).classList.add('active');
+    dots[current].classList.add('active');
+    labelEl.textContent = s.label;
+    ali.className = 'ali' + (s.aliClass ? ' ' + s.aliClass : '');
+    ali.style.left = s.ali.left + 'px';
+    ali.style.top  = s.ali.top  + 'px';
+  }
+
+  function scheduleNext() {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      goTo((current + 1) % scenes.length);
+      scheduleNext();
+    }, scenes[current].duration);
+  }
+
+  // init
+  ali.style.left = scenes[0].ali.left + 'px';
+  ali.style.top  = scenes[0].ali.top  + 'px';
+  scheduleNext();
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goTo(i);
+      scheduleNext();
+    });
+  });
+</script>
+</body>
+</html>

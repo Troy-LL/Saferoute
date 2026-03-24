@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Shield, Map, Menu, X } from 'lucide-react'
+import { Map, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { BrandName } from '@/components/BrandName'
+import brandLogoUrl from '../../images/App logo.png'
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -26,10 +27,18 @@ export default function Navbar() {
         {/* Brand */}
         <Link
           to="/"
-          className="flex items-center gap-2 cursor-pointer transition-opacity duration-200 hover:opacity-80"
+          className="flex items-center gap-2.5 cursor-pointer transition-opacity duration-200 hover:opacity-80"
         >
-          <Shield className="h-6 w-6 text-primary" />
-          <BrandName className="font-bold text-lg" />
+          <img
+            src={brandLogoUrl}
+            alt="ALAITAPTAP"
+            width={40}
+            height={40}
+            decoding="async"
+            draggable={false}
+            className="h-10 w-10 shrink-0 object-contain"
+          />
+          <BrandName className="font-bold text-lg leading-none" />
         </Link>
 
         {/* Desktop links */}
@@ -89,8 +98,16 @@ export default function Navbar() {
 
               <div className="flex flex-col h-full">
                 {/* Mobile brand header */}
-                <div className="flex items-center gap-2 px-6 py-5 border-b border-border">
-                  <Shield className="h-5 w-5 text-primary" />
+                <div className="flex items-center gap-2.5 px-6 py-5 border-b border-border">
+                  <img
+                    src={brandLogoUrl}
+                    alt="ALAITAPTAP"
+                    width={36}
+                    height={36}
+                    decoding="async"
+                    draggable={false}
+                    className="h-9 w-9 shrink-0 object-contain"
+                  />
                   <BrandName className="font-bold text-lg" />
                 </div>
 
