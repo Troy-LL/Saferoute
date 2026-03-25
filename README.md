@@ -1,4 +1,4 @@
-# SafeRoute
+# ALAITAPTAP
 
 Walking navigation for **Metro Manila** that prefers **safer streets**, not just the fastest path. The app combines **crime incident data**, **lighting and time-of-day context**, **safe spots** (e.g. lit areas, police, commercial corridors), and an **ML-based safety scorer** so users can plan routes with clearer situational awareness—especially women walking alone.
 
