@@ -191,6 +191,10 @@ export default function RoutePlanner({
 
   async function handleSearch(e: React.FormEvent) {
     e.preventDefault()
+    if (loading) return
+    setStartSuggestOpen(false)
+    setEndSuggestOpen(false)
+    
     if (!startInput || !endInput) {
       toast.error('Please enter both start and end locations')
       return

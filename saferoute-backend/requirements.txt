@@ -13,8 +13,7 @@ numpy==2.2.4
 joblib==1.4.2
 geopy==2.4.1
 polyline==2.0.2
-pydantic==2.11.1
-
-# Dev / tests (pip install -r requirements.txt; optional for CI)
+slowapi==0.1.9
+cachetools==5.5.2
 pytest>=8.0.0
 httpx>=0.27.0

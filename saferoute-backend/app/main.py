@@ -4,11 +4,17 @@ from app.database import engine
 from app.models import Base
 from app.config import CORS_ORIGINS
 
+from app.limiter import limiter
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
+
 app = FastAPI(
     title="ALAITAPTAP API",
     version="1.0.0",
     description="Safe walking route planner for Metro Manila - AIRA Youth Challenge 2026"
 )
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # CORS for React frontend
 app.add_middleware(

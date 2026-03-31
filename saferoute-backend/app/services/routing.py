@@ -3,49 +3,32 @@ import os
 from dotenv import load_dotenv
 from geopy.distance import geodesic
 
+from cachetools import cached, TTLCache
+
 load_dotenv()
 
 ORS_API_KEY = os.getenv("OPENROUTESERVICE_API_KEY")
-ORS_BASE_URL = "https://api.openrouteservice.org/v2/directions/foot-walking/json"
+# POST on directions expects the profile, NO '/json' at the end.
+ORS_BASE_URL = "https://api.openrouteservice.org/v2/directions/foot-walking"
 
-# ORS foot-walking rejects routes whose approximated distance exceeds ~150 km.
-# We no longer hard-fail on a local straight-line check, since bad geocoding
-# can incorrectly trigger "too far apart" for nearby points. Instead, we let
-# ORS enforce its own limits and surface its 400 error via _ors_routing_error.
+# Cache for 1 hour, max 500 routes — saves ORS quota and handles "spammed" requests.
+route_cache = TTLCache(maxsize=500, ttl=3600)
 MAX_STRAIGHT_FOR_MULTI_ROUTE_M = 50_000
 
-
+@cached(cache=route_cache, key=lambda start, end, alternatives=2: (tuple(start), tuple(end), alternatives))
 def get_walking_routes(start_coords, end_coords, alternatives=2):
     """
-    Get walking routes from OpenRouteService
-    
-    Args:
-        start_coords: [longitude, latitude]
-        end_coords: [longitude, latitude]
-        alternatives: Desired alternative route count (may be reduced for long trips)
-    
-    Returns:
-        List of route geometries and metadata
+    Get walking routes from OpenRouteService from Cache or API
     """
     if not ORS_API_KEY:
         raise Exception("OPENROUTESERVICE_API_KEY not set in environment")
 
-    lng1, lat1 = start_coords
-    lng2, lat2 = end_coords
-    straight_m = geodesic((lat1, lng1), (lat2, lng2)).meters
-
-    # Long trips: single route only — avoids ORS 400 "approximated route distance > 150000 m"
-    target_count = 1 if straight_m > MAX_STRAIGHT_FOR_MULTI_ROUTE_M else min(
-        max(1, alternatives), 3
-    )
-
     # Pass api_key as query parameter — proven to work via direct URL test.
-    # The Authorization header approach returns 403 for this key type.
     params = {'api_key': ORS_API_KEY}
     
     headers = {
         'Content-Type': 'application/json',
-        'Accept': 'application/json, application/geo+json',
+        'Accept': 'application/geo+json, application/json, */*',
     }
 
     body = {
@@ -54,6 +37,10 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
         'instructions': True,
         'elevation': False
     }
+    
+    straight_m = geodesic((start_coords[1], start_coords[0]), (end_coords[1], end_coords[0])).meters
+    target_count = 1 if straight_m > MAX_STRAIGHT_FOR_MULTI_ROUTE_M else min(max(1, alternatives), 3)
+
     if target_count > 1:
         body['alternative_routes'] = {
             'target_count': target_count,

@@ -1,8 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from sqlalchemy.orm import Session
 from app.database import get_db
 from app.services.routing import get_walking_routes
 from app.ml.safety_scorer import SafetyScorer
+from app.limiter import limiter
 from pydantic import BaseModel
 from typing import List, Optional, Any, Dict
 import polyline as polyline_lib
@@ -917,15 +918,16 @@ class RouteOption(BaseModel):
     passed_safe_spots: List[str] = []
 
 @router.post("/calculate-route", response_model=List[RouteOption])
-def calculate_route(request: RouteRequest, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def calculate_route(request: Request, body: RouteRequest, db: Session = Depends(get_db)):
     """
     Calculate 2-3 walking routes with safety scores.
     Returns routes sorted by safety score (safest first).
     """
     try:
         # Get routes from OpenRouteService
-        start_coords = [request.start_lng, request.start_lat]
-        end_coords = [request.end_lng, request.end_lat]
+        start_coords = [body.start_lng, body.start_lat]
+        end_coords = [body.end_lng, body.end_lat]
 
         ors_routes = get_walking_routes(start_coords, end_coords, alternatives=2)
 
