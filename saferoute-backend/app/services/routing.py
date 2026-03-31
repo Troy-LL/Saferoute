@@ -28,14 +28,24 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
     if not ORS_API_KEY:
         raise Exception("OPENROUTESERVICE_API_KEY not set in environment")
 
-    # GET format: start=lng,lat&end=lng,lat
-    params = {
-        'api_key': ORS_API_KEY,
-        'start': f"{start_coords[0]},{start_coords[1]}",
-        'end': f"{end_coords[0]},{end_coords[1]}",
+    headers = {
+        'Accept': 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+        'Authorization': ORS_API_KEY,
+        'Content-Type': 'application/json; charset=utf-8'
     }
 
-    response = requests.get(ORS_BASE_URL, params=params)
+    body = {
+        "coordinates": [[start_coords[0], start_coords[1]], [end_coords[0], end_coords[1]]],
+        "alternative_routes": {
+            "target_count": alternatives,
+            "weight_factor": 1.4,
+            "share_factor": 0.6
+        }
+    }
+
+    # Use the /geojson POST endpoint for multiple routes
+    url = f"{ORS_BASE_URL}/geojson"
+    response = requests.post(url, headers=headers, json=body)
 
     if response.status_code != 200:
         raise _ors_routing_error(response)
