@@ -39,12 +39,13 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
         max(1, alternatives), 3
     )
 
-    # ORS usually expects the raw key, but some JWT-based keys require 'Bearer '
-    auth_header = ORS_API_KEY if ORS_API_KEY.startswith("Bearer ") or len(ORS_API_KEY) < 70 else f"Bearer {ORS_API_KEY}"
+    # Pass api_key as query parameter — proven to work via direct URL test.
+    # The Authorization header approach returns 403 for this key type.
+    params = {'api_key': ORS_API_KEY}
     
     headers = {
-        'Authorization': auth_header,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json, application/geo+json',
     }
 
     body = {
@@ -60,7 +61,7 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
             'weight_factor': 1.4
         }
 
-    response = requests.post(ORS_BASE_URL, json=body, headers=headers)
+    response = requests.post(ORS_BASE_URL, json=body, headers=headers, params=params)
 
     if response.status_code != 200:
         raise _ors_routing_error(response)
