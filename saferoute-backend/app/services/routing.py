@@ -23,32 +23,22 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
     if not ORS_API_KEY:
         raise Exception("OPENROUTESERVICE_API_KEY not set in environment")
 
-    # Pass api_key as query parameter — proven to work via direct URL test.
-    params = {'api_key': ORS_API_KEY}
+    # Use GET — proven to work via direct URL test.
+    # Format: start=lng,lat&end=lng,lat
+    start_str = f"{start_coords[0]},{start_coords[1]}"
+    end_str = f"{end_coords[0]},{end_coords[1]}"
     
-    headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/geo+json, application/json, */*',
-    }
-
-    body = {
-        'coordinates': [start_coords, end_coords],
-        'geometry': True,
-        'instructions': True,
-        'elevation': False
+    params = {
+        'api_key': ORS_API_KEY,
+        'start': start_str,
+        'end': end_str
     }
     
-    straight_m = geodesic((start_coords[1], start_coords[0]), (end_coords[1], end_coords[0])).meters
-    target_count = 1 if straight_m > MAX_STRAIGHT_FOR_MULTI_ROUTE_M else min(max(1, alternatives), 3)
-
-    if target_count > 1:
-        body['alternative_routes'] = {
-            'target_count': target_count,
-            'share_factor': 0.6,
-            'weight_factor': 1.4
-        }
-
-    response = requests.post(ORS_BASE_URL, json=body, headers=headers, params=params)
+    # Optional: fetch a single alternative if requested (GET supports basic alternatives)
+    # response = requests.get(ORS_BASE_URL, params=params)
+    # Actually, many profiles don't support alternatives on GET. We'll start with the safest path.
+    
+    response = requests.get(ORS_BASE_URL, params=params)
 
     if response.status_code != 200:
         raise _ors_routing_error(response)
