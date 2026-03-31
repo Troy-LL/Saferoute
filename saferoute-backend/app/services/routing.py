@@ -39,8 +39,11 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
         max(1, alternatives), 3
     )
 
+    # ORS usually expects the raw key, but some JWT-based keys require 'Bearer '
+    auth_header = ORS_API_KEY if ORS_API_KEY.startswith("Bearer ") or len(ORS_API_KEY) < 70 else f"Bearer {ORS_API_KEY}"
+    
     headers = {
-        'Authorization': ORS_API_KEY,
+        'Authorization': auth_header,
         'Content-Type': 'application/json'
     }
 
@@ -77,22 +80,35 @@ def get_walking_routes(start_coords, end_coords, alternatives=2):
 
 def _ors_routing_error(response: requests.Response) -> Exception:
     """Map ORS HTTP errors to friendly messages (e.g. 150 km walking limit)."""
+    from fastapi import HTTPException
+    
     try:
         j = response.json()
-        err = j.get("error")
-        if isinstance(err, dict):
-            code = err.get("code")
-            msg = err.get("message", "")
-            if response.status_code == 400 and code == 2004:
-                return ValueError(
-                    "Walking route is too long for the routing service (max ~150 km). "
-                    "Pick start and end points closer together in Metro Manila."
-                )
-            if msg:
-                return Exception(f"ORS API error {response.status_code}: {msg}")
+        raw_msg = j.get("error")
+        msg = ""
+        if isinstance(raw_msg, dict):
+            msg = raw_msg.get("message", "")
+        elif isinstance(raw_msg, str):
+            msg = raw_msg
+            
+        if response.status_code == 403:
+            return HTTPException(
+                status_code=403, 
+                detail=f"OpenRouteService: Access Disallowed (403). Verify key status on openrouteservice.org. Detail: {msg}"
+            )
+            
+        if response.status_code == 400 and isinstance(raw_msg, dict) and raw_msg.get("code") == 2004:
+            return HTTPException(
+                status_code=400,
+                detail="Walking route is too long for the routing service (max ~150 km). "
+            )
+            
+        if msg:
+            return HTTPException(status_code=response.status_code, detail=f"ORS API error: {msg}")
     except Exception:
         pass
-    return Exception(f"ORS API error {response.status_code}: {response.text}")
+        
+    return HTTPException(status_code=response.status_code, detail=f"ORS returned {response.status_code}: {response.text}")
 
 
 # Test function

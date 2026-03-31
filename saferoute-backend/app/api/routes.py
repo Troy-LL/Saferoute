@@ -962,10 +962,15 @@ def calculate_route(request: RouteRequest, db: Session = Depends(get_db)):
 
         return route_options
 
+    except HTTPException as e:
+        # Re-raise explicit HTTP exceptions from services (like 403 for ORS)
+        raise e
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        # Log unexpected errors to server logs for debugging
+        print(f"CRITICAL: Failed to calculate route: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 
 @router.get("/geocode")
