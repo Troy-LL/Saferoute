@@ -9,6 +9,8 @@ import {
   Timer,
   Star,
   Loader2,
+  X,
+  Search,
 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -40,9 +42,12 @@ interface RoutePlannerProps {
   onSafeSpotsFound?: (spots: SafeSpot[]) => void
   onSelectedRouteChange?: (index: number) => void
   onLoadingChange?: (loading: boolean) => void
-  /** Routes and selection driven from the parent (e.g. after map click) */
+  /** Markers and routes driven from the parent (e.g. after map long-press or click) */
+  startMarker?: { lat: number; lng: number } | null
+  endMarker?: { lat: number; lng: number } | null
   externalRoutes?: RouteResult[] | null
   externalSelectedIndex?: number
+  onClear?: () => void
 }
 
 const SCORE_COLORS: Record<string, string> = {
@@ -64,6 +69,9 @@ export default function RoutePlanner({
   onLoadingChange,
   externalRoutes,
   externalSelectedIndex,
+  startMarker,
+  endMarker,
+  onClear,
 }: RoutePlannerProps) {
   const [startInput, setStartInput] = useState('')
   const [endInput, setEndInput] = useState('')
@@ -98,6 +106,26 @@ export default function RoutePlanner({
   useEffect(() => {
     getRailwaySchedules().then(setSchedules)
   }, [])
+
+  // Sync external map markers into input labels
+  useEffect(() => {
+    if (startMarker) {
+      setStartInput(`${startMarker.lat.toFixed(5)}, ${startMarker.lng.toFixed(5)}`)
+      setStartResolved({ label: 'Map Pin', lat: startMarker.lat, lng: startMarker.lng })
+      setStartSuggestOpen(false)
+    } else if (!activeRoutes) {
+      // Only clear if we don't have an active route (to avoid clearing on fresh route load)
+      // setStartInput('')
+    }
+  }, [startMarker, activeRoutes])
+
+  useEffect(() => {
+    if (endMarker) {
+      setEndInput(`${endMarker.lat.toFixed(5)}, ${endMarker.lng.toFixed(5)}`)
+      setEndResolved({ label: 'Map Pin', lat: endMarker.lat, lng: endMarker.lng })
+      setEndSuggestOpen(false)
+    }
+  }, [endMarker])
 
   const fetchSuggestions = useCallback(async (raw: string) => {
     const q = raw.trim()
@@ -252,31 +280,45 @@ export default function RoutePlanner({
               <MapPin className="h-3.5 w-3.5 text-primary" />
               From
             </Label>
-            <Input
-              id="start-location"
-              placeholder="e.g., Katipunan MRT Station"
-              value={startInput}
-              autoComplete="off"
-              onChange={(e) => {
-                const v = e.target.value
-                setStartInput(v)
-                setStartResolved(null)
-                scheduleStartSuggestions(v)
-              }}
-              onFocus={() => {
-                if (startSuggestions.length > 0) setStartSuggestOpen(true)
-              }}
-              onBlur={() => {
-                setTimeout(() => setStartSuggestOpen(false), 180)
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape') setStartSuggestOpen(false)
-              }}
-              aria-label="Starting point"
-              aria-autocomplete="list"
-              aria-expanded={startSuggestOpen}
-              aria-controls="start-suggestions-list"
-            />
+            <div className="relative group">
+              <Input
+                id="start-location"
+                placeholder="e.g., Katipunan MRT Station"
+                className="pr-9"
+                value={startInput}
+                autoComplete="off"
+                onChange={(e) => {
+                  const v = e.target.value
+                  setStartInput(v)
+                  setStartResolved(null)
+                  scheduleStartSuggestions(v)
+                }}
+                onFocus={() => {
+                  if (startSuggestions.length > 0) setStartSuggestOpen(true)
+                }}
+                onBlur={() => {
+                  setTimeout(() => setStartSuggestOpen(false), 180)
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setStartSuggestOpen(false)
+                }}
+                aria-label="Starting point"
+              />
+              {startInput && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStartInput('')
+                    setStartResolved(null)
+                    onClear?.()
+                  }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                  aria-label="Clear starting point"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
             {startSuggestOpen && startSuggestions.length > 0 && (
               <ul
                 id="start-suggestions-list"
@@ -314,31 +356,45 @@ export default function RoutePlanner({
               <Navigation className="h-3.5 w-3.5 text-primary" />
               To
             </Label>
-            <Input
-              id="end-location"
-              placeholder="e.g., Ateneo Gate 1"
-              value={endInput}
-              autoComplete="off"
-              onChange={(e) => {
-                const v = e.target.value
-                setEndInput(v)
-                setEndResolved(null)
-                scheduleEndSuggestions(v)
-              }}
-              onFocus={() => {
-                if (endSuggestions.length > 0) setEndSuggestOpen(true)
-              }}
-              onBlur={() => {
-                setTimeout(() => setEndSuggestOpen(false), 180)
-              }}
-              onKeyDown={(e) => {
-                if (e.key === 'Escape') setEndSuggestOpen(false)
-              }}
-              aria-label="Destination"
-              aria-autocomplete="list"
-              aria-expanded={endSuggestOpen}
-              aria-controls="end-suggestions-list"
-            />
+            <div className="relative group">
+              <Input
+                id="end-location"
+                placeholder="e.g., Ateneo Gate 1"
+                className="pr-9"
+                value={endInput}
+                autoComplete="off"
+                onChange={(e) => {
+                  const v = e.target.value
+                  setEndInput(v)
+                  setEndResolved(null)
+                  scheduleEndSuggestions(v)
+                }}
+                onFocus={() => {
+                  if (endSuggestions.length > 0) setEndSuggestOpen(true)
+                }}
+                onBlur={() => {
+                  setTimeout(() => setEndSuggestOpen(false), 180)
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') setEndSuggestOpen(false)
+                }}
+                aria-label="Destination"
+              />
+              {endInput && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEndInput('')
+                    setEndResolved(null)
+                    onClear?.()
+                  }}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors cursor-pointer"
+                  aria-label="Clear destination"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
+            </div>
             {endSuggestOpen && endSuggestions.length > 0 && (
               <ul
                 id="end-suggestions-list"

@@ -342,6 +342,9 @@ export default function MapPage() {
           onLoadingChange={setRouteSearchLoading}
           externalRoutes={routes}
           externalSelectedIndex={selectedRouteIndex}
+          startMarker={startMarker}
+          endMarker={endMarker}
+          onClear={handleClearRoute}
         />
       </div>
 
@@ -360,6 +363,9 @@ export default function MapPage() {
             onLoadingChange={setRouteSearchLoading}
             externalRoutes={routes}
             externalSelectedIndex={selectedRouteIndex}
+            startMarker={startMarker}
+            endMarker={endMarker}
+            onClear={handleClearRoute}
           />
         </SheetContent>
       </Sheet>

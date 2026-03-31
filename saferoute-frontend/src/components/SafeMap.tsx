@@ -450,6 +450,9 @@ export default function SafeMap({
             <strong style="display: block;">${spot.name}</strong>
             ${spot.address ? `<div style="font-size: 10px; opacity: 0.8; margin-top: 3px;">${spot.address}</div>` : ''}
           </div>
+          <button class="delete-pin-btn" style="margin-top: 10px; width: 100%; padding: 6px; background: #EF4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 11px; font-weight: 600;">
+            Delete Pin
+          </button>
         </div>
       `
     }
@@ -458,12 +461,22 @@ export default function SafeMap({
       const m = L.marker([startMarker.lat, startMarker.lng], { icon: startIcon })
         .addTo(map)
         .bindPopup(buildPopup('Start', startMarker.lat, startMarker.lng))
+        
+      m.on('popupopen', (e) => {
+        const btn = e.popup.getElement()?.querySelector('.delete-pin-btn')
+        if (btn) L.DomEvent.on(btn as HTMLElement, 'click', () => onClearRoute?.())
+      })
       endpointMarkers.current.push(m)
     }
     if (endMarker) {
       const m = L.marker([endMarker.lat, endMarker.lng], { icon: endIcon })
         .addTo(map)
         .bindPopup(buildPopup('Destination', endMarker.lat, endMarker.lng))
+
+      m.on('popupopen', (e) => {
+        const btn = e.popup.getElement()?.querySelector('.delete-pin-btn')
+        if (btn) L.DomEvent.on(btn as HTMLElement, 'click', () => onClearRoute?.())
+      })
       endpointMarkers.current.push(m)
     }
   }, [startMarker, endMarker, safeSpots, resolvedTheme])
