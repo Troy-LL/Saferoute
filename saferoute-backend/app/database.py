@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Railway/Heroku sometimes provide postgres:// — SQLAlchemy expects postgresql://
+# Supabase / Railway / Render all provide postgresql:// or postgres://
+# SQLAlchemy 2.x requires postgresql://
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./saferoute.db")
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)

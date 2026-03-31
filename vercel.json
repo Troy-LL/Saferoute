@@ -1,8 +1,8 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "installCommand": "npm install",
+  "version": 2,
+  "buildCommand": "cd saferoute-frontend && npm install && npm run build",
+  "outputDirectory": "saferoute-frontend/dist",
+  "framework": null,
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {

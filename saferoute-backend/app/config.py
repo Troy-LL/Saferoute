@@ -9,12 +9,21 @@ TWILIO_ACCOUNT_SID = os.getenv("TWILIO_ACCOUNT_SID", "")
 TWILIO_AUTH_TOKEN = os.getenv("TWILIO_AUTH_TOKEN", "")
 TWILIO_PHONE_NUMBER = os.getenv("TWILIO_PHONE_NUMBER", "")
 
-# Database
+# Database — set DATABASE_URL in env for production (Supabase Postgres)
+# Format: postgresql://postgres:[SERVICE_ROLE_PASSWORD]@db.xxxx.supabase.co:5432/postgres
+# For local dev: sqlite:///./saferoute.db  (default)
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./saferoute.db")
+
+# Supabase (optional: for direct Supabase client usage)
+SUPABASE_URL = os.getenv("SUPABASE_URL", "")
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 
 # App Settings
 APP_ENV = os.getenv("APP_ENV", "development")
-CORS_ORIGINS = os.getenv("CORS_ORIGINS", "http://localhost:5173,https://saferoute-asean.vercel.app").split(",")
+CORS_ORIGINS = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:5173,https://saferoute-asean.vercel.app"
+).split(",")
 
 # Safety scorer: set SAFETY_IGNORE_CRIME=1 to score routes from public infrastructure (safe spots CSV)
 # only, ignoring crime_incidents. Set SAFETY_USE_OSM_FILE=1 only if export.geojson is NOT merged into
